@@ -5,7 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f7f9fc">
-<title>Python 交互式学习 Demo</title>
+<meta name="description" content="无需安装、无需注册，打开链接即可学习和练习 Python，学习进度会自动保存在当前浏览器。">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Python 学习区">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Python 实用学习区">
+<meta property="og:description" content="打开链接即可学习 Python，示例、练习和进度保存都在一个页面里。">
+<title>Python 实用学习区</title>
 <style>
 :root {
   --bg: #eef2f8;
@@ -387,6 +394,13 @@ button {
   background: linear-gradient(90deg, #818cf8, #4f46e5);
   transition: width 0.25s ease;
 }
+.progress-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-bottom: 7px;
+}
+.progress-action-btn,
 .clear-btn {
   width: 100%;
   padding: 8px 10px;
@@ -398,6 +412,11 @@ button {
   font-size: 12px;
   cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.progress-action-btn:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: #4338ca;
 }
 .clear-btn:hover {
   border-color: #fecdd3;
@@ -414,6 +433,23 @@ button {
   font-size: 11px;
   line-height: 1.55;
   color: var(--warn);
+}
+.device-note {
+  display: flex;
+  gap: 7px;
+  margin: 9px 2px 0;
+  color: #758197;
+  font-size: 10.5px;
+  line-height: 1.55;
+}
+.device-note::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: none;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: #10b981;
 }
 .rule-note {
   display: flex;
@@ -724,6 +760,91 @@ pre.code {
   font-size: 14px;
   line-height: 1.85;
 }
+.practice-context {
+  display: grid;
+  gap: 10px;
+  margin: 14px 22px 0;
+  padding: 14px;
+  border: 1px solid #dce6fb;
+  border-radius: 12px;
+  background: #f7f9ff;
+}
+.context-row {
+  display: grid;
+  grid-template-columns: 68px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+.context-label,
+.task-label,
+.criteria-title {
+  color: #4f46e5;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.context-row p {
+  margin: 0;
+  color: #4b5870;
+  font-size: 12.5px;
+  line-height: 1.72;
+}
+.task-block {
+  margin: 14px 22px 16px;
+}
+.task-label { margin-bottom: 6px; }
+.task-block .ex-prompt { margin: 0; }
+.criteria-box {
+  margin: 0 22px 16px;
+  padding: 12px 14px;
+  border: 1px solid #e5eaf4;
+  border-radius: 12px;
+  background: #fbfcfe;
+}
+.hint-box {
+  margin: 0 22px 16px;
+  padding: 10px 13px;
+  border: 1px solid #f1e4c4;
+  border-radius: 10px;
+  background: #fffdf6;
+}
+.hint-box summary {
+  color: #9a6700;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.hint-box p {
+  margin: 8px 0 0;
+  color: #6b6252;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.criteria-title { margin-bottom: 7px; color: #64748b; }
+.criteria-list {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.criteria-list li {
+  position: relative;
+  padding-left: 17px;
+  color: #59667a;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.criteria-list li::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid #a5b4fc;
+  border-radius: 50%;
+}
 
 .expected-wrap {
   margin: 0 22px 16px;
@@ -977,6 +1098,34 @@ pre.expected {
   transition: opacity 0.18s ease, transform 0.18s ease;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.resume-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-bottom: 16px;
+  padding: 10px 13px;
+  border: 1px solid #d6eee3;
+  border-radius: 12px;
+  background: #f3fbf7;
+  color: #35695b;
+  font-size: 11.5px;
+  line-height: 1.65;
+}
+.resume-note::before {
+  content: "✓";
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: #d1fae5;
+  color: #047857;
+  font-size: 10px;
+  font-weight: 800;
+}
 
 button:focus-visible {
   outline: 2px solid #818cf8;
@@ -1359,7 +1508,7 @@ pre.syntax-code {
     cursor: pointer;
   }
   .brand-tag { display: none; }
-  .clear-btn { min-height: 44px; }
+  .progress-action-btn, .clear-btn { min-height: 44px; }
   .point-btn {
     min-height: 44px;
     padding-top: 10px;
@@ -1443,8 +1592,14 @@ pre.syntax-code {
   .exercise-head { padding: 16px 16px 0; gap: 10px; }
   .exercise-badge { font-size: 9.5px; }
   .ex-title { font-size: 18px; }
-  .mark-btn { min-height: 38px; padding: 7px 10px; font-size: 11px; }
-  .ex-prompt { margin: 9px 16px 14px; font-size: 13.5px; line-height: 1.75; }
+  .mark-btn { min-height: 40px; padding: 8px 10px; font-size: 11px; }
+  .practice-context { margin: 12px 16px 0; padding: 12px; }
+  .context-row { grid-template-columns: 62px minmax(0, 1fr); gap: 7px; }
+  .context-row p { font-size: 12px; }
+  .task-block { margin: 12px 16px 14px; }
+  .ex-prompt { font-size: 13.5px; line-height: 1.75; }
+  .criteria-box { margin: 0 16px 14px; padding: 11px 12px; }
+  .hint-box { margin: 0 16px 14px; }
   .plan-box { margin: 0 16px 14px; padding: 11px 12px; }
   .plan-title { font-size: 10px; }
   .plan-list { padding-left: 16px; font-size: 12px; line-height: 1.65; }
@@ -1525,17 +1680,17 @@ pre.syntax-code {
     <button class="menu-btn" id="menuBtn" type="button" aria-label="打开章节目录" aria-expanded="false" aria-controls="sidebar">
       <span></span><span></span><span></span>
     </button>
-    <div class="mobile-brand">Python 学习台</div>
-    <span class="mobile-progress" id="mobileProgress">0/19</span>
+    <div class="mobile-brand">Python 实用学习区</div>
+    <span class="mobile-progress" id="mobileProgress">0/23</span>
   </header>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="brand-mark"><span>Py</span></div>
       <div>
-        <div class="brand-title">Python 学习台</div>
-        <div class="brand-sub">慢一点，学清楚</div>
+        <div class="brand-title">Python 实用学习区</div>
+        <div class="brand-sub">打开链接，随时继续</div>
       </div>
-      <span class="brand-tag">本地版</span>
+      <span class="brand-tag">免登录</span>
       <button class="drawer-close" id="drawerClose" type="button" aria-label="关闭目录">×</button>
     </div>
     <div class="sidebar-body" id="sidebarBody"></div>
@@ -1544,13 +1699,19 @@ pre.syntax-code {
         <div class="progress-ring" id="progressRing" style="--p:0"><span id="ringPercent">0%</span></div>
         <div class="progress-meta">
           <div class="progress-label">总进度</div>
-          <strong id="totalText">0 / 19</strong>
+          <strong id="totalText">0 / 23</strong>
           <div class="bar"><span id="totalBar"></span></div>
         </div>
       </div>
+      <div class="progress-actions">
+        <button class="progress-action-btn" id="exportBtn" type="button">备份进度</button>
+        <button class="progress-action-btn" id="importBtn" type="button">恢复进度</button>
+      </div>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
       <button class="clear-btn" id="clearBtn" type="button">清空进度</button>
+      <p class="device-note">进度自动保存在当前浏览器。微信中学习时，请继续用微信打开此链接。</p>
       <p class="storage-note" id="storageNote" hidden>浏览器存储不可用，进度只在本次页面内有效。</p>
-      <p class="rule-note"><span class="rule-dot"></span>本 Demo 为规则判题，不是真实执行 Python。</p>
+      <p class="rule-note"><span class="rule-dot"></span>练习采用规则判题，不会把代码上传到服务器。</p>
     </div>
   </aside>
   <main class="main" id="main">
@@ -2221,6 +2382,167 @@ for key, value in student.items():
           }
         }
       ]
+    },
+    {
+      title: '实用小项目',
+      points: [
+        {
+          id: 'p8-1',
+          title: '生成成绩报告',
+          oneLine: '把列表、统计函数和 f-string 组合起来，从一组成绩中算出平均分和最高分。',
+          analogy: '像老师拿到全班成绩单后，先把分数加总，再计算平均分，同时找出最高分。',
+          example: `scores = [88, 76, 95, 81]
+
+total = sum(scores)
+average = total / len(scores)
+highest = max(scores)
+
+print(f"平均分：{average}")
+print(f"最高分：{highest}")`,
+          mistakes: [
+            '平均分要除以成绩数量 <code>len(scores)</code>，不能写死成某个数字。',
+            '<code>sum()</code> 和 <code>max()</code> 需要接收数字列表；列表里混入字符串会报错。',
+            '真实项目中还要考虑空列表，否则除以 0 会报 <code>ZeroDivisionError</code>。'
+          ],
+          exercise: {
+            id: 'ex8-1',
+            title: '计算班级平均分和最高分',
+            prompt: '已有成绩列表 <code>scores = [85, 92, 78, 90]</code>。先用 <code>sum(scores)</code> 得到总分，再用总分除以 <code>len(scores)</code> 得到平均分，用 <code>max(scores)</code> 得到最高分，最后按预期格式打印。',
+            hint: '把三个结果分别存进 total、average、highest，再用两个 f-string 输出。',
+            starter: 'scores = [85, 92, 78, 90]\n\n# 计算 total、average 和 highest\n\n# 按预期格式打印平均分和最高分\n',
+            expected: '平均分：86.25\n最高分：92',
+            checks: [
+              { label: '保留题目给出的 scores 成绩列表', test: re(/scores\s*=\s*\[\s*85\s*,\s*92\s*,\s*78\s*,\s*90\s*\]/) },
+              { label: '用 sum(scores) 计算总分', test: re(/total\s*=\s*sum\s*\(\s*scores\s*\)/) },
+              { label: '用 total / len(scores) 计算平均分', test: re(/average\s*=\s*total\s*\/\s*len\s*\(\s*scores\s*\)/) },
+              { label: '用 max(scores) 找最高分', test: re(/highest\s*=\s*max\s*\(\s*scores\s*\)/) },
+              { label: '分别用 f-string 输出平均分和最高分', test: function (code) { return /print\s*\(\s*f["'][^\n]*\{\s*average\s*\}/.test(code) && /print\s*\(\s*f["'][^\n]*\{\s*highest\s*\}/.test(code); } }
+            ],
+            explain: '<code>sum(scores)</code> 得到 345，<code>len(scores)</code> 得到 4，所以平均分是 86.25；<code>max(scores)</code> 会遍历列表并返回最大的 92。这就是最基础的成绩报表逻辑。'
+          }
+        },
+        {
+          id: 'p8-2',
+          title: '汇总分类消费',
+          oneLine: '遍历多条消费记录，用字典按分类累加金额，得到一份简单的消费汇总。',
+          analogy: '像整理购物小票：每看到一笔餐饮消费，就加到“餐饮”这一栏；交通消费则加到“交通”一栏。',
+          example: `expenses = [
+    {"category": "餐饮", "amount": 25},
+    {"category": "交通", "amount": 10},
+    {"category": "餐饮", "amount": 18}
+]
+
+totals = {}
+for item in expenses:
+    category = item["category"]
+    amount = item["amount"]
+    totals[category] = totals.get(category, 0) + amount
+
+print(totals)  # {'餐饮': 43, '交通': 10}`,
+          mistakes: [
+            '第一次遇到某个分类时字典里还没有这个键，要用 <code>get(category, 0)</code> 从 0 开始。',
+            '循环里要累加金额，直接写 <code>totals[category] = amount</code> 会覆盖之前的记录。',
+            '取分类和金额时要使用当前记录 <code>item</code>，不要直接从整个列表取。'
+          ],
+          exercise: {
+            id: 'ex8-2',
+            title: '制作本周消费分类表',
+            prompt: '遍历给出的 <code>expenses</code>。用空字典 <code>totals</code> 保存汇总结果，通过 <code>totals.get(category, 0) + amount</code> 累加每个分类的金额，最后打印 <code>totals</code>。',
+            hint: '循环中先从 item 取 category 和 amount，再更新 totals[category]。',
+            starter: 'expenses = [\n    {"category": "餐饮", "amount": 32},\n    {"category": "交通", "amount": 12},\n    {"category": "餐饮", "amount": 20}\n]\n\ntotals = {}\n\n# 遍历 expenses，按 category 累加 amount\n\n# 打印 totals\n',
+            expected: "{'餐饮': 52, '交通': 12}",
+            checks: [
+              { label: '创建空字典 totals', test: re(/totals\s*=\s*\{\s*\}/) },
+              { label: '用 for 遍历 expenses 中的每条记录', test: re(/for\s+\w+\s+in\s+expenses\s*:/) },
+              { label: '从当前记录中取得 category 和 amount', test: function (code) { return /\[\s*["']category["']\s*\]/.test(code) && /\[\s*["']amount["']\s*\]/.test(code); } },
+              { label: '用 get(category, 0) 保留之前的累计值', test: re(/totals\s*\.\s*get\s*\(\s*category\s*,\s*0\s*\)/) },
+              { label: '把当前 amount 累加到对应分类', test: re(/totals\s*\[\s*category\s*\]\s*=\s*totals\s*\.\s*get\s*\(\s*category\s*,\s*0\s*\)\s*\+\s*amount/) },
+              { label: '打印最终汇总字典 totals', test: re(/print\s*\(\s*totals\s*\)/) }
+            ],
+            explain: '第一笔餐饮从 0 加到 32，交通从 0 加到 12；再次遇到餐饮时，<code>get()</code> 先取出已有的 32，再加 20，最终得到 52。这个模式常用于订单、访问量和库存等分组统计。'
+          }
+        },
+        {
+          id: 'p8-3',
+          title: '统计文本关键词',
+          oneLine: '先清洗文本，再拆成单词并循环计数，这是文本分析最常见的入门流程。',
+          analogy: '像统计一篇文章里某个名字出现几次：先统一大小写、去掉标点，再逐词检查。',
+          example: `text = "Python is useful. I like Python."
+clean = text.lower().replace(".", "")
+words = clean.split()
+
+count = 0
+for word in words:
+    if word == "python":
+        count += 1
+
+print(f"Python 出现 {count} 次")`,
+          mistakes: [
+            '不先用 <code>lower()</code> 统一大小写，Python 和 python 会被当成不同单词。',
+            '不清理句号时，<code>python.</code> 不等于 <code>python</code>。',
+            '计数变量要在循环前设为 0，并且只在匹配成功时加 1。'
+          ],
+          exercise: {
+            id: 'ex8-3',
+            title: '统计反馈中的 Python',
+            prompt: '处理字符串 <code>"Python makes work easier. Python is practical."</code>：先转成小写并去掉句号，再用 <code>split()</code> 拆分。循环检查每个单词，统计 <code>python</code> 出现的次数并按预期格式输出。',
+            hint: '可以写 clean = text.lower().replace(".", "")，然后 words = clean.split()。',
+            starter: 'text = "Python makes work easier. Python is practical."\n\n# 统一大小写并去掉句号\n# 拆分成单词列表\n# 循环统计 python 出现的次数\n# 按预期格式打印\n',
+            expected: 'Python 出现 2 次',
+            checks: [
+              { label: '用 lower() 统一文本大小写', test: re(/text\s*\.\s*lower\s*\(\s*\)/) },
+              { label: '用 replace() 去掉英文句号', test: re(/\.\s*replace\s*\(\s*["']\.["']\s*,\s*["']["']\s*\)/) },
+              { label: '用 split() 得到单词列表', test: re(/words\s*=\s*\w+\s*\.\s*split\s*\(\s*\)/) },
+              { label: '把计数变量初始化为 0', test: re(/count\s*=\s*0(?!\d)/) },
+              { label: '循环判断单词是否等于 python', test: re(/for\s+word\s+in\s+words\s*:[\s\S]*?if\s+word\s*==\s*["']python["']\s*:/) },
+              { label: '匹配时让 count 增加 1', test: function (code) { return /count\s*\+=\s*1/.test(code) || /count\s*=\s*count\s*\+\s*1/.test(code); } },
+              { label: '用 f-string 输出统计结果', test: re(/print\s*\(\s*f["'][^\n]*\{\s*count\s*\}[^\n]*次/) }
+            ],
+            explain: '清洗后文本变成没有句号的小写单词序列。循环逐个比较，遇到两次 python，count 就从 0 增加到 2。这是词频统计、评论分析和搜索关键词的基础步骤。'
+          }
+        },
+        {
+          id: 'p8-4',
+          title: '管理待办事项',
+          oneLine: '用函数封装“添加任务”，用列表保存多条记录，再修改任务状态并生成清单。',
+          analogy: '像手机待办应用：每个任务既有标题，也有完成状态；添加和勾选是两种不同操作。',
+          example: `tasks = []
+
+def add_task(title):
+    tasks.append({"title": title, "done": False})
+
+add_task("复习列表")
+add_task("完成练习")
+tasks[0]["done"] = True
+
+for task in tasks:
+    status = "完成" if task["done"] else "待办"
+    print(f"[{status}] {task['title']}")`,
+          mistakes: [
+            '每个任务要创建新的字典；重复使用同一个字典对象会让多条记录一起变化。',
+            '<code>append()</code> 应写在函数内部，这样每次调用都能新增一条任务。',
+            '列表下标从 0 开始，<code>tasks[0]</code> 表示第一项任务。'
+          ],
+          exercise: {
+            id: 'ex8-4',
+            title: '制作两项学习待办',
+            prompt: '创建空列表 <code>tasks</code>，定义 <code>add_task(title)</code>，向列表加入包含 <code>title</code> 和 <code>done: False</code> 的字典。添加“复习字典”和“完成小项目”两个任务，把第一项标记为完成，最后打印整个任务列表。',
+            hint: '函数体写 tasks.append({"title": title, "done": False})，再用 tasks[0]["done"] = True 修改状态。',
+            starter: 'tasks = []\n\n# 定义 add_task(title)，把任务字典加入 tasks\n\n# 添加两个任务\n# 把第一项标记为完成\n# 打印 tasks\n',
+            expected: "[{'title': '复习字典', 'done': True}, {'title': '完成小项目', 'done': False}]",
+            checks: [
+              { label: '创建空列表 tasks', test: re(/tasks\s*=\s*\[\s*\]/) },
+              { label: '定义 add_task(title) 函数', test: re(/def\s+add_task\s*\(\s*title\s*\)\s*:/) },
+              { label: '函数中用 append 加入含 title 和 done 的字典', test: re(/tasks\s*\.\s*append\s*\(\s*\{\s*["']title["']\s*:\s*title\s*,\s*["']done["']\s*:\s*False\s*\}\s*\)/) },
+              { label: '添加“复习字典”任务', test: re(/add_task\s*\(\s*["']复习字典["']\s*\)/) },
+              { label: '添加“完成小项目”任务', test: re(/add_task\s*\(\s*["']完成小项目["']\s*\)/) },
+              { label: '把第一项任务的 done 改为 True', test: re(/tasks\s*\[\s*0\s*\]\s*\[\s*["']done["']\s*\]\s*=\s*True/) },
+              { label: '打印完整任务列表', test: re(/print\s*\(\s*tasks\s*\)/) }
+            ],
+            explain: '函数负责创建统一格式的任务记录，两次调用生成两条独立数据。随后通过下标找到第一条任务，把 done 从 False 改为 True。这种“列表中放字典”的结构常见于待办、订单和通讯录程序。'
+          }
+        }
+      ]
     }
   ];
 
@@ -2471,7 +2793,85 @@ for key, value in student.items():
         '写 for key, value in student.items():。',
         '循环体里 print(f"{key}: {value}")。'
       ]
+    },
+    'p8-1': {
+      steps: [
+        '<code>sum(scores)</code> 把列表里的所有成绩相加，得到总分 345。',
+        '<code>len(scores)</code> 返回成绩数量 4；总分除以人数，得到平均分 86.25。',
+        '<code>max(scores)</code> 找出列表中的最大值 92，最后用 f-string 生成可读的报告。'
+      ],
+      syntax: '总数 = sum(数字列表)\n平均值 = 总数 / len(数字列表)\n最大值 = max(数字列表)',
+      plan: [
+        '先用 sum(scores) 计算 total，避免手动把四个数字相加。',
+        '再用 total / len(scores) 计算 average，并用 max(scores) 计算 highest。',
+        '分别用 f-string 打印“平均分”和“最高分”，变量放在花括号中。'
+      ]
+    },
+    'p8-2': {
+      steps: [
+        'expenses 是“列表里放字典”：列表代表多条记录，每个字典代表一笔消费。',
+        '循环每次拿到一条 item，再分别取出 category 和 amount。',
+        '<code>totals.get(category, 0)</code> 取得已有合计；第一次出现时用 0，再加上本次金额。'
+      ],
+      syntax: '汇总 = {}\nfor 记录 in 记录列表:\n    分类 = 记录["分类"]\n    汇总[分类] = 汇总.get(分类, 0) + 记录["数值"]',
+      plan: [
+        '先保留 expenses，并创建空字典 totals。',
+        '循环每个 item，从字典中取 category 和 amount。',
+        '用 get(category, 0) 加上 amount，循环结束后打印 totals。'
+      ]
+    },
+    'p8-3': {
+      steps: [
+        '<code>lower()</code> 统一大小写，避免 Python 和 python 被当成两个词。',
+        '<code>replace(".", "")</code> 去掉句号，<code>split()</code> 再按空白拆成单词列表。',
+        '循环逐词比较；只有 word 等于 python 时，才让 count 增加 1。'
+      ],
+      syntax: '干净文本 = 原文本.lower().replace(".", "")\n单词列表 = 干净文本.split()\n计数 = 0\nfor 单词 in 单词列表:\n    if 单词 == 目标:\n        计数 += 1',
+      plan: [
+        '先把 text 转成小写并去掉句号，保存为 clean。',
+        '用 clean.split() 得到 words，并把 count 初始化为 0。',
+        '循环判断 word == "python"，匹配时加 1，最后用 f-string 输出。'
+      ]
+    },
+    'p8-4': {
+      steps: [
+        'tasks 是装任务记录的列表，每条记录用字典同时保存 title 和 done。',
+        '<code>add_task(title)</code> 把新增任务的固定步骤封装起来，调用时只需要给标题。',
+        '<code>tasks[0]["done"] = True</code> 先定位第一条记录，再修改其中的完成状态。'
+      ],
+      syntax: '记录列表 = []\ndef 添加记录(标题):\n    记录列表.append({"title": 标题, "done": False})\n\n记录列表[0]["done"] = True',
+      plan: [
+        '创建 tasks，并定义 add_task(title) 函数。',
+        '在函数里 append 一个包含 title 和 done 的新字典，然后调用两次。',
+        '修改第一项的 done，最后打印 tasks 检查两条记录。'
+      ]
     }
+  };
+
+  const PRACTICE_CONTEXT = {
+    'p1-1': { scene: '报名表、个人资料和订单都需要先把姓名、城市、数量等信息保存下来。变量就是程序里最小的数据容器。', goal: '能创建变量、分清字符串和整数，并正确打印变量里的内容。' },
+    'p1-2': { scene: '价格标签、快递信息和消息提示经常要把数字放进一段文字中。拼接之前，需要先统一数据类型。', goal: '理解数字与字符串的区别，并用 str() 把数字转换后再拼接。' },
+    'p1-3': { scene: '网页输入框和文件中读到的数字常常是字符串，计算前必须转换成真正的数值。', goal: '能按处理顺序使用 float() 和 int()，并理解转换后的结果。' },
+    'p2-1': { scene: '空调控制、成绩评级和登录验证都要根据条件选择不同操作。', goal: '能写出结构完整的 if / else，并保持分支代码正确缩进。' },
+    'p2-2': { scene: '活动报名可能同时要求年龄达标且已经签到，多个条件需要组合后才能做决定。', goal: '能使用比较运算符和 and 组合两个布尔条件。' },
+    'p3-1': { scene: '批量发送通知、处理一组订单或生成连续编号，都需要重复执行同一段代码。', goal: '能用 for 和 range() 控制明确次数的循环。' },
+    'p3-2': { scene: '倒计时、重试登录和持续读取数据通常不知道固定次数，而是满足条件后才停止。', goal: '能让 while 条件最终变为假，避免无限循环。' },
+    'p3-3': { scene: '批量处理数据时，可能要跳过无效记录，也可能在找到目标后立即停止。', goal: '理解 continue 跳过当前一轮，并分清它与 break 的作用。' },
+    'p4-1': { scene: '隐藏手机号、提取文件后缀和截取日期，都需要从文本的指定位置取字符。', goal: '能用正负下标和切片准确取得字符串片段。' },
+    'p4-2': { scene: '用户提交的姓名、邮箱和搜索词经常带有空格或大小写不统一，需要先清洗。', goal: '能组合 strip() 和 upper() 处理原始文本。' },
+    'p4-3': { scene: '成绩通知、订单确认和欢迎语都需要把变量填进固定文本模板。', goal: '能正确书写 f-string，并把多个变量放入花括号。' },
+    'p5-1': { scene: '购物车、课程名单和一周温度都可以按顺序放在列表中统一管理。', goal: '能创建列表，用下标取元素，并用 len() 获取数量。' },
+    'p5-2': { scene: '购物车会新增商品、修改数量或删除条目，列表也提供对应的增改删操作。', goal: '能用 append() 添加元素，并通过下标修改已有元素。' },
+    'p5-3': { scene: '统计总分、总消费或总库存时，需要遍历一组数字并持续累加。', goal: '能设置累加初始值，在循环中更新它，并在循环结束后输出结果。' },
+    'p6-1': { scene: '重复发送问候或执行同一套检查时，可以把步骤封装成函数并多次调用。', goal: '理解定义函数不会自动执行，并能主动调用函数多次。' },
+    'p6-2': { scene: '计算价格、面积和折扣时，函数接收不同输入并返回相应结果。', goal: '能定义参数、使用 return，并把函数返回值交给 print()。' },
+    'p6-3': { scene: '系统大多数时候采用常用配置，特殊情况才覆盖它，适合使用默认参数。', goal: '能定义默认参数，并理解省略参数与显式传参的区别。' },
+    'p7-1': { scene: '学生档案、商品详情和联系人都包含多个有名称的字段，适合用字典保存。', goal: '能按键取值，并在键可能不存在时使用 get()。' },
+    'p7-2': { scene: '生成个人资料页或配置清单时，需要逐项读取字典中的字段名称和字段值。', goal: '能使用 items() 同时取得键和值，并格式化输出。' },
+    'p8-1': { scene: '老师拿到一组考试成绩后，希望快速生成平均分和最高分，而不是用计算器逐项统计。', goal: '综合使用列表、sum()、len()、max() 和 f-string 生成成绩摘要。' },
+    'p8-2': { scene: '记账应用需要把多笔流水按餐饮、交通等分类合计，帮助用户看懂钱花在了哪里。', goal: '掌握“列表存记录、字典做汇总”的常用数据处理模式。' },
+    'p8-3': { scene: '分析问卷反馈或文章时，经常要统计某个关键词出现的次数，原始文本需要先清洗。', goal: '完成文本清洗、拆分、遍历和计数这一整条处理流程。' },
+    'p8-4': { scene: '待办应用需要持续添加任务，并分别记录每个任务的标题和完成状态。', goal: '综合使用函数、列表和字典组织多条结构化记录。' }
   };
 
   const CHAPTER_META = {
@@ -2530,6 +2930,14 @@ for key, value in student.items():
         '键不存在时直接取值会报错，get() 会返回 None。',
         'items() 同时给出键和值，适合用 for 遍历。'
       ]
+    },
+    '实用小项目': {
+      goal: '这一章把前面学过的语法组合起来，完成成绩统计、消费汇总、文本分析和待办管理四个真实任务。',
+      summary: [
+        '真实程序通常需要把列表、字典、循环和函数组合使用。',
+        '处理数据时先看输入结构，再拆成清洗、计算、汇总和输出几个步骤。',
+        '小项目的关键是让数据结构清楚、处理步骤可重复、输出结果容易读懂。'
+      ]
     }
   };
 
@@ -2555,17 +2963,21 @@ for key, value in student.items():
 
   var memoryStore = {};
 
+  function normalizeStoredState(data) {
+    return {
+      completed: data && data.completed && typeof data.completed === 'object' && !Array.isArray(data.completed) ? data.completed : {},
+      drafts: data && data.drafts && typeof data.drafts === 'object' && !Array.isArray(data.drafts) ? data.drafts : {},
+      last: data && typeof data.last === 'string' ? data.last : null
+    };
+  }
+
   function loadState() {
     var empty = { completed: {}, drafts: {}, last: null };
     try {
       var raw = storageOK ? localStorage.getItem(STORAGE_KEY) : memoryStore[STORAGE_KEY];
       if (!raw) return empty;
       var data = JSON.parse(raw);
-      return {
-        completed: data && data.completed && typeof data.completed === 'object' ? data.completed : {},
-        drafts: data && data.drafts && typeof data.drafts === 'object' ? data.drafts : {},
-        last: data && typeof data.last === 'string' ? data.last : null
-      };
+      return normalizeStoredState(data);
     } catch (err) {
       return empty;
     }
@@ -2593,6 +3005,9 @@ for key, value in student.items():
   var totalBar = document.getElementById('totalBar');
   var storageNote = document.getElementById('storageNote');
   var clearBtn = document.getElementById('clearBtn');
+  var exportBtn = document.getElementById('exportBtn');
+  var importBtn = document.getElementById('importBtn');
+  var importFile = document.getElementById('importFile');
   var sidebarEl = document.getElementById('sidebar');
   var menuBtn = document.getElementById('menuBtn');
   var drawerClose = document.getElementById('drawerClose');
@@ -2656,7 +3071,7 @@ for key, value in student.items():
 
   function highlightPython(code) {
     var keywords = ['def', 'return', 'if', 'elif', 'else', 'for', 'while', 'in', 'and', 'or', 'not', 'True', 'False', 'None', 'break', 'continue', 'import', 'from', 'as', 'class', 'try', 'except', 'finally', 'with', 'lambda', 'pass', 'global', 'nonlocal', 'is', 'raise', 'yield'];
-    var builtins = ['print', 'len', 'range', 'int', 'float', 'str', 'sum', 'sorted', 'list', 'dict', 'set', 'tuple', 'type', 'input', 'abs', 'round', 'enumerate', 'zip', 'append', 'strip', 'upper', 'lower', 'split', 'replace', 'join', 'pop', 'remove', 'insert', 'extend', 'get', 'items', 'keys', 'values'];
+    var builtins = ['print', 'len', 'range', 'int', 'float', 'str', 'sum', 'max', 'min', 'sorted', 'list', 'dict', 'set', 'tuple', 'type', 'input', 'abs', 'round', 'enumerate', 'zip', 'append', 'strip', 'upper', 'lower', 'split', 'replace', 'join', 'count', 'pop', 'remove', 'insert', 'extend', 'get', 'items', 'keys', 'values'];
     var html = '';
     var i = 0;
 
@@ -2752,6 +3167,66 @@ for key, value in student.items():
     } else {
       showToast(fallbackCopy() ? successMessage : '复制失败，请手动选中复制');
     }
+  }
+
+  function exportProgress() {
+    updateDraftSilently();
+    persist();
+    var backup = {
+      app: 'python-learning-demo',
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      state: state
+    };
+    var blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json;charset=utf-8' });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement('a');
+    var date = new Date();
+    var month = String(date.getMonth() + 1).padStart(2, '0');
+    var day = String(date.getDate()).padStart(2, '0');
+    link.href = url;
+    link.download = 'python-learning-progress-' + date.getFullYear() + month + day + '.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 0);
+    showToast('进度备份已生成');
+  }
+
+  function importProgress(file) {
+    if (!file) return;
+    if (file.size > 1024 * 1024) {
+      showToast('备份文件过大，无法恢复');
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var parsed = JSON.parse(String(reader.result || ''));
+        var incoming = parsed && parsed.state ? parsed.state : parsed;
+        if (!incoming || typeof incoming !== 'object' ||
+            (!incoming.completed && !incoming.drafts && !incoming.last)) {
+          throw new Error('invalid progress file');
+        }
+        state = normalizeStoredState(incoming);
+        currentIndex = state.last && POINT_INDEX.has(state.last) ? POINT_INDEX.get(state.last) : 0;
+        persist();
+        renderSidebar();
+        renderMain();
+        mainEl.scrollTop = 0;
+        closeDrawer(false);
+        showToast('学习进度已恢复');
+      } catch (err) {
+        showToast('无法识别这个进度备份');
+      } finally {
+        importFile.value = '';
+      }
+    };
+    reader.onerror = function () {
+      importFile.value = '';
+      showToast('读取备份失败，请重试');
+    };
+    reader.readAsText(file);
   }
 
   function updateDraftSilently() {
@@ -2860,10 +3335,12 @@ for key, value in student.items():
     var isDone = !!state.completed[exercise.id];
     var saved = Object.prototype.hasOwnProperty.call(state.drafts, exercise.id) ? state.drafts[exercise.id] : exercise.starter;
     var detail = DETAILS[point.id] || { steps: [], syntax: '', plan: [] };
+    var practiceContext = PRACTICE_CONTEXT[point.id] || { scene: point.analogy, goal: '理解本节写法并完成练习。' };
     var chapterMeta = CHAPTER_META[chapter.title] || { goal: '', summary: [] };
     var isFirstInChapter = pointIndex === 0;
     var isLastInChapter = pointIndex === chapter.points.length - 1;
     var isVeryFirst = chapterIndex === 0 && pointIndex === 0;
+    var hasSavedLearning = !!state.last || Object.keys(state.completed).length > 0 || Object.keys(state.drafts).length > 0;
     var introPath = chapter.points.map(function (p, i) {
       var done = !!state.completed[p.exercise.id];
       return (i > 0 ? '<span class="path-sep">→</span>' : '') +
@@ -2871,6 +3348,9 @@ for key, value in student.items():
     }).join('');
 
     mainInner.innerHTML =
+      '<div class="resume-note">' + (hasSavedLearning
+        ? '已恢复上次学习位置。代码草稿和完成进度会继续自动保存在当前浏览器。'
+        : '开始学习后，代码草稿和完成进度会自动保存在当前浏览器，下次打开这个链接可以继续。') + '</div>' +
       '<header class="page-head">' +
         '<div class="crumb-row">' +
           '<div class="crumb"><span class="crumb-chapter">第 ' + (chapterIndex + 1) + ' 章 · ' + chapter.title + '</span><span class="sep">/</span><span>知识点 ' + (pointIndex + 1) + '</span></div>' +
@@ -2938,19 +3418,34 @@ for key, value in student.items():
           '</div>' +
           '<button class="mark-btn' + (isDone ? ' done' : '') + '" id="markBtn" type="button" aria-pressed="' + (isDone ? 'true' : 'false') + '">' + (isDone ? '✓ 已完成' : '标记完成') + '</button>' +
         '</div>' +
-        '<p class="ex-prompt">' + exercise.prompt + '</p>' +
+        '<div class="practice-context">' +
+          '<div class="context-row"><span class="context-label">应用场景</span><p>' + practiceContext.scene + '</p></div>' +
+          '<div class="context-row"><span class="context-label">练习目标</span><p>' + practiceContext.goal + '</p></div>' +
+        '</div>' +
+        '<div class="task-block">' +
+          '<div class="task-label">任务要求</div>' +
+          '<p class="ex-prompt">' + exercise.prompt + '</p>' +
+        '</div>' +
         (detail.plan.length ?
           '<div class="plan-box">' +
-            '<div class="plan-title"><span class="plan-dot"></span>写之前先想 3 步</div>' +
+            '<div class="plan-title"><span class="plan-dot"></span>解题步骤</div>' +
             '<ol class="plan-list">' + detail.plan.map(function (step) { return '<li>' + step + '</li>'; }).join('') + '</ol>' +
           '</div>' : '') +
+        '<details class="hint-box">' +
+          '<summary>卡住了？展开提示</summary>' +
+          '<p>' + exercise.hint + '</p>' +
+        '</details>' +
+        '<div class="criteria-box">' +
+          '<div class="criteria-title">完成标准</div>' +
+          '<ul class="criteria-list">' + exercise.checks.map(function (check) { return '<li>' + escapeHtml(check.label) + '</li>'; }).join('') + '</ul>' +
+        '</div>' +
         '<div class="expected-wrap">' +
           '<div class="expected-head">' +
             '<span class="expected-label">预期输出</span>' +
             '<span class="expected-badge">规则比对</span>' +
           '</div>' +
           '<pre class="expected">' + escapeHtml(exercise.expected) + '</pre>' +
-          '<div class="expected-note">本 Demo 为规则判题，不是真实执行 Python。检查时只比对代码特征。</div>' +
+          '<div class="expected-note">检查会逐项核对上面的完成标准，不会运行或上传代码。</div>' +
         '</div>' +
         '<div class="editor-shell">' +
           '<div class="editor-top">' +
@@ -2976,7 +3471,7 @@ for key, value in student.items():
           '<ul class="summary-list">' + chapterMeta.summary.map(function (item) { return '<li>' + item + '</li>'; }).join('') + '</ul>' +
           '<p class="summary-next">' + (chapterIndex < COURSE.length - 1
             ? '下一章：' + COURSE[chapterIndex + 1].title + '。准备好了就点下面的“下一节”。'
-            : '基础篇到这里结束。可以回到任意一节复习，也可以继续用这些写法做小工具。') + '</p>' +
+            : '全部课程到这里结束。可以回到任意一节复习，也可以继续修改小项目里的数据和功能。') + '</p>' +
         '</section>' : '') +
       '<nav class="pager">' +
         '<button class="btn" id="prevBtn" type="button"' + (currentIndex === 0 ? ' disabled' : '') + '>← 上一节</button>' +
@@ -3048,7 +3543,7 @@ for key, value in student.items():
         '<ul class="check-list">' + checks.map(function (check) {
           return '<li class="ok">✓ ' + escapeHtml(check.label) + '</li>';
         }).join('') + '</ul>' +
-        '<p class="result-explain">' + exercise.explain + '</p>' +
+        '<p class="result-explain"><strong>为什么这样写：</strong>' + exercise.explain + '</p>' +
         (currentIndex < FLAT_POINTS.length - 1
           ? '<button class="btn result-next" id="nextFromResult" type="button">下一节 →</button>'
           : '<p class="result-explain">所有知识点都学完了，可以回到任意一节复习。</p>');
@@ -3104,10 +3599,11 @@ for key, value in student.items():
         }
       } else {
         var unindentStart = value.lastIndexOf('\n', start - 1) + 1;
-        var block = value.slice(unindentStart, end);
+        var lineEnd = start === end ? (value.indexOf('\n', end) === -1 ? value.length : value.indexOf('\n', end)) : end;
+        var block = value.slice(unindentStart, lineEnd);
         var unindented = block.replace(/^ {1,4}/gm, '');
         var removed = block.length - unindented.length;
-        editor.value = value.slice(0, unindentStart) + unindented + value.slice(end);
+        editor.value = value.slice(0, unindentStart) + unindented + value.slice(lineEnd);
         editor.selectionStart = Math.max(unindentStart, start - Math.min(4, start - unindentStart));
         editor.selectionEnd = Math.max(editor.selectionStart, end - removed);
       }
@@ -3179,6 +3675,16 @@ for key, value in student.items():
     renderMain();
     showToast('已清空进度和草稿');
   });
+
+  if (exportBtn) {
+    exportBtn.addEventListener('click', exportProgress);
+  }
+  if (importBtn && importFile) {
+    importBtn.addEventListener('click', function () { importFile.click(); });
+    importFile.addEventListener('change', function () {
+      importProgress(importFile.files && importFile.files[0]);
+    });
+  }
 
   if (menuBtn) {
     menuBtn.addEventListener('click', function () {
