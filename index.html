@@ -59,6 +59,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection { background: rgba(99, 102, 241, 0.18); }
@@ -561,6 +562,63 @@ h1 {
   border-radius: 16px;
   background: var(--panel);
   box-shadow: var(--shadow-sm);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 课程层级 ---------- */
+.learning-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 5px 10px;
+  border: 1px solid #dbe3ff;
+  border-radius: 99px;
+  background: #f5f7ff;
+  color: #4f46e5;
+  font-size: 10.5px;
+  font-weight: 750;
+}
+.learning-level::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.learning-level.applied {
+  border-color: #bae6d4;
+  background: #f0fdf7;
+  color: #07815f;
+}
+.learning-level.advanced {
+  border-color: #fed7aa;
+  background: #fff8ed;
+  color: #b45309;
+}
+.curriculum-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+.curriculum-stage {
+  padding: 12px;
+  border: 1px solid #e1e7f0;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.76);
+}
+.curriculum-stage strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #27344d;
+  font-size: 11.5px;
+}
+.curriculum-stage span {
+  display: block;
+  color: #748096;
+  font-size: 10.5px;
+  line-height: 1.6;
 }
 .card-label {
   display: flex;
@@ -1171,6 +1229,82 @@ button:focus-visible {
   font-size: 13.5px;
   line-height: 1.85;
 }
+
+.chapter-showcase {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #c7d2fe;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #eef2ff 0%, #ffffff 58%, #ecfeff 100%);
+  box-shadow: 0 14px 30px rgba(49, 46, 129, .08);
+}
+
+.showcase-copy h3 {
+  margin: 6px 0 8px;
+  color: #1e1b4b;
+  font-size: 1.08rem;
+}
+
+.showcase-copy p,
+.showcase-takeaway { line-height: 1.75; }
+
+.showcase-kicker {
+  color: #4338ca;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.showcase-code {
+  margin-top: 14px;
+  overflow-x: auto;
+  border-radius: 13px;
+  background: #111827;
+  color: #e5e7eb;
+  -webkit-overflow-scrolling: touch;
+}
+
+.showcase-code pre,
+.showcase-result pre {
+  margin: 0;
+  padding: 15px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: 13px/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.showcase-result {
+  margin-top: 10px;
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  background: rgba(255,255,255,.82);
+}
+
+.showcase-result > span {
+  display: block;
+  padding: 9px 14px 0;
+  color: #0369a1;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.showcase-result pre { padding-top: 7px; color: #0f172a; }
+
+.showcase-takeaway {
+  margin-top: 12px;
+  padding: 11px 13px;
+  border-left: 4px solid #14b8a6;
+  border-radius: 8px;
+  background: rgba(240, 253, 250, .9);
+  color: #134e4a;
+  font-size: .9rem;
+}
+
+@media (max-width: 480px) {
+  .chapter-showcase { padding: 15px; border-radius: 15px; }
+  .showcase-code pre, .showcase-result pre { padding: 12px; font-size: 12px; }
+  .showcase-result > span { padding-left: 12px; }
+}
 .intro-path {
   display: flex;
   align-items: center;
@@ -1410,7 +1544,8 @@ pre.syntax-code {
   }
 
   .mobile-bar {
-    position: relative;
+    position: sticky;
+    top: 0;
     z-index: 40;
     display: flex;
     align-items: center;
@@ -1537,6 +1672,7 @@ pre.syntax-code {
     width: 100%;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    scroll-padding-top: 76px;
   }
   .main-inner {
     max-width: 720px;
@@ -1555,6 +1691,8 @@ pre.syntax-code {
     padding: 16px;
     border-radius: 14px;
   }
+  .curriculum-map { grid-template-columns: 1fr; gap: 7px; }
+  .curriculum-stage { padding: 10px 11px; }
   .card-label { margin-bottom: 8px; font-size: 10px; }
   .analogy-card p { font-size: 14px; line-height: 1.85; }
   .card-head { gap: 8px; margin-bottom: 10px; }
@@ -1616,6 +1754,8 @@ pre.syntax-code {
     padding: 14px;
     font-size: 16px;
     line-height: 1.7;
+    max-height: 52dvh;
+    overscroll-behavior: contain;
   }
 
   .toolbar {
@@ -1650,6 +1790,28 @@ pre.syntax-code {
   }
 }
 
+@media (max-width: 480px) {
+  .mobile-bar { padding-left: 10px; padding-right: 10px; }
+  .mobile-brand { font-size: 13px; }
+  .main-inner { padding-left: 10px; padding-right: 10px; }
+  h1 { font-size: 23px; }
+  .card { padding: 14px 13px; border-radius: 12px; }
+  .exercise-head { padding-left: 13px; padding-right: 13px; }
+  .mark-btn { max-width: 92px; white-space: normal; line-height: 1.35; }
+  .practice-context, .task-block, .criteria-box, .hint-box,
+  .expected-wrap, .editor-shell, .result, .plan-box {
+    margin-left: 13px;
+    margin-right: 13px;
+  }
+  .toolbar { padding-left: 13px; padding-right: 13px; }
+  .pager .btn { padding-left: 9px; padding-right: 9px; }
+  pre.code, pre.syntax-code, pre.expected { overflow-wrap: normal; word-break: normal; }
+}
+
+@supports not (height: 100dvh) {
+  .app, .sidebar { height: 100vh; }
+}
+
 @media (max-width: 960px) and (max-height: 520px) {
   .sidebar .brand {
     padding-top: calc(10px + env(safe-area-inset-top, 0px));
@@ -1681,7 +1843,7 @@ pre.syntax-code {
       <span></span><span></span><span></span>
     </button>
     <div class="mobile-brand">Python 实用学习区</div>
-    <span class="mobile-progress" id="mobileProgress">0/23</span>
+    <span class="mobile-progress" id="mobileProgress">0/35</span>
   </header>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
@@ -1699,7 +1861,7 @@ pre.syntax-code {
         <div class="progress-ring" id="progressRing" style="--p:0"><span id="ringPercent">0%</span></div>
         <div class="progress-meta">
           <div class="progress-label">总进度</div>
-          <strong id="totalText">0 / 23</strong>
+          <strong id="totalText">0 / 35</strong>
           <div class="bar"><span id="totalBar"></span></div>
         </div>
       </div>
@@ -1999,6 +2161,137 @@ while count < 3:
               { label: '没有用 break 提前结束循环', test: function (code) { return !/\bbreak\b/.test(code); } }
             ],
             explain: '3 这一轮被 <code>continue</code> 跳过，所以没有打印 3；其余 1、2、4、5 正常打印。'
+          }
+        },
+        {
+          id: 'p3-4',
+          title: '遍历记录并汇总',
+          oneLine: '循环不只是打印数字，还可以逐条读取字典记录，按条件累加业务数据。',
+          analogy: '像财务逐笔查看订单：只统计已支付订单，并把金额累加成销售额。',
+          example: `orders = [
+    {"status": "paid", "amount": 120},
+    {"status": "pending", "amount": 80},
+    {"status": "paid", "amount": 60}
+]
+total = 0
+for order in orders:
+    if order["status"] == "paid":
+        total += order["amount"]
+print(total)  # 180`,
+          mistakes: [
+            '不要把 total = 0 放进循环，否则每轮都会清空前面的累计结果。',
+            '字典字段要用键访问，例如 order["amount"]。',
+            '先判断 status，再累加金额，避免把未支付订单算进去。'
+          ],
+          exercise: {
+            id: 'ex3-4',
+            title: '统计已支付订单',
+            prompt: '给定 orders 列表，使用 <code>for</code> 遍历每条订单，只把 status 为 <code>paid</code> 的 amount 加到 total，最后打印 total。',
+            hint: 'total = 0 要写在循环前；循环中用 order["status"] 判断，再用 total += order["amount"]。',
+            starter: 'orders = [{"status": "paid", "amount": 120}, {"status": "pending", "amount": 80}, {"status": "paid", "amount": 60}]\ntotal = 0\n\n# 遍历订单并统计已支付金额\n',
+            expected: '180',
+            checks: [
+              { label: '创建 total = 0', test: re(/total\s*=\s*0/) },
+              { label: '用 for 遍历 orders', test: re(/for\s+\w+\s+in\s+orders\s*:/) },
+              { label: '判断订单状态为 paid', test: re(/\[\s*["']status["']\s*\]\s*==\s*["']paid["']/) },
+              { label: '累加订单金额', test: re(/total\s*\+=\s*\w+\s*\[\s*["']amount["']\s*\]/) },
+              { label: '打印 total', test: re(/print\s*\(\s*total\s*\)/) }
+            ],
+            explain: 'total 是循环外的累加器。每轮 order 指向一条记录，只有 paid 订单才执行 total += amount，最后得到 120 + 60 = 180。'
+          }
+        },
+        {
+          id: 'p3-5',
+          title: 'enumerate 获取序号',
+          oneLine: '<code>enumerate()</code> 同时提供序号和元素，适合生成带编号的清单。',
+          analogy: '像给作业名单编号：一边拿到学生姓名，一边拿到从 1 开始的排名。',
+          example: `tasks = ["复习", "写作业", "提交"]
+for index, task in enumerate(tasks, start=1):
+    print(f"{index}. {task}")`,
+          mistakes: [
+            '默认序号从 0 开始；面向用户的清单通常使用 start=1。',
+            'enumerate 返回两个值，for 后面要准备两个变量接收。',
+            '不要手动维护 index += 1，容易漏加或重复。'
+          ],
+          exercise: {
+            id: 'ex3-5',
+            title: '生成待办清单',
+            prompt: '使用 <code>enumerate(tasks, start=1)</code> 遍历任务列表，按“序号. 任务”格式逐行打印。',
+            hint: '写 for index, task in enumerate(tasks, start=1)，用 f-string 输出。',
+            starter: 'tasks = ["复习", "写作业", "提交"]\n\n# 用 enumerate 生成带编号的清单\n',
+            expected: '1. 复习\n2. 写作业\n3. 提交',
+            checks: [
+              { label: '使用 enumerate(tasks, start=1)', test: re(/enumerate\s*\(\s*tasks\s*,\s*start\s*=\s*1\s*\)/) },
+              { label: '同时接收 index 和 task', test: re(/for\s+\w+\s*,\s*\w+\s+in\s+enumerate/) },
+              { label: '使用 f-string 输出序号和任务', test: re(/print\s*\(\s*f["'][^\n]*\{\s*\w+\s*\}[^\n]*\{\s*\w+\s*\}/) }
+            ],
+            explain: 'enumerate 把列表元素包装成 (序号, 元素) 两个值。start=1 让第一项从 1 开始，f-string 负责把两者拼成界面上的清单文本。'
+          }
+        },
+        {
+          id: 'p3-6',
+          title: '嵌套循环生成表格',
+          oneLine: '一个循环里再放一个循环，可以处理二维表格、座位和组合数据。',
+          analogy: '像电影院按行、按列检查座位：先走完第 1 行，再走第 2 行。',
+          example: `for row in range(1, 3):
+    line = []
+    for col in range(1, 4):
+        line.append(f"{row}-{col}")
+    print(" ".join(line))`,
+          mistakes: [
+            '内层循环每换一行都要重新创建 line，不能把上一行的座位带过来。',
+            '内层循环的缩进要比外层多 4 个空格。',
+            'join 的对象必须是字符串列表。'
+          ],
+          exercise: {
+            id: 'ex3-6',
+            title: '打印座位表',
+            prompt: '用嵌套 <code>for</code> 生成 2 行 3 列座位，输出两行：<code>A1 A2 A3</code> 和 <code>B1 B2 B3</code>。',
+            hint: '外层用 range(2)，内层用 range(1, 4)；行名可用 "AB"[row]，每行先建 seats 列表。',
+            starter: '# 生成 2 行 3 列座位表\n',
+            expected: 'A1 A2 A3\nB1 B2 B3',
+            checks: [
+              { label: '使用两层 for 循环', test: function (code) { return (code.match(/for\s+\w+\s+in/g) || []).length >= 2; } },
+              { label: '内层遍历 1 到 3', test: re(/range\s*\(\s*1\s*,\s*4\s*\)/) },
+              { label: '使用 seats 列表收集座位', test: re(/seats\s*=\s*\[\s*\]/) },
+              { label: '用 join 输出每一行', test: re(/join\s*\(/) }
+            ],
+            explain: '外层决定行，内层决定列。每一轮外层先清空 seats，再由内层加入 1、2、3 三个座位，最后 join 成一行。'
+          }
+        },
+        {
+          id: 'p3-7',
+          title: 'while 输入校验与重试',
+          oneLine: 'while 常用于不断尝试，直到输入满足规则；必须在成功或失败上限时退出。',
+          analogy: '像登录重试：密码错误就再试，正确或达到次数上限就停止。',
+          example: `password = ""
+attempts = 0
+while password != "python" and attempts < 3:
+    password = input("密码：")
+    attempts += 1
+if password == "python":
+    print("登录成功")
+else:
+    print("次数用完")`,
+          mistakes: [
+            '循环体里必须更新 password 或 attempts，否则条件可能永远为真。',
+            '限制最大次数可以保护程序，避免用户一直卡在输入循环。',
+            '成功提示和失败提示要放在循环结束后统一判断。'
+          ],
+          exercise: {
+            id: 'ex3-7',
+            title: '校验年龄输入',
+            prompt: '变量 <code>age = 0</code>。用 while 重复加 1，直到 age >= 18；结束后打印 <code>可以参加</code>。',
+            hint: 'while age < 18:，循环里写 age += 1；打印语句要放在循环外。',
+            starter: 'age = 0\n\n# 用 while 让 age 逐步达到 18\n',
+            expected: '可以参加',
+            checks: [
+              { label: 'age 赋值为 0', test: re(/age\s*=\s*0(?![\d.])/) },
+              { label: '使用 while age < 18', test: re(/while\s+age\s*<\s*18\s*:/) },
+              { label: '循环中递增 age', test: function (code) { return /age\s*\+=\s*1/.test(code) || /age\s*=\s*age\s*\+\s*1/.test(code); } },
+              { label: '循环结束后打印可以参加', test: re(/while[\s\S]*?\nprint\s*\(\s*["']可以参加["']\s*\)/) }
+            ],
+            explain: 'age 从 0 开始，每轮增加 1，达到 18 后 while 条件变假。print 放在循环外，只输出一次，代表校验完成后的后续业务。'
           }
         }
       ]
@@ -2543,6 +2836,291 @@ for task in tasks:
           }
         }
       ]
+    },
+    {
+      title: '数据处理进阶',
+      points: [
+        {
+          id: 'p9-1',
+          title: '筛选与排序数据',
+          oneLine: '先按条件筛选需要的数据，再用 <code>sorted()</code> 排序，是成绩表、商品列表和排行榜的常用处理流程。',
+          analogy: '像整理报名名单：先找出已经通过审核的人，再按照成绩从高到低排列。',
+          example: `scores = [72, 95, 61, 88, 54]
+
+passed = []
+for score in scores:
+    if score >= 60:
+        passed.append(score)
+
+ranking = sorted(passed, reverse=True)
+print(ranking)  # [95, 88, 72, 61]`,
+          mistakes: [
+            '<code>sorted()</code> 返回新列表，原列表不会自动改变，要用变量接住结果。',
+            '<code>reverse=True</code> 才是从大到小；默认是从小到大。',
+            '筛选条件要写在循环内部，只把满足条件的数据加入新列表。'
+          ],
+          exercise: {
+            id: 'ex9-1',
+            title: '生成及格成绩排行榜',
+            prompt: '从 <code>scores = [58, 91, 76, 45, 83]</code> 中筛选大于等于 60 的成绩，保存到 <code>passed</code>，再用 <code>sorted(passed, reverse=True)</code> 得到 <code>ranking</code> 并打印。',
+            hint: '先创建 passed = []，循环中满足 score >= 60 时 append，循环结束后再排序。',
+            starter: 'scores = [58, 91, 76, 45, 83]\\npassed = []\\n\\n# 筛选及格成绩\\n# 从高到低排序并打印\\n',
+            expected: '[91, 83, 76]',
+            checks: [
+              { label: '创建空列表 passed', test: re(/passed\s*=\s*\[\s*\]/) },
+              { label: '用 for 遍历 scores', test: re(/for\s+score\s+in\s+scores\s*:/) },
+              { label: '判断 score 大于等于 60', test: re(/if\s+score\s*>=\s*60\s*:/) },
+              { label: '把及格成绩加入 passed', test: re(/passed\s*\.\s*append\s*\(\s*score\s*\)/) },
+              { label: '使用 sorted(passed, reverse=True) 排序', test: re(/ranking\s*=\s*sorted\s*\(\s*passed\s*,\s*reverse\s*=\s*True\s*\)/) },
+              { label: '打印 ranking', test: re(/print\s*\(\s*ranking\s*\)/) }
+            ],
+            explain: '循环先排除 58 和 45，passed 得到 [91, 76, 83]；sorted 再生成从高到低的新列表 [91, 83, 76]。实际项目通常把筛选和排序分开，代码更容易检查。'
+          }
+        },
+        {
+          id: 'p9-2',
+          title: '列表推导式',
+          oneLine: '列表推导式把“遍历、计算、收集结果”压缩成一行，适合清晰而简单的数据转换。',
+          analogy: '像流水线：每个原始价格经过同一个折扣公式，出口处直接得到一组新价格。',
+          example: `prices = [10, 25, 40]
+discounted = [price * 0.8 for price in prices]
+print(discounted)  # [8.0, 20.0, 32.0]
+
+even = [n for n in range(1, 7) if n % 2 == 0]
+print(even)  # [2, 4, 6]`,
+          mistakes: [
+            '推导式的表达式写在最前面，<code>for</code> 写在后面。',
+            '复杂的多层判断不适合硬塞进一行，普通循环往往更容易读。',
+            '推导式会创建新列表，大量数据时也会占用内存。'
+          ],
+          exercise: {
+            id: 'ex9-2',
+            title: '批量计算折后价格',
+            prompt: '已有 <code>prices = [20, 50, 100]</code>。用列表推导式创建 <code>final_prices</code>，让每个价格乘以 0.8，再打印新列表。',
+            hint: '写成 final_prices = [price * 0.8 for price in prices]。',
+            starter: 'prices = [20, 50, 100]\\n\\n# 用列表推导式计算折后价格\\n# 打印 final_prices\\n',
+            expected: '[16.0, 40.0, 80.0]',
+            checks: [
+              { label: '使用列表推导式创建 final_prices', test: re(/final_prices\s*=\s*\[\s*price\s*\*\s*0\.8\s+for\s+price\s+in\s+prices\s*\]/) },
+              { label: '打印 final_prices', test: re(/print\s*\(\s*final_prices\s*\)/) }
+            ],
+            explain: '推导式会依次把 20、50、100 代入 price * 0.8，并把三个结果收集成新列表。折扣、单位换算和批量清洗经常使用这种写法。'
+          }
+        }
+      ]
+    },
+    {
+      title: '文件与异常',
+      points: [
+        {
+          id: 'p10-1',
+          title: '读取与写入文件',
+          oneLine: '文件让数据在程序结束后继续保存，<code>with open()</code> 会在使用完成后自动关闭文件。',
+          analogy: '变量像桌面便签，程序关闭后就消失；文件像保存到抽屉里的笔记，下次还能打开。',
+          example: `with open("note.txt", "w", encoding="utf-8") as file:
+    file.write("今天学习了 Python")
+
+with open("note.txt", "r", encoding="utf-8") as file:
+    content = file.read()
+
+print(content)`,
+          mistakes: [
+            '<code>"w"</code> 会覆盖原文件；想在末尾追加要使用 <code>"a"</code>。',
+            '处理中文文件时明确写 <code>encoding="utf-8"</code>，能减少跨设备乱码。',
+            '文件路径不存在或没有权限时会报错，真实程序要配合异常处理。'
+          ],
+          exercise: {
+            id: 'ex10-1',
+            title: '保存并读取学习笔记',
+            prompt: '使用 <code>with open("study.txt", "w", encoding="utf-8") as file</code> 写入“完成文件练习”，再用读取模式打开同一文件，把内容保存到 <code>content</code> 并打印。',
+            hint: '写入用 file.write()；读取时重新写一个 with open，并用 file.read()。',
+            starter: '# 写入 study.txt\\n\\n# 重新打开并读取到 content\\n\\n# 打印 content\\n',
+            expected: '完成文件练习',
+            checks: [
+              { label: '以写入模式打开 study.txt 并指定 utf-8', test: re(/with\s+open\s*\(\s*["']study\.txt["']\s*,\s*["']w["'][^\n]*encoding\s*=\s*["']utf-8["']/) },
+              { label: '写入“完成文件练习”', test: re(/file\s*\.\s*write\s*\(\s*["']完成文件练习["']\s*\)/) },
+              { label: '以读取模式重新打开 study.txt', test: re(/with\s+open\s*\(\s*["']study\.txt["']\s*,\s*["']r["']/) },
+              { label: '用 file.read() 保存到 content', test: re(/content\s*=\s*file\s*\.\s*read\s*\(\s*\)/) },
+              { label: '打印 content', test: re(/print\s*\(\s*content\s*\)/) }
+            ],
+            explain: '第一个 with 把文本保存到文件，代码块结束后文件自动关闭；第二个 with 再读取内容。日志、配置和简单数据导出都会使用相同模式。'
+          }
+        },
+        {
+          id: 'p10-2',
+          title: 'JSON 数据',
+          oneLine: 'JSON 适合保存带字段名的结构化数据，也是网页接口最常见的数据格式。',
+          analogy: 'JSON 像一份层级清楚的电子档案，每个值旁边都有姓名、分数等字段名。',
+          example: `import json
+
+text = '{"name": "小明", "score": 92}'
+student = json.loads(text)
+print(student["name"])
+
+result = json.dumps(student, ensure_ascii=False)
+print(result)`,
+          mistakes: [
+            '<code>json.loads()</code> 把 JSON 字符串转成 Python 数据；<code>json.dumps()</code> 的方向相反。',
+            'JSON 的键和字符串必须使用双引号，不能直接照搬 Python 的单引号字典。',
+            '输出中文时设置 <code>ensure_ascii=False</code>，结果更容易阅读。'
+          ],
+          exercise: {
+            id: 'ex10-2',
+            title: '解析订单 JSON',
+            prompt: '导入 <code>json</code>，使用 <code>json.loads(text)</code> 把订单字符串转成字典 <code>order</code>，再用 f-string 打印“商品：笔记本，数量：2”。',
+            hint: '先写 order = json.loads(text)，再通过 order["product"] 和 order["count"] 取值。',
+            starter: 'import json\\n\\ntext = \'{"product": "笔记本", "count": 2}\'\\n\\n# 解析 JSON 并打印订单摘要\\n',
+            expected: '商品：笔记本，数量：2',
+            checks: [
+              { label: '导入 json 模块', test: re(/import\s+json\b/) },
+              { label: '用 json.loads(text) 得到 order', test: re(/order\s*=\s*json\s*\.\s*loads\s*\(\s*text\s*\)/) },
+              { label: '从 order 取 product 和 count', test: function (code) { return /order\s*\[\s*["']product["']\s*\]/.test(code) && /order\s*\[\s*["']count["']\s*\]/.test(code); } },
+              { label: '用 f-string 输出商品和数量', test: re(/print\s*\(\s*f["'][^\n]*商品[^\n]*数量/) }
+            ],
+            explain: 'json.loads() 解析后，order 就是普通 Python 字典，可以按键取商品名和数量。接口返回、配置文件和前后端通信经常使用这一流程。'
+          }
+        },
+        {
+          id: 'p10-3',
+          title: '异常处理',
+          oneLine: '<code>try / except</code> 让程序遇到可预期错误时给出友好提示，而不是直接中断。',
+          analogy: '像填写表单时输错内容，系统提示“请输入数字”，而不是整个页面突然关闭。',
+          example: `text = "abc"
+
+try:
+    number = int(text)
+    print(number)
+except ValueError:
+    print("请输入有效数字")`,
+          mistakes: [
+            '只把可能出错的代码放进 try，范围太大会掩盖真正的程序错误。',
+            '优先捕获明确的异常类型，例如 <code>ValueError</code>，不要随意使用空 except。',
+            'except 是处理错误，不是忽略错误；应给用户清楚提示或采取补救动作。'
+          ],
+          exercise: {
+            id: 'ex10-3',
+            title: '处理错误的年龄输入',
+            prompt: '变量 <code>age_text = "十八"</code>。在 <code>try</code> 中用 <code>int(age_text)</code> 转换并打印；使用 <code>except ValueError</code> 捕获错误，打印“年龄必须是数字”。',
+            hint: 'try 和 except 行末都有冒号，各自下面的代码要缩进。',
+            starter: 'age_text = "十八"\\n\\n# 尝试转换，失败时给出友好提示\\n',
+            expected: '年龄必须是数字',
+            checks: [
+              { label: '使用 try 代码块', test: re(/try\s*:/) },
+              { label: '尝试执行 int(age_text)', test: re(/int\s*\(\s*age_text\s*\)/) },
+              { label: '捕获 ValueError', test: re(/except\s+ValueError\s*:/) },
+              { label: '错误时打印“年龄必须是数字”', test: re(/print\s*\(\s*["']年龄必须是数字["']\s*\)/) }
+            ],
+            explain: '“十八”不能直接转成整数，所以 Python 抛出 ValueError，并跳到 except 分支显示提示。表单、文件读取和网络请求都需要考虑失败路径。'
+          }
+        }
+      ]
+    },
+    {
+      title: '模块与自动化',
+      points: [
+        {
+          id: 'p11-1',
+          title: '日期与时间',
+          oneLine: '<code>datetime</code> 能取得当前时间、计算日期差并格式化日期，是提醒、日志和报表的基础。',
+          analogy: '像日历工具箱：既能看今天，也能算距离截止日期还有多少天。',
+          example: `from datetime import datetime
+
+now = datetime.now()
+print(now.strftime("%Y-%m-%d"))
+
+deadline = datetime(2027, 1, 1)
+print((deadline - now).days)`,
+          mistakes: [
+            '<code>%m</code> 是月份，<code>%M</code> 是分钟，大小写含义不同。',
+            '日期对象与普通字符串不能直接相减，要先解析成 datetime。',
+            '跨时区系统要额外处理时区；入门练习先使用本地时间。'
+          ],
+          exercise: {
+            id: 'ex11-1',
+            title: '格式化课程日期',
+            prompt: '从 <code>datetime</code> 导入 <code>datetime</code>，创建 <code>course_date = datetime(2026, 11, 7)</code>，再使用 <code>strftime("%Y年%m月%d日")</code> 格式化并打印。',
+            hint: '写 print(course_date.strftime("%Y年%m月%d日"))。',
+            starter: '# 导入 datetime\\n# 创建 course_date\\n# 格式化并打印\\n',
+            expected: '2026年11月07日',
+            checks: [
+              { label: '从 datetime 模块导入 datetime', test: re(/from\s+datetime\s+import\s+datetime/) },
+              { label: '创建指定的 course_date', test: re(/course_date\s*=\s*datetime\s*\(\s*2026\s*,\s*11\s*,\s*7\s*\)/) },
+              { label: '使用指定格式调用 strftime', test: re(/course_date\s*\.\s*strftime\s*\(\s*["']%Y年%m月%d日["']\s*\)/) },
+              { label: '打印格式化结果', test: re(/print\s*\(/) }
+            ],
+            explain: 'datetime 保存的是可计算的日期对象，strftime 再把它转换成适合展示的字符串。日志命名、截止时间和按日期生成报表都会用到。'
+          }
+        },
+        {
+          id: 'p11-2',
+          title: '批量生成文件名',
+          oneLine: '用 <code>enumerate()</code> 和格式化字符串批量生成统一名称，是文件整理自动化的第一步。',
+          analogy: '像给一叠照片统一编号：先逐个找到文件，再按规则生成 001、002、003。',
+          example: `files = ["a.jpg", "b.jpg", "c.jpg"]
+
+for index, filename in enumerate(files, start=1):
+    new_name = f"photo_{index:03d}.jpg"
+    print(filename, "->", new_name)`,
+          mistakes: [
+            '批量重命名前先打印旧名和新名预览，避免规则写错后难以恢复。',
+            '目标文件名已经存在时可能冲突，要先检查。',
+            '<code>:03d</code> 表示用 0 补足三位，适合文件按名称排序。'
+          ],
+          exercise: {
+            id: 'ex11-2',
+            title: '生成照片的新文件名',
+            prompt: '已有 <code>files = ["a.jpg", "b.jpg", "c.jpg"]</code>。使用 <code>enumerate(files, start=1)</code> 遍历，用 <code>f"photo_{index:03d}.jpg"</code> 生成三位编号的新名称并打印。',
+            hint: '循环写 for index, filename in enumerate(files, start=1):，循环内生成 new_name。',
+            starter: 'files = ["a.jpg", "b.jpg", "c.jpg"]\\n\\n# 遍历并生成 photo_001.jpg 这样的新名称\\n',
+            expected: 'photo_001.jpg\\nphoto_002.jpg\\nphoto_003.jpg',
+            checks: [
+              { label: '使用 enumerate(files, start=1)', test: re(/enumerate\s*\(\s*files\s*,\s*start\s*=\s*1\s*\)/) },
+              { label: '循环同时取得 index 和 filename', test: re(/for\s+index\s*,\s*filename\s+in\s+enumerate/) },
+              { label: '使用三位数字格式生成 new_name', test: re(/new_name\s*=\s*f["']photo_\{\s*index\s*:\s*03d\s*\}\.jpg["']/) },
+              { label: '打印 new_name', test: re(/print\s*\(\s*new_name\s*\)/) }
+            ],
+            explain: 'enumerate 同时提供顺序号和当前文件名，:03d 会把 1 格式化成 001。先只生成并打印新名称，是批量文件操作的重要安全预览步骤。'
+          }
+        },
+        {
+          id: 'p11-3',
+          title: '类与对象',
+          oneLine: '类定义一类事物共同的数据和行为，对象则是按这份模板创建出来的具体实例。',
+          analogy: '类像商品档案模板，对象是键盘、鼠标等各自填写完成的档案。',
+          example: `class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+    def label(self):
+        return f"{self.name}：{self.price}元"
+
+product = Product("键盘", 199)
+print(product.label())`,
+          mistakes: [
+            '<code>__init__</code> 两侧各有两个下划线，实例化时会自动调用。',
+            '实例方法的第一个参数通常写 <code>self</code>，通过它访问当前对象。',
+            '定义类只是创建模板，仍要调用类名才能创建对象。'
+          ],
+          exercise: {
+            id: 'ex11-3',
+            title: '创建商品对象',
+            prompt: '定义 <code>Product</code> 类，<code>__init__(self, name, price)</code> 保存两个属性；定义 <code>label(self)</code> 返回商品标签。创建“键盘”、199 元的对象并打印 label()。',
+            hint: '属性写 self.name = name 和 self.price = price；类外创建 product = Product("键盘", 199)。',
+            starter: '# 定义 Product 类、初始化属性和 label 方法\\n\\n# 创建 product 并打印标签\\n',
+            expected: '键盘：199元',
+            checks: [
+              { label: '定义 Product 类', test: re(/class\s+Product\s*:/) },
+              { label: '定义包含 name 和 price 的 __init__', test: re(/def\s+__init__\s*\(\s*self\s*,\s*name\s*,\s*price\s*\)\s*:/) },
+              { label: '保存 name 和 price 属性', test: function (code) { return /self\s*\.\s*name\s*=\s*name/.test(code) && /self\s*\.\s*price\s*=\s*price/.test(code); } },
+              { label: '定义 label(self) 方法', test: re(/def\s+label\s*\(\s*self\s*\)\s*:/) },
+              { label: '创建键盘商品对象', test: re(/product\s*=\s*Product\s*\(\s*["']键盘["']\s*,\s*199\s*\)/) },
+              { label: '打印 product.label()', test: re(/print\s*\(\s*product\s*\.\s*label\s*\(\s*\)\s*\)/) }
+            ],
+            explain: 'Product 把商品共有字段和行为放在一起。product 是具体对象，保存自己的 name 和 price；调用 label() 时，self 指向这个对象。订单、用户和库存模型常用这种组织方式。'
+          }
+        }
+      ]
     }
   ];
 
@@ -2650,6 +3228,42 @@ for task in tasks:
         '循环里加 if i == 3:，下一行缩进写 continue。',
         '在 if 外面、循环里面写 print(i)。'
       ]
+    },
+    'p3-4': {
+      steps: [
+        'orders 是“列表里装字典”的常见业务结构，每个 order 代表一条订单。',
+        'total 必须在循环前初始化；每轮只在 status 等于 paid 时累加 amount。',
+        '循环结束后再打印 total，得到所有符合条件记录的汇总值。'
+      ],
+      syntax: '汇总值 = 0\nfor 记录 in 记录列表:\n    if 记录["字段"] == 目标值:\n        汇总值 += 记录["数值字段"]',
+      plan: ['先创建循环外的 total = 0。', '逐条遍历 orders，并判断 status。', '只累加 paid 订单的 amount，最后打印 total。']
+    },
+    'p3-5': {
+      steps: [
+        'enumerate(tasks, start=1) 每轮同时返回用户看到的序号和当前任务。',
+        'for 后的两个变量按顺序接收序号与元素，不需要手动维护计数器。',
+        'f-string 把序号、点号和任务名称组合成清晰的清单。'
+      ],
+      syntax: 'for 序号, 元素 in enumerate(列表, start=1):\n    print(f"{序号}. {元素}")',
+      plan: ['用 enumerate 包住 tasks，并设置 start=1。', '用 index 和 task 接收两个值。', '用 f-string 按指定格式逐行输出。']
+    },
+    'p3-6': {
+      steps: [
+        '外层循环控制第几行，内层循环控制这一行的第几列。',
+        '每次进入新行都创建空的 seats，避免混入上一行结果。',
+        '内层生成三个座位后，使用 join 一次输出整行。'
+      ],
+      syntax: 'for 行 in 行范围:\n    当前行 = []\n    for 列 in 列范围:\n        当前行.append(...)\n    print(" ".join(当前行))',
+      plan: ['外层循环两次，分别处理 A、B 两行。', '内层遍历 1、2、3，生成座位名并 append。', '内层结束后用空格 join 并打印。']
+    },
+    'p3-7': {
+      steps: [
+        'while 在每轮开始前检查 age 是否仍小于 18。',
+        '循环体必须更新 age；否则条件永远不变，会形成无限循环。',
+        '条件满足后才执行循环外的后续业务，因此提示只打印一次。'
+      ],
+      syntax: 'while 数据不满足要求:\n    更新数据\n# 满足要求后继续执行',
+      plan: ['从 age = 0 开始。', '用 while age < 18 控制重复。', '每轮加 1，循环结束后打印结果。']
     },
     'p4-1': {
       steps: [
@@ -2845,6 +3459,54 @@ for task in tasks:
         '在函数里 append 一个包含 title 和 done 的新字典，然后调用两次。',
         '修改第一项的 done，最后打印 tasks 检查两条记录。'
       ]
+    },
+    'p9-1': {
+      steps: [
+        '先创建空列表 passed，专门保存满足条件的成绩，原始 scores 保持不变。',
+        '循环检查每个 score，只有大于等于 60 时才 append，完成筛选。',
+        '筛选完成后用 sorted(..., reverse=True) 生成从高到低的新列表。'
+      ],
+      syntax: '结果 = []\\nfor 数据 in 原列表:\\n    if 数据满足条件:\\n        结果.append(数据)\\n排序结果 = sorted(结果, reverse=True)',
+      plan: ['创建 passed，并遍历原始成绩。', '判断 score >= 60，满足时加入 passed。', '循环结束后排序为 ranking，再打印结果。']
+    },
+    'p9-2': {
+      steps: [
+        '推导式最前面的 price * 0.8 表示每个元素要进行的转换。',
+        'for price in prices 依次取出原列表里的三个价格。',
+        '每次计算的结果自动收集进 final_prices，不需要手动 append。'
+      ],
+      syntax: '新列表 = [转换表达式 for 元素 in 原列表]\\n新列表 = [元素 for 元素 in 原列表 if 条件]',
+      plan: ['确认原始数据来自 prices，每轮变量使用 price。', '把 price * 0.8 放在推导式最前面。', '保存为 final_prices 并打印。']
+    },
+    'p10-1': {
+      steps: ['第一个 with 用 w 模式打开文件，write 把学习笔记写入磁盘。', '代码块结束后文件自动关闭，第二个 with 再用 r 模式读取。', 'read() 返回完整文本，保存到 content 后即可继续处理。'],
+      syntax: 'with open("文件名", "w", encoding="utf-8") as file:\\n    file.write(内容)\\nwith open("文件名", "r", encoding="utf-8") as file:\\n    内容 = file.read()',
+      plan: ['用 w 模式和 utf-8 打开 study.txt 并写入。', '再用 r 模式打开同一文件并 read()。', '打印 content，确认保存与读取形成闭环。']
+    },
+    'p10-2': {
+      steps: ['import json 引入标准库中的 JSON 工具，不需要另外安装。', 'json.loads(text) 把字符串解析成字典 order。', '解析后就能像普通字典一样按 product 和 count 取值。'],
+      syntax: 'import json\\n数据 = json.loads(JSON字符串)\\n值 = 数据["字段名"]',
+      plan: ['保留 import json 和题目给出的 text。', '用 json.loads(text) 得到 order。', '用 f-string 组合两个字段并打印。']
+    },
+    'p10-3': {
+      steps: ['程序先进入 try，尝试把 age_text 转成整数。', '字符串“十八”不符合整数格式，Python 会抛出 ValueError。', 'except ValueError 捕获错误，程序继续运行并显示提示。'],
+      syntax: 'try:\\n    可能出错的代码\\nexcept ValueError:\\n    处理输入错误',
+      plan: ['在 try 中调用 int(age_text)。', '紧接着写 except ValueError:。', '在 except 中缩进打印友好提示。']
+    },
+    'p11-1': {
+      steps: ['from datetime import datetime 只导入需要的 datetime 类。', 'datetime(2026, 11, 7) 创建可计算和格式化的日期对象。', 'strftime 根据格式代码把日期变成适合界面显示的文本。'],
+      syntax: 'from datetime import datetime\\n日期 = datetime(年, 月, 日)\\n文本 = 日期.strftime("格式")',
+      plan: ['导入 datetime 类。', '按年、月、日创建 course_date。', '调用 strftime 并打印返回结果。']
+    },
+    'p11-2': {
+      steps: ['enumerate(files, start=1) 同时返回从 1 开始的序号和文件名。', 'f-string 中的 :03d 把序号补成三位。', '本练习只预览名称；真实重命名前也应先检查预览。'],
+      syntax: 'for 序号, 文件 in enumerate(文件列表, start=1):\\n    新名称 = f"前缀_{序号:03d}.后缀"',
+      plan: ['用 enumerate 遍历 files。', '按 photo_三位序号.jpg 生成 new_name。', '打印每个 new_name 检查结果。']
+    },
+    'p11-3': {
+      steps: ['class Product 定义商品共同的数据结构和方法。', '__init__ 创建对象时接收 name 和 price，并保存到 self 属性。', 'label 读取当前对象属性并返回展示文本。'],
+      syntax: 'class 类名:\\n    def __init__(self, 参数):\\n        self.属性 = 参数\\n\\n对象 = 类名(参数)\\n对象.方法()',
+      plan: ['定义 Product 和 __init__。', '定义 label(self) 返回商品标签。', '创建 product 并打印 product.label()。']
     }
   };
 
@@ -2857,6 +3519,10 @@ for task in tasks:
     'p3-1': { scene: '批量发送通知、处理一组订单或生成连续编号，都需要重复执行同一段代码。', goal: '能用 for 和 range() 控制明确次数的循环。' },
     'p3-2': { scene: '倒计时、重试登录和持续读取数据通常不知道固定次数，而是满足条件后才停止。', goal: '能让 while 条件最终变为假，避免无限循环。' },
     'p3-3': { scene: '批量处理数据时，可能要跳过无效记录，也可能在找到目标后立即停止。', goal: '理解 continue 跳过当前一轮，并分清它与 break 的作用。' },
+    'p3-4': { scene: '销售、记账和库存系统经常要遍历结构化记录，只汇总符合条件的数据。', goal: '掌握遍历“列表中的字典”、条件筛选和累加器的组合用法。' },
+    'p3-5': { scene: '待办、菜单和排行榜需要把列表内容转换成用户易读的编号清单。', goal: '能用 enumerate 同时获得序号和元素，避免手动维护计数器。' },
+    'p3-6': { scene: '座位表、课程表和二维数据需要按行、按列进行处理。', goal: '理解两层循环的执行顺序，并能按行收集和输出结果。' },
+    'p3-7': { scene: '注册表单、登录和命令行工具都要反复校验数据，直到满足规则或达到退出条件。', goal: '能设计会正确终止的 while 循环，并把后续业务放在循环外。' },
     'p4-1': { scene: '隐藏手机号、提取文件后缀和截取日期，都需要从文本的指定位置取字符。', goal: '能用正负下标和切片准确取得字符串片段。' },
     'p4-2': { scene: '用户提交的姓名、邮箱和搜索词经常带有空格或大小写不统一，需要先清洗。', goal: '能组合 strip() 和 upper() 处理原始文本。' },
     'p4-3': { scene: '成绩通知、订单确认和欢迎语都需要把变量填进固定文本模板。', goal: '能正确书写 f-string，并把多个变量放入花括号。' },
@@ -2871,7 +3537,15 @@ for task in tasks:
     'p8-1': { scene: '老师拿到一组考试成绩后，希望快速生成平均分和最高分，而不是用计算器逐项统计。', goal: '综合使用列表、sum()、len()、max() 和 f-string 生成成绩摘要。' },
     'p8-2': { scene: '记账应用需要把多笔流水按餐饮、交通等分类合计，帮助用户看懂钱花在了哪里。', goal: '掌握“列表存记录、字典做汇总”的常用数据处理模式。' },
     'p8-3': { scene: '分析问卷反馈或文章时，经常要统计某个关键词出现的次数，原始文本需要先清洗。', goal: '完成文本清洗、拆分、遍历和计数这一整条处理流程。' },
-    'p8-4': { scene: '待办应用需要持续添加任务，并分别记录每个任务的标题和完成状态。', goal: '综合使用函数、列表和字典组织多条结构化记录。' }
+    'p8-4': { scene: '待办应用需要持续添加任务，并分别记录每个任务的标题和完成状态。', goal: '综合使用函数、列表和字典组织多条结构化记录。' },
+    'p9-1': { scene: '成绩排名、商品价格排序和热度榜都要先过滤无效数据，再按规则排列。', goal: '掌握筛选列表、保存结果和自定义排序方向的完整流程。' },
+    'p9-2': { scene: '折扣价、单位换算和批量清洗需要对一组数据执行相同转换。', goal: '能在适合的场景使用列表推导式生成新列表。' },
+    'p10-1': { scene: '学习笔记、程序日志和配置需要在程序关闭后继续保留，因此必须写入文件。', goal: '理解写入、读取、编码和自动关闭文件的基本流程。' },
+    'p10-2': { scene: '天气、订单和 AI 接口通常返回 JSON，程序需要先解析才能使用其中字段。', goal: '能把 JSON 字符串解析成字典并提取需要的数据。' },
+    'p10-3': { scene: '表单输入、文件内容和网络请求都可能不符合预期，应用需要友好处理错误。', goal: '能捕获明确的 ValueError，并为用户提供可理解的反馈。' },
+    'p11-1': { scene: '课程提醒、截止日期、日志和日报都离不开日期对象与格式化。', goal: '会创建 datetime 对象并按界面需要格式化日期。' },
+    'p11-2': { scene: '照片、作业附件和扫描件经常需要按统一编号批量整理。', goal: '用 enumerate 和格式化字符串安全地预览批量文件名。' },
+    'p11-3': { scene: '商品、用户、订单都有固定字段和行为，类可以把相关数据与方法组织在一起。', goal: '理解类、初始化方法、属性、对象和实例方法之间的关系。' }
   };
 
   const CHAPTER_META = {
@@ -2892,10 +3566,11 @@ for task in tasks:
       ]
     },
     '循环': {
-      goal: '学完这章，你会用 for 和 while 重复做事，并能用 break / continue 控制循环。',
+      goal: '学完这章，你会用循环处理真实数据、生成编号与二维表格，并设计安全可终止的重试流程。',
       summary: [
-        'for 适合已知次数，range(a, b) 含头不含尾。',
-        'while 靠条件重复，记得让条件最终变假。',
+        'for 既能遍历 range，也能逐条处理列表、字典记录和 enumerate 产生的序号。',
+        '累加器放在循环外，循环内先筛选再更新，可完成订单、成绩和库存汇总。',
+        '嵌套循环处理二维数据；while 必须更新条件，并设计清晰的停止规则。',
         'break 结束整个循环，continue 只跳过当前这一轮。'
       ]
     },
@@ -2938,6 +3613,98 @@ for task in tasks:
         '处理数据时先看输入结构，再拆成清洗、计算、汇总和输出几个步骤。',
         '小项目的关键是让数据结构清楚、处理步骤可重复、输出结果容易读懂。'
       ]
+    },
+    '数据处理进阶': {
+      goal: '学习把原始数据筛选、排序和批量转换，逐步接近真实的数据处理任务。',
+      summary: ['筛选负责留下需要的数据，排序负责决定展示顺序。', 'sorted() 返回新列表，reverse=True 表示降序。', '简单转换可用列表推导式，复杂逻辑仍应使用普通循环。']
+    },
+    '文件与异常': {
+      goal: '让程序能够保存数据、读取 JSON，并在输入错误时继续稳定运行。',
+      summary: ['with open() 能可靠地打开并自动关闭文件。', 'JSON 是网页接口和配置数据的常见格式。', 'try / except 用于处理可预期失败并给出友好反馈。']
+    },
+    '模块与自动化': {
+      goal: '使用标准库处理日期和批量命名，并用类组织更完整的业务对象。',
+      summary: ['标准库提供日期等成熟工具，使用前先 import。', '批量文件操作应先生成并检查预览。', '类把同类数据和行为组织成可复用模板。']
+    }
+  };
+
+  const CHAPTER_SHOWCASES = {
+    '变量与类型': {
+      title: '30 秒做出一个奶茶结算器',
+      value: '变量不只是“存一个数字”，它们能代表商品、数量和价格，并参与真实计算。',
+      code: 'drink = "珍珠奶茶"\nprice = 12.5\ncount = 2\ntotal = price * count\nprint(f"{drink} × {count}，共 {total} 元")',
+      output: '珍珠奶茶 × 2，共 25.0 元',
+      takeaway: '这里同时用到了字符串、浮点数、整数、乘法和格式化输出。以后换成购物车或订单，思路完全相同。'
+    },
+    '条件判断': {
+      title: '把优惠规则写成程序',
+      value: '条件判断能把“满减、会员、库存、权限”等规则变成程序可以执行的决定。',
+      code: 'amount = 128\nis_member = True\nif amount >= 100 and is_member:\n    discount = 20\nelif amount >= 100:\n    discount = 10\nelse:\n    discount = 0\nprint(f"实付 {amount - discount} 元")',
+      output: '实付 108 元',
+      takeaway: '真实规则要先分清优先级：会员满减应先判断，再处理普通满减，最后用 else 兜底。'
+    },
+    '循环': {
+      title: '一段代码处理整批订单',
+      value: '循环的价值不是重复打印，而是让同一套规则稳定地处理几十、几千条数据。',
+      code: 'orders = [120, 80, 200]\ntotal = 0\nfor amount in orders:\n    if amount >= 100:\n        total += amount\nprint(f"大额订单合计：{total} 元")',
+      output: '大额订单合计：320 元',
+      takeaway: '“遍历 → 判断 → 累加 → 输出”是数据统计中非常常见的处理链，成绩、库存和账单都能套用。'
+    },
+    '字符串': {
+      title: '清洗一条不规范的用户输入',
+      value: '现实中的文本常有空格、大小写和分隔符问题，先清洗才能可靠地搜索或统计。',
+      code: 'raw = "  Python, 数据分析,AI  "\ntags = raw.strip().lower().split(",")\nclean_tags = [tag.strip() for tag in tags]\nprint(" | ".join(clean_tags))',
+      output: 'python | 数据分析 | ai',
+      takeaway: '这段流程依次完成去除首尾空格、统一大小写、拆分、逐项清洗和重新拼接，是表单与文本分析的基础。'
+    },
+    '列表': {
+      title: '从成绩中找出需要重点复习的人',
+      value: '列表适合保存同类数据，再配合遍历完成筛选、排序和统计。',
+      code: 'scores = [88, 57, 92, 61, 49]\nneed_help = []\nfor score in scores:\n    if score < 60:\n        need_help.append(score)\nprint(f"待复习：{need_help}")',
+      output: '待复习：[57, 49]',
+      takeaway: '新建结果列表、遍历原列表、按条件 append，是处理数据时最值得掌握的基础模式之一。'
+    },
+    '函数': {
+      title: '把运费规则封装成可复用工具',
+      value: '函数能给一段业务规则命名，让它被不同页面、不同订单反复调用。',
+      code: 'def shipping_fee(amount, remote=False):\n    fee = 0 if amount >= 99 else 8\n    if remote:\n        fee += 10\n    return fee\n\nprint(shipping_fee(120))\nprint(shipping_fee(80, remote=True))',
+      output: '0\n18',
+      takeaway: '参数是输入，函数体处理规则，return 给出结果。默认参数让常见调用简洁，又保留特殊情况。'
+    },
+    '字典': {
+      title: '用一条记录描述一个真实商品',
+      value: '字典用有意义的字段名组织数据，比依赖列表下标更适合表示用户、商品和订单。',
+      code: 'product = {\n    "name": "机械键盘",\n    "price": 199,\n    "stock": 5\n}\nproduct["stock"] -= 1\nprint(f"{product[\"name\"]} 剩余 {product[\"stock\"]} 件")',
+      output: '机械键盘 剩余 4 件',
+      takeaway: '字段名表达数据含义；读取、修改和遍历字典，是后续处理 JSON 和接口数据的直接基础。'
+    },
+    '实用小项目': {
+      title: '把零散语法组合成消费报告',
+      value: '项目能力来自组合：先设计数据结构，再清洗、统计，最后输出用户能看懂的结果。',
+      code: 'records = [("餐饮", 32), ("交通", 8), ("餐饮", 18)]\nsummary = {}\nfor category, amount in records:\n    summary[category] = summary.get(category, 0) + amount\nfor category, total in summary.items():\n    print(f"{category}：{total} 元")',
+      output: '餐饮：50 元\n交通：8 元',
+      takeaway: '列表存原始记录，字典做分类汇总，循环完成批量处理；这已经是一段可迁移到记账工具的核心逻辑。'
+    },
+    '数据处理进阶': {
+      title: '生成可直接展示的排行榜',
+      value: '真实数据往往不能直接使用，需要先过滤无效值，再转换和排序。',
+      code: 'scores = [88, -1, 95, 61, 120, 76]\nvalid = [score for score in scores if 0 <= score <= 100]\nranking = sorted(valid, reverse=True)\nprint(ranking)',
+      output: '[95, 88, 76, 61]',
+      takeaway: '“校验 → 筛选 → 排序”比只会调用 sorted 更重要，它能避免脏数据污染最终报告。'
+    },
+    '文件与异常': {
+      title: '安全读取一份可能不存在的配置',
+      value: '文件让数据在程序关闭后继续存在，异常处理则让程序遇到问题时不直接崩溃。',
+      code: 'try:\n    with open("settings.txt", "r", encoding="utf-8") as file:\n        theme = file.read().strip()\nexcept FileNotFoundError:\n    theme = "light"\nprint(f"当前主题：{theme}")',
+      output: '当前主题：light  （文件不存在时）',
+      takeaway: '只捕获明确的 FileNotFoundError，并提供合理默认值，比笼统地忽略所有错误更安全。'
+    },
+    '模块与自动化': {
+      title: '自动生成当天的学习记录文件名',
+      value: '标准库和自动化脚本可以替你完成重复整理，让程序真正成为日常工具。',
+      code: 'from datetime import datetime\nnow = datetime.now()\nfilename = f"学习记录_{now:%Y-%m-%d}.txt"\nprint(filename)',
+      output: '学习记录_2026-11-10.txt  （日期以运行当天为准）',
+      takeaway: 'datetime 提供可靠的日期能力，格式化规则控制输出；再结合文件写入，就能制作每日记录工具。'
     }
   };
 
@@ -3337,9 +4104,15 @@ for task in tasks:
     var detail = DETAILS[point.id] || { steps: [], syntax: '', plan: [] };
     var practiceContext = PRACTICE_CONTEXT[point.id] || { scene: point.analogy, goal: '理解本节写法并完成练习。' };
     var chapterMeta = CHAPTER_META[chapter.title] || { goal: '', summary: [] };
+    var chapterShowcase = CHAPTER_SHOWCASES[chapter.title] || null;
     var isFirstInChapter = pointIndex === 0;
     var isLastInChapter = pointIndex === chapter.points.length - 1;
     var isVeryFirst = chapterIndex === 0 && pointIndex === 0;
+    var learningLevel = chapterIndex <= 6
+      ? { text: '基础 · 单个知识点', className: '' }
+      : (chapterIndex <= 8
+        ? { text: '应用 · 组合练习', className: ' applied' }
+        : { text: '进阶 · 真实工具', className: ' advanced' });
     var hasSavedLearning = !!state.last || Object.keys(state.completed).length > 0 || Object.keys(state.drafts).length > 0;
     var introPath = chapter.points.map(function (p, i) {
       var done = !!state.completed[p.exercise.id];
@@ -3358,6 +4131,7 @@ for task in tasks:
         '</div>' +
         '<h1>' + point.title + '</h1>' +
         '<p class="lede">' + point.oneLine + '</p>' +
+        '<span class="learning-level' + learningLevel.className + '">' + learningLevel.text + '</span>' +
       '</header>' +
       (isFirstInChapter ?
         '<section class="intro-card">' +
@@ -3367,6 +4141,21 @@ for task in tasks:
           '</div>' +
           '<p class="intro-goal">' + chapterMeta.goal + '</p>' +
           '<div class="intro-path">' + introPath + '</div>' +
+          (chapterShowcase ? '<div class="chapter-showcase">' +
+            '<div class="showcase-copy">' +
+              '<span class="showcase-kicker">先看看学完能做什么</span>' +
+              '<h3>' + chapterShowcase.title + '</h3>' +
+              '<p>' + chapterShowcase.value + '</p>' +
+            '</div>' +
+            '<div class="showcase-code"><pre><code>' + highlightPython(chapterShowcase.code) + '</code></pre></div>' +
+            '<div class="showcase-result"><span>运行结果</span><pre>' + escapeHtml(chapterShowcase.output) + '</pre></div>' +
+            '<div class="showcase-takeaway"><strong>真正要学会的：</strong>' + chapterShowcase.takeaway + '</div>' +
+          '</div>' : '') +
+          (isVeryFirst ? '<div class="curriculum-map">' +
+            '<div class="curriculum-stage"><strong>① 学会基础</strong><span>变量、判断、循环、字符串、列表、函数与字典</span></div>' +
+            '<div class="curriculum-stage"><strong>② 解决问题</strong><span>成绩、消费、文本和待办等组合任务</span></div>' +
+            '<div class="curriculum-stage"><strong>③ 做实用工具</strong><span>数据处理、文件、异常、模块、自动化与对象</span></div>' +
+          '</div>' : '') +
           (isVeryFirst ?
             '<div class="start-tips">' +
               '<span class="start-tip"><b>1</b>左侧选知识点</span>' +
