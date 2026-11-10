@@ -1067,6 +1067,49 @@ pre.expected {
   font-size: 10.5px;
 }
 
+.btn-run {
+  border-color: #99f6e4;
+  background: #f0fdfa;
+  color: #0f766e;
+}
+.runtime-panel {
+  margin: 0 22px 14px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  background: #0f172a;
+}
+.runtime-panel[hidden] { display: none; }
+.runtime-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 13px;
+  border-bottom: 1px solid #334155;
+  color: #94a3b8;
+  font-size: 10.5px;
+}
+.runtime-status { color: #5eead4; font-weight: 750; }
+.runtime-output {
+  min-height: 62px;
+  max-height: 260px;
+  margin: 0;
+  padding: 13px;
+  overflow: auto;
+  color: #e2e8f0;
+  font: 12.5px/1.7 var(--mono);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  -webkit-overflow-scrolling: touch;
+}
+.runtime-output.error { color: #fda4af; }
+.runtime-help {
+  padding: 0 13px 12px;
+  color: #fda4af;
+  font-size: 11.5px;
+  line-height: 1.7;
+}
+
 .result {
   margin: 0 22px 20px;
   padding: 15px 17px;
@@ -1524,6 +1567,7 @@ pre.syntax-code {
   .exercise-head { padding-left: 18px; padding-right: 18px; }
   .ex-prompt { margin-left: 18px; margin-right: 18px; }
   .expected-wrap, .editor-shell, .result, .plan-box { margin-left: 18px; margin-right: 18px; }
+  .runtime-panel { margin-left: 18px; margin-right: 18px; }
   .intro-card { padding: 16px 18px; }
   .toolbar { padding-left: 18px; padding-right: 18px; }
 }
@@ -1803,6 +1847,7 @@ pre.syntax-code {
     margin-left: 13px;
     margin-right: 13px;
   }
+  .runtime-panel { margin-left: 13px; margin-right: 13px; }
   .toolbar { padding-left: 13px; padding-right: 13px; }
   .pager .btn { padding-left: 9px; padding-right: 9px; }
   pre.code, pre.syntax-code, pre.expected { overflow-wrap: normal; word-break: normal; }
@@ -1843,7 +1888,7 @@ pre.syntax-code {
       <span></span><span></span><span></span>
     </button>
     <div class="mobile-brand">Python 实用学习区</div>
-    <span class="mobile-progress" id="mobileProgress">0/35</span>
+    <span class="mobile-progress" id="mobileProgress">0/38</span>
   </header>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
@@ -1861,7 +1906,7 @@ pre.syntax-code {
         <div class="progress-ring" id="progressRing" style="--p:0"><span id="ringPercent">0%</span></div>
         <div class="progress-meta">
           <div class="progress-label">总进度</div>
-          <strong id="totalText">0 / 35</strong>
+          <strong id="totalText">0 / 38</strong>
           <div class="bar"><span id="totalBar"></span></div>
         </div>
       </div>
@@ -2594,6 +2639,113 @@ greet("小红", "早上好")    # 早上好，小红`,
               { label: '打印 power(2, 3) 的结果', test: re(/print\s*\(\s*power\s*\(\s*2\s*,\s*3\s*\)\s*\)/) }
             ],
             explain: '不传 exponent 时用默认值 2，<code>power(3)</code> 得到 3² = 9；传了 3 就按 3 次方算，<code>power(2, 3)</code> 得到 8。'
+          }
+        },
+        {
+          id: 'p6-4',
+          title: '作用域与局部变量',
+          oneLine: '函数内部创建的变量通常只在函数里有效，能减少不同功能之间互相干扰。',
+          analogy: '局部变量像每个教室自己的草稿纸：教室外的人看不到，也不会误改别人的内容。',
+          example: `tax_rate = 0.06
+
+def final_price(price):
+    tax = price * tax_rate
+    return price + tax
+
+print(final_price(100))
+# print(tax)  # 函数外访问会触发 NameError`,
+          mistakes: [
+            '函数内部赋值的变量默认是局部变量，函数外不能直接使用。',
+            '函数能读取外部变量，但业务函数更推荐通过参数接收依赖，方便测试和复用。',
+            '不要为了修改外部变量到处使用 <code>global</code>，优先用 return 返回新结果。'
+          ],
+          exercise: {
+            id: 'ex6-4',
+            title: '用局部变量计算折后价',
+            prompt: '定义 <code>discount_price(price, rate)</code>，在函数内用局部变量 <code>discount</code> 保存优惠金额，返回折后价。打印 <code>discount_price(200, 0.15)</code>。',
+            hint: '函数内先写 discount = price * rate，再 return price - discount。',
+            starter: '# 定义 discount_price，在函数内计算 discount\n',
+            expected: '170.0',
+            checks: [
+              { label: '定义 discount_price(price, rate)', test: re(/def\s+discount_price\s*\(\s*price\s*,\s*rate\s*\)\s*:/) },
+              { label: '在函数内计算局部变量 discount', test: re(/discount\s*=\s*price\s*\*\s*rate/) },
+              { label: '返回 price - discount', test: re(/return\s+price\s*-\s*discount/) },
+              { label: '打印 200 元打 85 折的结果', test: re(/print\s*\(\s*discount_price\s*\(\s*200\s*,\s*0\.15\s*\)\s*\)/) }
+            ],
+            explain: 'discount 只负责函数内部的中间计算，调用结束后无需保留。输入 200 和 0.15，优惠 30 元，因此返回 170.0。'
+          }
+        },
+        {
+          id: 'p6-5',
+          title: '参数校验与提前返回',
+          oneLine: '函数应先检查输入是否合法，发现无效数据就尽早 return，避免错误继续扩散。',
+          analogy: '像检票口先验票：票无效就立即说明原因，不让它进入后面的乘车流程。',
+          example: `def average(scores):
+    if len(scores) == 0:
+        return 0
+    return sum(scores) / len(scores)
+
+print(average([]))
+print(average([80, 90]))`,
+          mistakes: [
+            '空列表直接计算 sum(scores) / len(scores) 会出现除以零错误。',
+            '校验应放在核心计算之前，并返回类型一致、含义明确的结果。',
+            '不要只 print 错误却继续计算；需要停止函数时要使用 return。'
+          ],
+          exercise: {
+            id: 'ex6-5',
+            title: '安全计算平均分',
+            prompt: '定义 <code>average(scores)</code>。列表为空时返回 0，否则返回平均值；分别打印 <code>average([])</code> 和 <code>average([80, 90, 100])</code>。',
+            hint: '先用 if len(scores) == 0: return 0，再进行除法。',
+            starter: '# 定义能处理空列表的 average(scores)\n',
+            expected: '0\n90.0',
+            checks: [
+              { label: '定义 average(scores)', test: re(/def\s+average\s*\(\s*scores\s*\)\s*:/) },
+              { label: '先判断 scores 是否为空', test: function (code) { return /if\s+(?:len\s*\(\s*scores\s*\)\s*==\s*0|not\s+scores)\s*:/.test(code); } },
+              { label: '空列表时提前 return 0', test: re(/return\s+0(?:\.0)?/) },
+              { label: '非空时计算平均值', test: re(/return\s+sum\s*\(\s*scores\s*\)\s*\/\s*len\s*\(\s*scores\s*\)/) },
+              { label: '分别测试空列表和三项成绩', test: function (code) { return /average\s*\(\s*\[\s*\]\s*\)/.test(code) && /average\s*\(\s*\[\s*80\s*,\s*90\s*,\s*100\s*\]\s*\)/.test(code); } }
+            ],
+            explain: '空列表先返回 0，不会执行后面的除法；正常列表执行 sum / len，得到 270 / 3 = 90.0。这就是“边界情况优先”的函数设计。'
+          }
+        },
+        {
+          id: 'p6-6',
+          title: '拆分并组合函数',
+          oneLine: '复杂任务应拆成职责单一的小函数，再由一个流程函数把它们组合起来。',
+          analogy: '像餐厅分工：一个人算原价，一个人算优惠，收银员只负责按顺序调用并生成账单。',
+          example: `def subtotal(price, count):
+    return price * count
+
+def apply_discount(amount, rate):
+    return amount * (1 - rate)
+
+def checkout(price, count, rate):
+    amount = subtotal(price, count)
+    return apply_discount(amount, rate)
+
+print(checkout(50, 3, 0.2))`,
+          mistakes: [
+            '不要把所有逻辑塞进一个巨大函数，小函数更容易单独验证。',
+            '组合函数要接住前一步的返回值，再传给下一步。',
+            '函数名应表达职责，例如 calculate_total 比 do_it 更容易维护。'
+          ],
+          exercise: {
+            id: 'ex6-6',
+            title: '组合商品结算流程',
+            prompt: '定义 <code>subtotal(price, count)</code> 返回小计；定义 <code>checkout(price, count)</code>，调用 subtotal 后，满 100 减 10，否则原价。打印 <code>checkout(40, 3)</code>。',
+            hint: 'checkout 里先写 amount = subtotal(price, count)，再判断 amount >= 100。',
+            starter: '# 定义 subtotal 和 checkout，让 checkout 复用 subtotal\n',
+            expected: '110',
+            checks: [
+              { label: '定义 subtotal(price, count)', test: re(/def\s+subtotal\s*\(\s*price\s*,\s*count\s*\)\s*:/) },
+              { label: 'subtotal 返回 price * count', test: re(/return\s+(?:price\s*\*\s*count|count\s*\*\s*price)/) },
+              { label: '定义 checkout(price, count)', test: re(/def\s+checkout\s*\(\s*price\s*,\s*count\s*\)\s*:/) },
+              { label: 'checkout 内调用 subtotal', test: re(/amount\s*=\s*subtotal\s*\(\s*price\s*,\s*count\s*\)/) },
+              { label: '满 100 时减 10', test: function (code) { return /if\s+amount\s*>=\s*100\s*:/.test(code) && /return\s+amount\s*-\s*10/.test(code); } },
+              { label: '打印 checkout(40, 3)', test: re(/print\s*\(\s*checkout\s*\(\s*40\s*,\s*3\s*\)\s*\)/) }
+            ],
+            explain: 'subtotal 只算 40 × 3 = 120；checkout 复用这个结果并应用满减，返回 110。规则拆开后，两部分都更容易测试和修改。'
           }
         }
       ]
@@ -3382,6 +3534,21 @@ print(product.label())`,
         '分别 print(power(3)) 和 print(power(2, 3))。'
       ]
     },
+    'p6-4': {
+      steps: ['price 和 rate 是本次调用的输入。', 'discount 是函数内的局部变量，不会污染外部代码。', 'return 只交回最终折后价，中间过程仍保持封装。'],
+      syntax: 'def 函数名(参数):\n    局部变量 = 中间计算\n    return 最终结果',
+      plan: ['定义两个参数。', '用 discount 保存优惠金额。', '返回折后价并用指定数据测试。']
+    },
+    'p6-5': {
+      steps: ['先检查 scores 是否为空，避免除以零。', '无效输入通过 return 0 立即结束函数。', '只有通过校验的数据才进入平均值计算。'],
+      syntax: 'def 函数名(数据):\n    if 数据无效:\n        return 兜底结果\n    return 正常结果',
+      plan: ['定义 average。', '优先处理空列表。', '计算正常平均值并测试两类输入。']
+    },
+    'p6-6': {
+      steps: ['subtotal 只负责计算小计。', 'checkout 调用 subtotal，避免重复乘法逻辑。', '拿到 amount 后再应用满减，形成完整流程。'],
+      syntax: 'def 步骤一(...):\n    return 结果\n\ndef 流程(...):\n    中间结果 = 步骤一(...)\n    return 后续处理',
+      plan: ['先完成 subtotal。', '在 checkout 中复用它。', '判断满减并打印最终结果。']
+    },
     'p7-1': {
       steps: [
         '<code>student["name"]</code> 按键 name 取值，得到“小明”。',
@@ -3532,6 +3699,9 @@ print(product.label())`,
     'p6-1': { scene: '重复发送问候或执行同一套检查时，可以把步骤封装成函数并多次调用。', goal: '理解定义函数不会自动执行，并能主动调用函数多次。' },
     'p6-2': { scene: '计算价格、面积和折扣时，函数接收不同输入并返回相应结果。', goal: '能定义参数、使用 return，并把函数返回值交给 print()。' },
     'p6-3': { scene: '系统大多数时候采用常用配置，特殊情况才覆盖它，适合使用默认参数。', goal: '能定义默认参数，并理解省略参数与显式传参的区别。' },
+    'p6-4': { scene: '价格、税费和折扣计算包含许多中间值，局部变量能避免它们影响其他功能。', goal: '理解参数和局部变量的作用范围，并通过 return 传递结果。' },
+    'p6-5': { scene: '真实输入可能为空或越界，函数必须先处理边界情况才能稳定工作。', goal: '能在函数开头校验参数，并用提前返回阻止无效计算。' },
+    'p6-6': { scene: '结算和数据分析通常包含多个步骤，拆成小函数后更容易测试、复用和修改。', goal: '能让函数调用另一个函数，并用返回值串起完整流程。' },
     'p7-1': { scene: '学生档案、商品详情和联系人都包含多个有名称的字段，适合用字典保存。', goal: '能按键取值，并在键可能不存在时使用 get()。' },
     'p7-2': { scene: '生成个人资料页或配置清单时，需要逐项读取字典中的字段名称和字段值。', goal: '能使用 items() 同时取得键和值，并格式化输出。' },
     'p8-1': { scene: '老师拿到一组考试成绩后，希望快速生成平均分和最高分，而不是用计算器逐项统计。', goal: '综合使用列表、sum()、len()、max() 和 f-string 生成成绩摘要。' },
@@ -3591,11 +3761,12 @@ print(product.label())`,
       ]
     },
     '函数': {
-      goal: '学完这章，你会把代码打包成函数，传参数、接返回值，并给参数设默认值。',
+      goal: '学完这章，你会设计可复用、能校验输入、职责清晰的函数，并把多个函数组合成业务流程。',
       summary: [
         'def 定义函数，函数名加括号才会执行。',
         '参数是输入，return 是输出；没有 return 会得到 None。',
-        '默认参数让调用更省事，带默认值的参数要放在后面。'
+        '默认参数让调用更省事，局部变量避免不同功能互相干扰。',
+        '先处理边界情况，再执行核心计算；复杂任务应拆成小函数组合。'
       ]
     },
     '字典': {
@@ -4234,7 +4405,7 @@ print(product.label())`,
             '<span class="expected-badge">规则比对</span>' +
           '</div>' +
           '<pre class="expected">' + escapeHtml(exercise.expected) + '</pre>' +
-          '<div class="expected-note">检查会逐项核对上面的完成标准，不会运行或上传代码。</div>' +
+          '<div class="expected-note">提交时会真实运行 Python，并同时核对输出结果和本题要求。代码只在当前浏览器中运行，不会上传。</div>' +
         '</div>' +
         '<div class="editor-shell">' +
           '<div class="editor-top">' +
@@ -4247,10 +4418,16 @@ print(product.label())`,
           '</div>' +
         '</div>' +
         '<div class="toolbar">' +
-          '<button class="btn btn-primary" id="checkBtn" type="button">检查答案</button>' +
+          '<button class="btn btn-run" id="runBtn" type="button">▶ 运行代码</button>' +
+          '<button class="btn btn-primary" id="checkBtn" type="button">提交并检查</button>' +
           '<button class="btn" id="resetBtn" type="button">重置</button>' +
           '<button class="btn" id="copyCodeBtn" type="button">复制代码</button>' +
-          '<span class="shortcut-hint">Ctrl + Enter 检查</span>' +
+          '<span class="shortcut-hint">Ctrl + Enter 运行</span>' +
+        '</div>' +
+        '<div class="runtime-panel" id="runtimePanel" hidden>' +
+          '<div class="runtime-head"><span>真实运行结果</span><span class="runtime-status" id="runtimeStatus">等待运行</span></div>' +
+          '<pre class="runtime-output" id="runtimeOutput"></pre>' +
+          '<div class="runtime-help" id="runtimeHelp" hidden></div>' +
         '</div>' +
         '<div class="result" id="result" hidden></div>' +
       '</section>' +
@@ -4279,6 +4456,7 @@ print(product.label())`,
       }, 300);
     });
 
+    document.getElementById('runBtn').addEventListener('click', runOnly);
     document.getElementById('checkBtn').addEventListener('click', runCheck);
     document.getElementById('resetBtn').addEventListener('click', resetEditor);
     document.getElementById('copyCodeBtn').addEventListener('click', function () {
@@ -4294,6 +4472,172 @@ print(product.label())`,
     document.getElementById('nextBtn').addEventListener('click', function () { goTo(currentIndex + 1); });
   }
 
+  var pythonWorker = null;
+  var pythonRequest = null;
+  var pythonRequestId = 0;
+  var pythonEngineReady = false;
+
+  function createPythonWorker() {
+    if (pythonWorker) pythonWorker.terminate();
+    var source = [
+      'var enginePromise = null;',
+      'self.onmessage = async function (event) {',
+      '  var data = event.data;',
+      '  try {',
+      '    if (!enginePromise) {',
+      '      self.postMessage({ id: data.id, phase: "loading" });',
+      '      importScripts("https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js");',
+      '      enginePromise = loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/" });',
+      '    }',
+      '    var pyodide = await enginePromise;',
+      '    self.postMessage({ id: data.id, phase: "running" });',
+      '    var stdout = [];',
+      '    var stderr = [];',
+      '    pyodide.setStdout({ batched: function (text) { stdout.push(text); } });',
+      '    pyodide.setStderr({ batched: function (text) { stderr.push(text); } });',
+      '    await pyodide.runPythonAsync(data.code);',
+      '    self.postMessage({ id: data.id, ok: true, stdout: stdout.join("\\n"), stderr: stderr.join("\\n") });',
+      '  } catch (error) {',
+      '    self.postMessage({ id: data.id, ok: false, error: String(error && error.message ? error.message : error) });',
+      '  }',
+      '};'
+    ].join('\n');
+    var url = URL.createObjectURL(new Blob([source], { type: 'text/javascript' }));
+    pythonWorker = new Worker(url);
+    URL.revokeObjectURL(url);
+    pythonWorker.onmessage = function (event) {
+      var data = event.data || {};
+      if (!pythonRequest || data.id !== pythonRequest.id) return;
+      if (data.phase) {
+        updateRuntimePhase(data.phase);
+        if (data.phase === 'running') pythonEngineReady = true;
+        return;
+      }
+      clearTimeout(pythonRequest.timer);
+      var resolve = pythonRequest.resolve;
+      pythonRequest = null;
+      resolve(data);
+    };
+    pythonWorker.onerror = function () {
+      if (!pythonRequest) return;
+      clearTimeout(pythonRequest.timer);
+      var resolve = pythonRequest.resolve;
+      pythonRequest = null;
+      resolve({ ok: false, infrastructure: true, error: 'Python 运行组件加载失败，请检查网络后重试。' });
+    };
+  }
+
+  function executePython(code) {
+    if (!pythonWorker) createPythonWorker();
+    if (pythonRequest) return Promise.resolve({ ok: false, infrastructure: true, error: '已有代码正在运行，请稍候。' });
+    return new Promise(function (resolve) {
+      var id = ++pythonRequestId;
+      var timeout = pythonEngineReady ? 8000 : 35000;
+      var timer = setTimeout(function () {
+        if (!pythonRequest || pythonRequest.id !== id) return;
+        pythonWorker.terminate();
+        pythonWorker = null;
+        pythonEngineReady = false;
+        pythonRequest = null;
+        resolve({ ok: false, timeout: true, error: '运行时间过长，已自动停止。请检查 while 条件或循环是否能结束。' });
+      }, timeout);
+      pythonRequest = { id: id, resolve: resolve, timer: timer };
+      pythonWorker.postMessage({ id: id, code: code });
+    });
+  }
+
+  function updateRuntimePhase(phase) {
+    var panel = document.getElementById('runtimePanel');
+    var status = document.getElementById('runtimeStatus');
+    var output = document.getElementById('runtimeOutput');
+    if (!panel || !status || !output) return;
+    panel.hidden = false;
+    status.textContent = phase === 'loading' ? '首次加载 Python…' : '正在运行…';
+    output.className = 'runtime-output';
+    output.textContent = phase === 'loading'
+      ? '首次运行需要加载浏览器版 Python，之后通常会使用缓存。'
+      : '代码正在独立环境中执行。';
+  }
+
+  function explainPythonError(errorText) {
+    var text = String(errorText || '');
+    var lineMatch = text.match(/line\s+(\d+)/i);
+    var line = lineMatch ? Number(lineMatch[1]) : 0;
+    var advice = '查看报错最后一行，它通常包含错误类型和直接原因。';
+    if (/IndentationError|TabError/.test(text)) advice = '缩进有问题。检查报错行及上一行，代码块通常统一缩进 4 个空格。';
+    else if (/SyntaxError/.test(text)) advice = '语法不完整。重点检查报错行附近的冒号、括号、引号和拼写。';
+    else if (/NameError/.test(text)) advice = '使用了尚未定义的名称。检查变量或函数的拼写，以及是否在使用前赋值。';
+    else if (/TypeError/.test(text)) advice = '数据类型或参数不匹配。检查传入值的类型和函数参数数量。';
+    else if (/ZeroDivisionError/.test(text)) advice = '出现除以零。计算前应判断分母是否为 0。';
+    else if (/IndexError/.test(text)) advice = '列表下标超出范围。可先用 len() 检查列表长度。';
+    else if (/KeyError/.test(text)) advice = '字典中没有这个键。不确定键是否存在时可以使用 get()。';
+    return { line: line, advice: advice };
+  }
+
+  function showRuntime(result) {
+    var panel = document.getElementById('runtimePanel');
+    var status = document.getElementById('runtimeStatus');
+    var output = document.getElementById('runtimeOutput');
+    var help = document.getElementById('runtimeHelp');
+    if (!panel || !status || !output || !help) return;
+    panel.hidden = false;
+    if (result.ok) {
+      status.textContent = '运行完成';
+      output.className = 'runtime-output';
+      output.textContent = (result.stdout || result.stderr || '').trim() || '（程序运行成功，但没有输出）';
+      help.hidden = true;
+      help.textContent = '';
+    } else {
+      var info = explainPythonError(result.error);
+      status.textContent = result.timeout ? '已停止' : '运行出错';
+      output.className = 'runtime-output error';
+      output.textContent = result.error || '未知运行错误';
+      help.hidden = false;
+      help.textContent = (info.line ? '第 ' + info.line + ' 行附近：' : '') + info.advice;
+      if (info.line) focusEditorLine(info.line);
+    }
+  }
+
+  function focusEditorLine(lineNumber) {
+    var editor = document.getElementById('editor');
+    if (!editor || lineNumber < 1) return;
+    var lines = editor.value.split('\n');
+    var start = 0;
+    for (var i = 0; i < lineNumber - 1 && i < lines.length; i++) start += lines[i].length + 1;
+    var end = start + (lines[lineNumber - 1] || '').length;
+    editor.focus();
+    editor.setSelectionRange(start, end);
+  }
+
+  function setRunBusy(busy) {
+    ['runBtn', 'checkBtn'].forEach(function (id) {
+      var button = document.getElementById(id);
+      if (button) button.disabled = busy;
+    });
+  }
+
+  async function runOnly() {
+    var editor = document.getElementById('editor');
+    if (!editor || !editor.value.trim()) {
+      showRuntime({ ok: false, infrastructure: true, error: '编辑区是空的，请先写代码。' });
+      return;
+    }
+    setRunBusy(true);
+    var result = await executePython(editor.value);
+    setRunBusy(false);
+    showRuntime(result);
+  }
+
+  function normalizeOutput(value) {
+    return String(value == null ? '' : value)
+      .replace(/\\n/g, '\n')
+      .replace(/\r\n?/g, '\n')
+      .split('\n')
+      .map(function (line) { return line.replace(/[ \t]+$/g, ''); })
+      .join('\n')
+      .trim();
+  }
+
   function normalizeCode(code) {
     return String(code)
       .replace(/\r\n?/g, '\n')
@@ -4302,7 +4646,7 @@ print(product.label())`,
       .join('\n');
   }
 
-  function runCheck() {
+  async function runCheck() {
     var editor = document.getElementById('editor');
     if (!editor) return;
     var exercise = FLAT_POINTS[currentIndex].point.exercise;
@@ -4317,11 +4661,23 @@ print(product.label())`,
       return;
     }
 
-    var checks = exercise.checks.map(function (check) {
+    setRunBusy(true);
+    var runtime = await executePython(editor.value);
+    setRunBusy(false);
+    showRuntime(runtime);
+    if (!runtime.ok) {
+      box.className = 'result result-bad';
+      box.innerHTML = '<div class="result-title">代码还没有成功运行</div>' +
+        '<p class="result-explain">先根据上方真实报错修改代码。程序能运行后，系统才会继续核对答案。</p>';
+      return;
+    }
+
+    var outputMatches = normalizeOutput(runtime.stdout) === normalizeOutput(exercise.expected);
+    var checks = [{ label: '真实运行输出与预期结果一致', ok: outputMatches }].concat(exercise.checks.map(function (check) {
       var ok = false;
       try { ok = !!check.test(clean); } catch (err) { ok = false; }
       return { label: check.label, ok: ok };
-    });
+    }));
     var passed = checks.every(function (check) { return check.ok; });
     var failedCount = checks.filter(function (check) { return !check.ok; }).length;
 
@@ -4349,7 +4705,8 @@ print(product.label())`,
           return '<li class="' + (check.ok ? 'ok' : 'bad') + '">' + (check.ok ? '✓' : '✗') + ' ' + escapeHtml(check.label) + '</li>';
         }).join('') + '</ul>' +
         '<p class="result-explain">提示：' + exercise.hint + '</p>' +
-        '<p class="result-explain">判题只认关键代码特征，不会运行 Python。对照示例和预期输出改，不急着一次写对。</p>';
+        (outputMatches ? '' : '<p class="result-explain"><strong>实际输出：</strong><br><code>' + escapeHtml(normalizeOutput(runtime.stdout) || '（无输出）') + '</code><br><strong>预期输出：</strong><br><code>' + escapeHtml(normalizeOutput(exercise.expected)) + '</code></p>') +
+        '<p class="result-explain">系统已经真实运行代码，并继续检查是否使用了本题要求的知识点。对照失败项逐个修改即可。</p>';
     }
   }
 
@@ -4362,6 +4719,8 @@ print(product.label())`,
     var box = document.getElementById('result');
     box.hidden = true;
     box.innerHTML = '';
+    var runtimePanel = document.getElementById('runtimePanel');
+    if (runtimePanel) runtimePanel.hidden = true;
     editor.focus();
     showToast('已重置为初始代码');
   }
@@ -4420,7 +4779,7 @@ print(product.label())`,
 
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
       event.preventDefault();
-      runCheck();
+      runOnly();
     }
   }
 
