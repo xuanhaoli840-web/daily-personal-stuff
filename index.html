@@ -878,6 +878,29 @@ pre.code {
   font-size: 12px;
   line-height: 1.7;
 }
+.hint-steps {
+  display: grid;
+  gap: 7px;
+  margin-top: 9px;
+}
+.hint-step {
+  border: 1px solid #f1e4c4;
+  border-radius: 8px;
+  background: rgba(255,255,255,.72);
+}
+.hint-step summary {
+  padding: 8px 10px;
+  color: #8a5a00;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.hint-step p {
+  margin: 0;
+  padding: 0 10px 9px;
+}
+.hint-step-2 summary { color: #7c4a03; }
+.hint-step-3 summary { color: #92400e; }
 .criteria-title { margin-bottom: 7px; color: #64748b; }
 .criteria-list {
   display: grid;
@@ -1568,7 +1591,18 @@ pre.syntax-code {
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.04em;
+  cursor: pointer;
+  list-style: none;
 }
+.plan-title::-webkit-details-marker { display: none; }
+.plan-title::after {
+  content: "展开";
+  margin-left: auto;
+  color: #818cf8;
+  font-size: 10px;
+  font-weight: 700;
+}
+.plan-box[open] .plan-title::after { content: "收起"; }
 .plan-dot {
   width: 5px;
   height: 5px;
@@ -4609,13 +4643,23 @@ print(product.label())`,
           '<p class="ex-prompt">' + exercise.prompt + '</p>' +
         '</div>' +
         (detail.plan.length ?
-          '<div class="plan-box">' +
-            '<div class="plan-title"><span class="plan-dot"></span>解题步骤</div>' +
+          '<details class="plan-box">' +
+            '<summary class="plan-title"><span class="plan-dot"></span>解题路线（先自己尝试）</summary>' +
             '<ol class="plan-list">' + detail.plan.map(function (step) { return '<li>' + step + '</li>'; }).join('') + '</ol>' +
-          '</div>' : '') +
+          '</details>' : '') +
         '<details class="hint-box">' +
-          '<summary>卡住了？展开提示</summary>' +
-          '<p>' + exercise.hint + '</p>' +
+          '<summary>卡住了？分三步获取提示</summary>' +
+          '<div class="hint-steps">' +
+            '<details class="hint-step hint-step-1"><summary>提示 1：先想清楚任务</summary><p>' +
+              '先不要急着写完整代码：找出题目中的输入、需要重复或判断的动作，以及最后要输出的结果。先写出变量名或函数名。' +
+            '</p></details>' +
+            '<details class="hint-step hint-step-2"><summary>提示 2：搭出代码骨架</summary><p>' +
+              escapeHtml(detail.plan.length ? detail.plan[0] : '先写出本题要求的基本语法结构，再把题目给出的数据放进去。') +
+            '</p></details>' +
+            '<details class="hint-step hint-step-3"><summary>提示 3：检查关键写法</summary><p>' +
+              exercise.hint +
+            '</p></details>' +
+          '</div>' +
         '</details>' +
         '<div class="criteria-box">' +
           '<div class="criteria-title">完成标准</div>' +
@@ -4926,7 +4970,7 @@ print(product.label())`,
         '<ul class="check-list">' + checks.map(function (check) {
           return '<li class="' + (check.ok ? 'ok' : 'bad') + '">' + (check.ok ? '✓' : '✗') + ' ' + escapeHtml(check.label) + '</li>';
         }).join('') + '</ul>' +
-        '<p class="result-explain">提示：' + exercise.hint + '</p>' +
+        '<p class="result-explain">先从“提示 1”开始。如果仍然卡住，再依次展开“提示 2”和“提示 3”，不要一次把所有答案都看完。</p>' +
         (outputMatches ? '' : '<p class="result-explain"><strong>实际输出：</strong><br><code>' + escapeHtml(normalizeOutput(runtime.stdout) || '（无输出）') + '</code><br><strong>预期输出：</strong><br><code>' + escapeHtml(normalizeOutput(exercise.expected)) + '</code></p>') +
         '<p class="result-explain">系统已经真实运行代码，并继续检查是否使用了本题要求的知识点。对照失败项逐个修改即可。</p>';
     }
