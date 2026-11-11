@@ -1405,6 +1405,73 @@ button:focus-visible {
 }
 
 .steps-card { border-color: #e3e9f2; }
+.deep-dive-card {
+  border-color: #bfdbfe;
+  background: #f8fbff;
+}
+.concept-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.concept-item {
+  padding: 12px 13px;
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+  background: #fff;
+}
+.concept-item strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #1d4ed8;
+  font-size: 11.5px;
+}
+.concept-item p {
+  margin: 0;
+  color: #475569;
+  font-size: 12.5px;
+  line-height: 1.75;
+}
+.trace-title {
+  margin: 5px 0 9px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 800;
+}
+.trace-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+.trace-table {
+  width: 100%;
+  min-width: 530px;
+  border-collapse: collapse;
+  font-size: 11.5px;
+}
+.trace-table th,
+.trace-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid #edf2f7;
+  text-align: left;
+  line-height: 1.55;
+  vertical-align: top;
+}
+.trace-table th { background: #eff6ff; color: #1e40af; }
+.trace-table tr:last-child td { border-bottom: 0; }
+.deep-note {
+  margin-top: 13px;
+  padding: 11px 12px;
+  border-left: 4px solid #0ea5e9;
+  border-radius: 7px;
+  background: #f0f9ff;
+  color: #0c4a6e;
+  font-size: 12px;
+  line-height: 1.75;
+}
 .step-list {
   display: grid;
   gap: 14px;
@@ -1762,6 +1829,9 @@ pre.syntax-code {
   .start-tip { font-size: 10px; }
 
   .steps-card { padding: 16px; }
+  .concept-grid { grid-template-columns: 1fr; gap: 7px; }
+  .concept-item { padding: 10px 11px; }
+  .trace-table { font-size: 11px; }
   .step-list { gap: 12px; }
   .step-list p { font-size: 13px; line-height: 1.78; }
   .step-number { width: 22px; height: 22px; font-size: 9.5px; }
@@ -3383,12 +3453,14 @@ print(product.label())`,
     },
     'p3-4': {
       steps: [
-        'orders 是“列表里装字典”的常见业务结构，每个 order 代表一条订单。',
-        'total 必须在循环前初始化；每轮只在 status 等于 paid 时累加 amount。',
-        '循环结束后再打印 total，得到所有符合条件记录的汇总值。'
+        '<code>orders</code> 是整个订单列表，里面有 3 个字典。每个字典就是一张订单卡片，保存状态 status 和金额 amount。',
+        '<code>for order in orders</code> 的意思是：每次从列表中拿出一张订单卡片，临时叫它 order。order 不是整个列表，只是当前这一条。',
+        '<code>order["status"]</code> 从当前订单里取状态；只有值等于 paid，才执行缩进更深的累加语句。',
+        '<code>total += order["amount"]</code> 等价于 <code>total = total + order["amount"]</code>。它会保留前面的结果，再加上本轮金额。',
+        '三条订单全部检查完后才执行 <code>print(total)</code>。因此 pending 的 80 被跳过，结果是 120 + 60 = 180。'
       ],
       syntax: '汇总值 = 0\nfor 记录 in 记录列表:\n    if 记录["字段"] == 目标值:\n        汇总值 += 记录["数值字段"]',
-      plan: ['先创建循环外的 total = 0。', '逐条遍历 orders，并判断 status。', '只累加 paid 订单的 amount，最后打印 total。']
+      plan: ['先看清数据：orders 是列表，每个 order 是字典。', '在循环外创建 total = 0，让所有轮次共享同一个总额。', '逐条取出 order，先判断 status，再决定是否累加 amount。', '循环全部结束后只打印一次 total。']
     },
     'p3-5': {
       steps: [
@@ -3879,6 +3951,142 @@ print(product.label())`,
     }
   };
 
+  const DEEP_DIVES = {
+    'p3-4': {
+      concepts: [
+        ['orders 和 order 有什么不同？', '<code>orders</code> 是装着全部订单的列表；<code>order</code> 是循环当前拿到的一条订单。名字只差一个 s，但代表的层级完全不同。'],
+        ['为什么先写 total = 0？', 'total 是“记账本上的累计金额”。它必须在第一条订单处理前准备好，并被每一轮共同使用。'],
+        ['为什么要写 order["status"]？', 'order 是字典，不能直接问它是否等于 paid；要先用键 status 取出这张订单的状态。'],
+        ['为什么 print 不缩进？', '不缩进表示等三条订单都处理完再打印一次。如果放在循环里，会打印三个中间结果。']
+      ],
+      traceHeaders: ['轮次', '当前 order', '条件是否成立', 'total 的变化'],
+      traceRows: [
+        ['开始前', '还没取订单', '还没判断', '0'],
+        ['第 1 轮', 'paid，120 元', '成立', '0 + 120 → 120'],
+        ['第 2 轮', 'pending，80 元', '不成立，跳过累加', '仍然是 120'],
+        ['第 3 轮', 'paid，60 元', '成立', '120 + 60 → 180'],
+        ['循环结束', '没有下一条订单', '停止循环', '打印 180']
+      ],
+      note: '<strong>最容易写错：</strong>如果把 <code>total = 0</code> 缩进到 for 里面，每轮都会重新清零，前面订单的金额就丢了。这个模式可以直接迁移到“统计及格人数、汇总某类支出、计算有库存商品总价”。'
+    },
+    'p3-5': {
+      concepts: [['enumerate 解决什么问题？', '普通 for 只能直接拿到元素；enumerate 会额外生成序号，让你不用自己维护容易出错的计数器。'], ['start=1 有什么作用？', 'Python 默认从 0 编号，但用户看到的清单通常从 1 开始，因此指定 start=1。']],
+      note: '把数据本身和展示序号分开理解：task 是任务内容，index 只是展示位置。'
+    },
+    'p3-6': {
+      concepts: [['两层循环怎么运行？', '外层每运行 1 次，内层会完整运行 3 次。先生成 A1、A2、A3，再进入 B 行。'], ['为什么每行重新建 seats？', 'seats 只负责当前这一行。如果不清空，第二行会带着第一行的数据。']],
+      note: '嵌套循环适合二维结构，但层数过多会难读；真实项目中通常把内层逻辑拆成函数。'
+    },
+    'p3-7': {
+      concepts: [['while 和 for 的核心区别', 'for 通常处理已有集合或明确次数；while 表示“条件仍成立就继续”，次数可能事先不知道。'], ['怎样避免死循环？', '循环体必须改变条件依赖的数据，并能证明它最终让条件变成 False。']],
+      note: '写 while 前先回答两个问题：什么时候继续？每轮改变什么，才能最终停止？'
+    },
+    'p4-1': {
+      concepts: [['索引是什么？', '索引是字符的位置编号，从 0 开始；负索引从末尾倒数。'], ['切片为什么不包含终点？', 'Python 使用左闭右开区间，这让片段长度等于“终点 - 起点”，也方便首尾片段无缝拼接。']],
+      note: '切片不会修改原字符串，而是产生一个新的字符串。'
+    },
+    'p4-2': {
+      concepts: [['为什么方法能连着写？', 'strip() 返回一个新字符串，后面的 upper() 就继续处理这个返回值。'], ['原字符串会改变吗？', '不会。字符串不可变，必须用变量接住方法返回的新结果。']],
+      note: '文本清洗通常按“去空格 → 统一大小写 → 拆分 → 逐项处理”的顺序进行。'
+    },
+    'p4-3': {
+      concepts: [['f-string 做了什么？', '字符串前的 f 告诉 Python：花括号中是表达式，需要先计算再放回文字。'], ['花括号里能写什么？', '可以写变量和简单表达式，但复杂业务计算最好先保存到变量，避免输出模板难读。']],
+      note: 'f-string 负责展示，不应承担大量业务计算。'
+    },
+    'p5-1': {
+      concepts: [['列表解决什么问题？', '当多个数据属于同一组并且有顺序时，用一个列表统一保存，比创建许多独立变量更容易遍历。'], ['下标和长度的关系', '长度为 3 的列表，有效正下标是 0、1、2；下标 3 已经越界。']],
+      note: '列表可修改，字符串不可修改，这是后续增删改操作的重要区别。'
+    },
+    'p5-2': {
+      concepts: [['append 和赋值不同', 'append 增加一个新位置；nums[0] = 10 只替换已有位置，列表长度不变。'], ['remove 和 pop 不同', 'remove 按值寻找并删除，pop 按位置删除并返回被删元素。']],
+      note: '修改集合前先确定你是在“新增、替换，还是删除”，再选对应操作。'
+    },
+    'p5-3': {
+      concepts: [['累加器是什么？', 'total 保存“到目前为止”的结果。每轮用旧 total 和当前元素算出新 total。'], ['为什么最后才 print？', '循环内 print 看见的是过程；循环外 print 得到的是最终汇总。']],
+      note: '求和、计数、寻找最大值都属于“遍历 + 更新状态”的同一类模式。'
+    },
+    'p6-1': {
+      concepts: [['定义为什么不会执行？', 'def 是把步骤保存并命名；只有调用函数名加括号，Python 才进入函数体。'], ['函数带来什么？', '它减少重复，并把一段逻辑变成可理解、可测试、可复用的独立单元。']],
+      note: '看到函数时分清两个时刻：定义时保存步骤，调用时真正执行。'
+    },
+    'p6-2': {
+      concepts: [['参数和返回值的区别', '参数把数据送进函数，return 把结果送回调用位置，方向相反。'], ['return 和 print 不同', 'print 只是给人看；return 的结果还能继续赋值、判断和计算。']],
+      note: '可复用函数通常 return 数据，把如何展示留给调用者决定。'
+    },
+    'p6-3': {
+      concepts: [['默认参数何时使用？', '调用时省略该参数才使用默认值；显式传入时会覆盖默认值。'], ['为什么默认参数放后面？', '这样 Python 才能明确位置参数分别对应谁。']],
+      note: '默认值代表最常见的合理选择，不是用来隐藏必需信息。'
+    },
+    'p6-4': {
+      concepts: [['局部变量有什么好处？', '中间值只在函数内存在，外部代码无法误改它，不同函数也可以放心使用同名变量。'], ['怎样把结果带出去？', '使用 return，而不是依赖或修改全局变量。']],
+      note: '函数应尽量只依赖参数，并通过 return 输出，这会让测试更简单。'
+    },
+    'p6-5': {
+      concepts: [['什么是边界情况？', '空列表、0、负数和缺失值都是容易破坏正常公式的特殊输入。'], ['为什么提前 return？', '发现无效输入后立即结束，后面的核心逻辑就不需要层层缩进。']],
+      note: '先守住入口，再写正常流程，是稳定函数常见的结构。'
+    },
+    'p6-6': {
+      concepts: [['为什么拆成多个函数？', '每个函数只负责一件事，出错时能快速确定是哪一步，也可以单独复用。'], ['怎样组合？', '用变量接住前一个函数的返回值，再传给下一个步骤。']],
+      note: '拆分不是越细越好；一个函数应有一个清晰、能用一句话说明的职责。'
+    },
+    'p7-1': {
+      concepts: [['字典与列表如何选择？', '按位置取值用列表；按姓名、价格等字段名取值用字典。'], ['get 为什么更安全？', '键缺失时 get 返回兜底值，而方括号取值会抛出 KeyError。']],
+      note: '确定键必然存在时用方括号；数据来自用户或接口时先考虑 get 和校验。'
+    },
+    'p7-2': {
+      concepts: [['items() 返回什么？', '每轮返回一对键和值，因此 for 左侧需要两个变量接收。'], ['遍历顺序可靠吗？', '现代 Python 保留插入顺序，但业务逻辑不应无意依赖字典的显示顺序。']],
+      note: 'keys() 只取键，values() 只取值，items() 同时取两者。'
+    },
+    'p8-1': {
+      concepts: [['先看输入再选工具', 'scores 是数字列表，所以 sum、len、max 能直接完成总和、数量和最大值。'], ['平均值为何可能出错？', '空列表的长度为 0，除法前必须考虑是否有数据。']],
+      note: '报告不仅要算对，还要把结果格式化成用户看得懂的文字。'
+    },
+    'p8-2': {
+      concepts: [['为什么用字典汇总？', '分类名称作为键，总金额作为值，相同分类能快速找到旧结果继续累加。'], ['get(category, 0) 的意义', '第一次遇到分类时没有旧金额，用 0 作为累加起点。']],
+      note: '这是日志、消费和订单分析中非常常见的“分组汇总”模式。'
+    },
+    'p8-3': {
+      concepts: [['为什么先清洗文本？', 'Python、python 和带标点的 Python, 肉眼相同，但程序看到的是不同字符串。'], ['处理链如何拆分？', '先统一大小写和标点，再拆成词，最后遍历计数。']],
+      note: '文本分析的质量往往取决于清洗规则，而不只是最后的 count。'
+    },
+    'p8-4': {
+      concepts: [['为什么列表里放字典？', '列表管理多条任务，字典描述每条任务的多个字段，两种结构各司其职。'], ['函数的职责', 'add_task 统一创建记录，避免各处使用不同字段或默认值。']],
+      note: '真实应用通常使用“集合装记录，函数管理操作”的结构。'
+    },
+    'p9-1': {
+      concepts: [['筛选和排序谁先做？', '先删除无效或不需要的数据，再排序，逻辑更清楚也减少处理量。'], ['sorted 会改原列表吗？', '不会，它返回新列表；原地修改使用 list.sort()。']],
+      note: '数据处理要保留原始数据，除非你明确希望原地修改。'
+    },
+    'p9-2': {
+      concepts: [['推导式在表达什么？', '它把“遍历每个元素并生成一个新值”浓缩成一行。'], ['什么时候不用推导式？', '逻辑包含多层判断、副作用或难以一眼看懂时，普通循环更合适。']],
+      note: '简短不等于更好；可读性比少写几行更重要。'
+    },
+    'p10-1': {
+      concepts: [['with 为什么重要？', '代码块结束时会自动关闭文件，即使中途出错也更可靠。'], ['w 和 r 有何区别？', 'w 写入并可能清空旧内容，r 只读取；真实文件操作前要确认模式。']],
+      note: '文件写入会影响磁盘数据，实际项目应先备份或使用测试文件。'
+    },
+    'p10-2': {
+      concepts: [['JSON 是什么？', '它是跨程序传输结构化数据的文本格式，解析后通常变成 Python 字典和列表。'], ['loads 和 load 不同', 'loads 解析字符串，load 从已打开的文件对象读取。']],
+      note: '外部 JSON 的字段可能缺失或类型变化，解析成功后仍需校验。'
+    },
+    'p10-3': {
+      concepts: [['异常处理不是隐藏错误', '它用于处理已经预料到、并且有合理恢复方式的失败。'], ['为什么捕获具体异常？', '只捕获 ValueError 不会意外吞掉程序中的其他错误。']],
+      note: 'try 中只放可能失败的最小代码范围，便于判断真正出错的位置。'
+    },
+    'p11-1': {
+      concepts: [['日期对象与字符串不同', '日期对象可以比较和计算；strftime 只负责把它转换成展示文本。'], ['格式代码是什么？', '%Y、%m、%d 分别代表四位年份、月份和日期。']],
+      note: '内部保留日期对象，真正显示或生成文件名时再格式化。'
+    },
+    'p11-2': {
+      concepts: [['为什么先预览？', '批量操作影响很多文件，先打印旧名和新名能提前发现冲突和格式错误。'], [':03d 是什么？', 'd 表示整数，3 表示总宽度，0 表示不足时在左侧补零。']],
+      note: '自动化最重要的不只是快，还要可预览、可验证、尽量可恢复。'
+    },
+    'p11-3': {
+      concepts: [['类和对象有什么区别？', '类是共同结构的定义，对象是按定义创建出的具体数据，例如不同商品。'], ['self 是谁？', '调用 product.label() 时，self 就是 product，用它访问当前对象自己的属性。']],
+      note: '数据和行为确实属于同一类事物时再使用类，不要为了“高级”而强行套类。'
+    }
+  };
+
   const STORAGE_KEY = 'python-learning-demo-v1';
   const FLAT_POINTS = [];
   const POINT_INDEX = new Map();
@@ -4276,6 +4484,7 @@ print(product.label())`,
     var practiceContext = PRACTICE_CONTEXT[point.id] || { scene: point.analogy, goal: '理解本节写法并完成练习。' };
     var chapterMeta = CHAPTER_META[chapter.title] || { goal: '', summary: [] };
     var chapterShowcase = CHAPTER_SHOWCASES[chapter.title] || null;
+    var deepDive = DEEP_DIVES[point.id] || null;
     var isFirstInChapter = pointIndex === 0;
     var isLastInChapter = pointIndex === chapter.points.length - 1;
     var isVeryFirst = chapterIndex === 0 && pointIndex === 0;
@@ -4366,6 +4575,19 @@ print(product.label())`,
             '<pre class="syntax-code">' + escapeHtml(detail.syntax) + '</pre>' +
           '</div>' +
         '</section>' : '') +
+      (deepDive ? '<section class="card deep-dive-card">' +
+        '<div class="card-label">把它真正想明白</div>' +
+        '<div class="concept-grid">' + (deepDive.concepts || []).map(function (item) {
+          return '<div class="concept-item"><strong>' + item[0] + '</strong><p>' + item[1] + '</p></div>';
+        }).join('') + '</div>' +
+        (deepDive.traceRows ? '<div class="trace-title">程序运行时，数据是这样变化的</div>' +
+          '<div class="trace-table-wrap"><table class="trace-table"><thead><tr>' +
+          deepDive.traceHeaders.map(function (header) { return '<th>' + header + '</th>'; }).join('') +
+          '</tr></thead><tbody>' + deepDive.traceRows.map(function (row) {
+            return '<tr>' + row.map(function (cell) { return '<td>' + cell + '</td>'; }).join('') + '</tr>';
+          }).join('') + '</tbody></table></div>' : '') +
+        '<div class="deep-note">' + deepDive.note + '</div>' +
+      '</section>' : '') +
       '<section class="card warn-card">' +
         '<div class="card-label">常见错误 / 易混点</div>' +
         '<ul>' + point.mistakes.map(function (mistake) { return '<li>' + mistake + '</li>'; }).join('') + '</ul>' +
