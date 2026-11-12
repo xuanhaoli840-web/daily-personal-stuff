@@ -1992,7 +1992,7 @@ pre.syntax-code {
       <span></span><span></span><span></span>
     </button>
     <div class="mobile-brand">Python 实用学习区</div>
-    <span class="mobile-progress" id="mobileProgress">0/38</span>
+    <span class="mobile-progress" id="mobileProgress">0/39</span>
   </header>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
@@ -2010,7 +2010,7 @@ pre.syntax-code {
         <div class="progress-ring" id="progressRing" style="--p:0"><span id="ringPercent">0%</span></div>
         <div class="progress-meta">
           <div class="progress-label">总进度</div>
-          <strong id="totalText">0 / 38</strong>
+          <strong id="totalText">0 / 39</strong>
           <div class="bar"><span id="totalBar"></span></div>
         </div>
       </div>
@@ -2541,6 +2541,47 @@ print(f"明年{score + 1}分")      # 明年93分`,
               { label: '把 score 嵌进字符串', test: re(/\{\s*score\s*\}/) }
             ],
             explain: 'f-string 里的 <code>{name}</code> 会换成变量 name 的值，<code>{score}</code> 换成 92，于是输出“小明考了92分”。'
+          }
+        },
+        {
+          id: 'p4-4',
+          title: 'format() 模板格式化',
+          oneLine: '<code>format()</code> 用占位符把数据填入字符串模板，还能控制小数位、对齐和编号格式。',
+          analogy: '像一张可重复使用的快递面单：先留好 {name}、{price} 这些空位，打印时再把具体内容填进去。',
+          example: `name = "小明"
+price = 12.5
+count = 2
+
+message = "顾客：{}，单价：{:.2f} 元，数量：{}".format(
+    name, price, count
+)
+print(message)
+
+print("订单号：{id}，状态：{status}".format(
+    id="A1024", status="已支付"
+))`,
+          mistakes: [
+            '<code>{}</code> 的位置要和 format() 传入参数的顺序对应；顺序错了，输出也会错。',
+            '<code>{:.2f}</code> 中的 <code>.2f</code> 表示保留两位小数，f 代表按小数格式显示。',
+            '命名占位符要写成 <code>{name}</code>，调用时传 <code>name="小明"</code>；不要把位置参数和命名参数混得没有规律。',
+            'format() 会返回一个新字符串，不会修改原模板；模板需要反复使用时，可以先保存起来。'
+          ],
+          exercise: {
+            id: 'ex4-4',
+            title: '制作订单确认消息',
+            prompt: '变量 <code>product = "无线鼠标"</code>、<code>price = 59.9</code>、<code>count = 2</code>。使用 <code>format()</code> 输出：<code>无线鼠标：2 件，共 119.80 元</code>。金额必须保留两位小数。',
+            hint: '模板可以写成 "{}：{} 件，共 {:.2f} 元".format(product, count, price * count)。',
+            starter: 'product = "无线鼠标"\nprice = 59.9\ncount = 2\n\n# 用 format() 生成订单确认消息，金额保留两位小数\n',
+            expected: '无线鼠标：2 件，共 119.80 元',
+            checks: [
+              { label: '准备 product、price、count 三个变量', test: function (code) { return /product\s*=\s*["']无线鼠标["']/.test(code) && /price\s*=\s*59\.9/.test(code) && /count\s*=\s*2(?![\d.])/.test(code); } },
+              { label: '调用 format() 进行字符串填充', test: re(/["'][^\n]*\{[^\n]*\}[^\n]*["']\.format\s*\(/) },
+              { label: '把商品名和数量放入模板', test: function (code) { return /format\s*\(\s*product\s*,\s*count/.test(code) || (/\{\s*product\s*\}/.test(code) && /\{\s*count\s*\}/.test(code)); } },
+              { label: '计算 price * count', test: re(/price\s*\*\s*count/) },
+              { label: '使用 {:.2f} 保留两位小数', test: re(/\{\s*:\s*\.2f\s*\}/) },
+              { label: '打印最终消息', test: re(/print\s*\(/) }
+            ],
+            explain: 'price * count 得到 119.8；模板中的 {:.2f} 把它显示为 119.80。format() 先按位置把三个值填入，再按照格式说明控制金额的显示样式。'
           }
         }
       ]
@@ -3562,6 +3603,21 @@ print(product.label())`,
         '检查字符串前的 f 和引号是否成对。'
       ]
     },
+    'p4-4': {
+      steps: [
+        '字符串中的 <code>{}</code> 是位置占位符，format() 里的第一个值填第一个空位，第二个值填第二个空位。',
+        '<code>{:.2f}</code> 不是变量名，而是一条格式规则：把数字按小数形式显示，并保留两位。',
+        '本题先算 <code>price * count</code> 得到 119.8，再把它格式化为 119.80，最后和商品名称、数量组合成完整消息。',
+        'format() 也支持命名占位符，例如 <code>"{name}".format(name="小明")</code>，当模板字段较多时更不容易弄错。'
+      ],
+      syntax: '"{}：{} 件，共 {:.2f} 元".format(商品, 数量, 金额)',
+      plan: [
+        '先确认模板中有三个空位：商品、数量、金额。',
+        '按相同顺序传入 product、count 和 price * count。',
+        '在金额占位符中写 {:.2f}，保证 119.8 显示为 119.80。',
+        '用 print 输出 format() 返回的新字符串。'
+      ]
+    },
     'p5-1': {
       steps: [
         '<code>fruits[0]</code> 取第一个元素“苹果”，<code>fruits[-1]</code> 取最后一个。',
@@ -3799,6 +3855,7 @@ print(product.label())`,
     'p4-1': { scene: '隐藏手机号、提取文件后缀和截取日期，都需要从文本的指定位置取字符。', goal: '能用正负下标和切片准确取得字符串片段。' },
     'p4-2': { scene: '用户提交的姓名、邮箱和搜索词经常带有空格或大小写不统一，需要先清洗。', goal: '能组合 strip() 和 upper() 处理原始文本。' },
     'p4-3': { scene: '成绩通知、订单确认和欢迎语都需要把变量填进固定文本模板。', goal: '能正确书写 f-string，并把多个变量放入花括号。' },
+    'p4-4': { scene: '订单、报表和批量通知需要反复套用同一套文字模板，还要控制金额、小数和编号的显示格式。', goal: '掌握 format() 的位置参数、命名参数和数字格式化，并知道它与 f-string 的适用区别。' },
     'p5-1': { scene: '购物车、课程名单和一周温度都可以按顺序放在列表中统一管理。', goal: '能创建列表，用下标取元素，并用 len() 获取数量。' },
     'p5-2': { scene: '购物车会新增商品、修改数量或删除条目，列表也提供对应的增改删操作。', goal: '能用 append() 添加元素，并通过下标修改已有元素。' },
     'p5-3': { scene: '统计总分、总消费或总库存时，需要遍历一组数字并持续累加。', goal: '能设置累加初始值，在循环中更新它，并在循环结束后输出结果。' },
@@ -3851,11 +3908,13 @@ print(product.label())`,
       ]
     },
     '字符串': {
-      goal: '学完这章，你会按下标取字符、用常用方法处理文本，并用 f-string 拼接输出。',
+      goal: '学完这章，你会定位、清洗、拆分和格式化文本，并能根据场景选择 format() 或 f-string。',
       summary: [
         '下标从 0 开始，切片含头不含尾。',
         'strip、upper、split 等方法返回新字符串，要接住结果。',
-        'f-string 用 {} 把变量嵌进文字，字符串前面别忘写 f。'
+        'f-string 用 {} 把变量嵌进文字，字符串前面别忘写 f。',
+        'format() 通过位置或名称填充占位符，还能控制小数位和对齐。',
+        '模板字段较多或需要复用时，命名 format() 更清楚；代码固定且追求直观时，f-string 通常更简洁。'
       ]
     },
     '列表': {
@@ -4026,6 +4085,24 @@ print(product.label())`,
     'p4-3': {
       concepts: [['f-string 做了什么？', '字符串前的 f 告诉 Python：花括号中是表达式，需要先计算再放回文字。'], ['花括号里能写什么？', '可以写变量和简单表达式，但复杂业务计算最好先保存到变量，避免输出模板难读。']],
       note: 'f-string 负责展示，不应承担大量业务计算。'
+    },
+    'p4-4': {
+      concepts: [
+        ['{} 和参数怎样对应？', '不写名字时按顺序填充：第一个 {} 使用 format() 的第一个参数。也可以写 {0}、{1} 指定位置，或写 {product} 使用命名参数。'],
+        [':.2f 到底是什么意思？', '冒号表示后面开始写显示规则；.2 表示小数点后两位；f 表示按浮点数格式显示。它改变的是显示结果，不是原变量的数值。'],
+        ['什么时候用命名参数？', '模板很长或同一个字段出现多次时，"{name}：{price}".format(name=..., price=...) 比只看位置更容易理解和维护。'],
+        ['format() 和 f-string 怎么选？', 'f-string 适合模板和变量写在同一段代码里；format() 适合模板先保存、之后再填数据，或项目仍需兼容较旧的 Python 写法。'],
+        ['还有哪些实用格式？', '<code>{:,}</code> 添加千位分隔符，<code>{:.1%}</code> 显示百分比，<code>{:&gt;10}</code> 表示在宽度 10 内右对齐并用指定字符填充。'],
+        ['怎样输出花括号本身？', '占位符本身使用花括号，所以要显示一个真正的 { 或 }，需写成双花括号 <code>{{</code> 或 <code>}}</code>。']
+      ],
+      traceHeaders: ['模板片段', '对应的值', '格式规则', '填入后的结果'],
+      traceRows: [
+        ['{}', 'product = "无线鼠标"', '直接转成文字', '无线鼠标'],
+        ['{}', 'count = 2', '直接转成文字', '2'],
+        ['{:.2f}', 'price * count = 119.8', '保留两位小数', '119.80'],
+        ['完整模板', '三个结果依次填入', '保留原有标点和单位', '无线鼠标：2 件，共 119.80 元']
+      ],
+      note: '<strong>常见误解：</strong><code>.2f</code> 不会把 price 永久改成两位小数，它只控制这一次生成字符串时怎样显示。例如 <code>"{:,.2f}".format(12345.6)</code> 得到 12,345.60。货币计算还涉及精度问题，正式财务程序通常使用 <code>Decimal</code>，这里先学习输出格式。'
     },
     'p5-1': {
       concepts: [['列表解决什么问题？', '当多个数据属于同一组并且有顺序时，用一个列表统一保存，比创建许多独立变量更容易遍历。'], ['下标和长度的关系', '长度为 3 的列表，有效正下标是 0、1、2；下标 3 已经越界。']],
