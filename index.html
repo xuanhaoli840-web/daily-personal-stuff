@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta name="site-release" content="pages-20261119-courses">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f7f9fc">
-<meta name="description" content="无需安装、无需注册，打开链接即可学习和练习 Python，学习进度会自动保存在当前浏览器。">
+<meta name="description" content="配套赵广辉《Python 程序设计基础（第2版）》的自学网站，提供 Python 知识点讲解、浏览器在线练习、错题复习、教材对照和期末急救题。">
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Python 学习区">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Python 实用学习区">
-<meta property="og:description" content="打开链接即可学习 Python，示例、练习和进度保存都在一个页面里。">
-<title>Python 实用学习区</title>
+<meta property="og:title" content="Python 程序设计基础自学网站">
+<meta property="og:description" content="配套赵广辉《Python 程序设计基础（第2版）》，通过讲解、在线练习和错题复习巩固基础。">
+<title>Python 程序设计基础自学网站</title>
 <style>
 :root {
   --bg: #eef2f8;
@@ -183,26 +183,9 @@ button {
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 transparent;
 }
-.tool-nav {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border);
-  background: #fff;
-}
-.tool-nav button {
-  min-height: 36px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: #f8fafc;
-  color: var(--text-2);
-  font: inherit;
-  font-size: 11.5px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.tool-nav button:hover, .tool-nav button.active { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; }
+.tool-nav { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:7px; padding:12px 14px; border-bottom:1px solid var(--border); background:#fff; }
+.tool-nav button { min-height:36px; border:1px solid var(--border); border-radius:7px; background:#f8fafc; color:var(--text-2); font:inherit; font-size:11.5px; font-weight:700; cursor:pointer; }
+.tool-nav button:hover,.tool-nav button.active { border-color:#93c5fd; background:#eff6ff; color:#1d4ed8; }
 .sidebar-body::-webkit-scrollbar { width: 8px; }
 .sidebar-body::-webkit-scrollbar-thumb {
   background: #cbd5e1;
@@ -770,30 +753,6 @@ pre.code {
   border-radius: 50%;
   background: #e9c47a;
 }
-.error-guide { border-color: #fecaca; background: #fffafa; }
-.error-guide-list { display: grid; gap: 9px; margin-top: 12px; }
-.error-guide-item { padding: 11px 12px; border: 1px solid #fee2e2; border-radius: 7px; background: #fff; }
-.error-guide-item code { color: #b42318; }
-.error-guide-item p { margin: 6px 0 0; color: var(--text-2); font-size: 12px; line-height: 1.65; }
-.tool-page-head { margin-bottom: 22px; }
-.tool-page-head h1 { margin: 0 0 8px; font-size: 27px; }
-.tool-page-head p { margin: 0; color: var(--muted); line-height: 1.7; }
-.tool-section { margin-bottom: 16px; }
-.tool-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
-.tool-table { width: 100%; border-collapse: collapse; min-width: 650px; font-size: 12px; }
-.tool-table th, .tool-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; line-height: 1.6; }
-.tool-table th { background: #f1f5f9; color: var(--text-2); }
-.tool-table tr:last-child td { border-bottom: 0; }
-.tool-link { border: 0; padding: 0; background: none; color: #2563eb; font: inherit; cursor: pointer; text-align: left; }
-.exam-item { border: 1px solid var(--border); border-radius: 8px; background: #fff; margin-bottom: 10px; }
-.exam-item summary { padding: 14px 16px; cursor: pointer; font-weight: 750; color: var(--text); }
-.exam-body { padding: 0 16px 16px; color: var(--text-2); font-size: 13px; line-height: 1.75; }
-.exam-body h3 { margin: 12px 0 5px; color: var(--text); font-size: 12px; }
-.exam-body pre { overflow: auto; padding: 12px; border-radius: 7px; background: var(--code-bg); color: var(--code-text); font: 12px/1.65 var(--mono); }
-.wrong-item { margin-bottom: 12px; }
-.wrong-item pre { overflow: auto; max-height: 240px; padding: 12px; border-radius: 7px; background: var(--code-bg); color: var(--code-text); white-space: pre-wrap; }
-.wrong-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-@media (max-width: 960px) { .tool-nav { padding: 10px 12px; } .tool-page-head h1 { font-size: 23px; } }
 
 .exercise-card {
   overflow: hidden;
@@ -801,6 +760,72 @@ pre.code {
   border-color: #dbe3ff;
   box-shadow: 0 18px 44px rgba(79, 70, 229, 0.09);
 }
+.error-guide { border-color:#fecaca; background:#fffafa; }
+.error-guide-list { display:grid; gap:9px; margin-top:12px; }
+.error-guide-item { padding:11px 12px; border:1px solid #fee2e2; border-radius:7px; background:#fff; }
+.error-guide-item code { color:#b42318; }
+.error-guide-item p { margin:6px 0 0; color:var(--text-2); font-size:12px; line-height:1.65; }
+.tool-page-head { margin-bottom:22px; }
+.tool-page-head h1 { margin:0 0 8px; font-size:27px; }
+.tool-page-head p { margin:0; color:var(--muted); line-height:1.7; }
+.tool-section { margin-bottom:16px; }
+.tool-table-wrap { overflow-x:auto; border:1px solid var(--border); border-radius:8px; background:#fff; }
+.tool-table { width:100%; border-collapse:collapse; min-width:650px; font-size:12px; }
+.tool-table th,.tool-table td { padding:11px 12px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; line-height:1.6; }
+.tool-table th { background:#f1f5f9; color:var(--text-2); }
+.tool-table tr:last-child td { border-bottom:0; }
+.tool-link { border:0; padding:0; background:none; color:#2563eb; font:inherit; cursor:pointer; text-align:left; }
+.coverage-status { display:inline-block; padding:3px 7px; border-radius:99px; background:#fffbeb; color:#92400e; font-size:11px; font-weight:750; white-space:nowrap; }
+.coverage-status.full { background:#ecfdf5; color:#047857; }
+.coverage-status.none { background:#fff1f2; color:#be123c; }
+.exam-item { border:1px solid var(--border); border-radius:8px; background:#fff; margin-bottom:10px; }
+.exam-item summary { padding:14px 16px; cursor:pointer; font-weight:750; color:var(--text); }
+.exam-body { padding:0 16px 16px; color:var(--text-2); font-size:13px; line-height:1.75; }
+.exam-body h3 { margin:12px 0 5px; color:var(--text); font-size:12px; }
+.exam-body pre { overflow:auto; padding:12px; border-radius:7px; background:var(--code-bg); color:var(--code-text); font:12px/1.65 var(--mono); }
+.exam-body .exam-code { margin-top:8px; }
+.exam-body .exam-line-list { display:grid; gap:6px; margin:8px 0 0; padding-left:23px; }
+.exam-body .exam-line-list li { padding-left:3px; line-height:1.7; }
+.exam-body .exam-output { padding:9px 11px; border-left:3px solid #818cf8; border-radius:6px; background:#eef2ff; color:#312e81; font-family:var(--mono); white-space:pre-wrap; }
+.exam-body .exam-variant { padding:10px 11px; border-left:3px solid #14b8a6; border-radius:6px; background:#ecfdf5; color:#115e59; }
+.wrong-item { margin-bottom:12px; }
+.wrong-item pre { overflow:auto; max-height:240px; padding:12px; border-radius:7px; background:var(--code-bg); color:var(--code-text); white-space:pre-wrap; }
+.wrong-actions { display:flex; gap:8px; flex-wrap:wrap; }
+.variation-card { border-color:#c7d2fe; background:#fafaff; }
+.variation-list { display:grid; gap:9px; margin-top:10px; }
+.variation-list details { border:1px solid #e0e7ff; border-radius:8px; background:#fff; }
+.variation-list summary { padding:11px 13px; color:#3730a3; font-size:12px; font-weight:750; cursor:pointer; }
+.variation-list p { margin:0; padding:0 13px 12px; color:var(--text-2); font-size:12px; line-height:1.75; }
+.variation-exercise { margin:10px 13px 13px; padding:12px; border:1px solid #e0e7ff; border-radius:8px; background:#fff; }
+.variation-exercise h4 { margin:0 0 7px; color:#3730a3; font-size:12px; }
+.variation-prompt { margin:0 0 9px; color:var(--text-2); font-size:12px; line-height:1.7; }
+.variation-editor { width:100%; min-height:110px; resize:vertical; padding:10px; border:1px solid #cbd5e1; border-radius:7px; background:#0f172a; color:#e2e8f0; font:12px/1.7 var(--mono); box-sizing:border-box; }
+.variation-toolbar { display:flex; gap:7px; flex-wrap:wrap; align-items:center; margin-top:8px; }
+.variation-result { margin-top:8px; padding:8px 10px; border-radius:6px; font-size:11.5px; line-height:1.6; white-space:pre-wrap; }
+.variation-result.ok { background:#ecfdf5; color:#047857; }
+.variation-result.bad { background:#fff1f2; color:#be123c; }
+.example-purpose { margin:0 0 13px; padding:11px 12px; border-left:3px solid #6366f1; border-radius:6px; background:#eef2ff; color:#3730a3; font-size:12.5px; line-height:1.75; }
+.example-preview { margin:14px 0 12px; padding:12px 14px; border:1px solid #c7d2fe; border-radius:9px; background:linear-gradient(135deg,#f5f7ff,#fff); color:#334155; }
+.example-preview strong { display:block; margin-bottom:5px; color:#4338ca; font-size:11.5px; }
+.example-preview p { margin:0; font-size:12.5px; line-height:1.75; }
+.example-flow { margin:0 0 12px; padding:10px 12px; border:1px solid #dbeafe; border-radius:7px; background:#f8fbff; color:#334155; font-size:12px; line-height:1.7; }
+.example-output { margin-top:12px; padding:10px 12px; border:1px solid #bbf7d0; border-radius:7px; background:#f0fdf4; color:#166534; font:12px/1.65 var(--mono); white-space:pre-wrap; }
+.tool-nav button[data-tool="wall"] { grid-column:1 / -1; }
+.note-wall-head { margin-bottom:18px; }
+.note-wall-grid { display:grid; grid-template-columns:minmax(0, 1fr) minmax(260px, .78fr); gap:14px; align-items:start; }
+.note-wall-form textarea { width:100%; min-height:145px; resize:vertical; padding:12px; border:1px solid var(--border-strong); border-radius:8px; background:#fff; color:var(--text); font:inherit; font-size:13px; line-height:1.7; }
+.note-wall-form input,.note-wall-form select { width:100%; min-height:40px; margin:5px 0 10px; padding:7px 9px; border:1px solid var(--border-strong); border-radius:7px; background:#fff; color:var(--text); font:inherit; }
+.note-wall-form label { display:block; margin-top:8px; color:var(--text-2); font-size:11.5px; font-weight:700; }
+.note-wall-hint { margin:9px 0 0; color:var(--muted); font-size:11px; line-height:1.6; }
+.note-wall-list { display:grid; gap:10px; }
+.note-card { position:relative; padding:13px; border:1px solid #f1dfaa; border-radius:8px; background:#fffdf3; box-shadow:0 4px 12px rgba(120,90,20,.04); }
+.note-card:nth-child(3n+2) { border-color:#c7e9df; background:#f4fffb; }
+.note-card:nth-child(3n) { border-color:#d9d2fb; background:#faf8ff; }
+.note-card-head { display:flex; justify-content:space-between; gap:10px; margin-bottom:8px; color:#7c5b12; font-size:10.5px; font-weight:750; }
+.note-card p { margin:0; color:var(--text-2); font-size:13px; line-height:1.75; white-space:pre-wrap; overflow-wrap:anywhere; }
+.note-card button { margin-top:8px; border:0; background:none; color:#2563eb; font:inherit; font-size:11px; cursor:pointer; }
+.note-wall-empty { padding:24px 16px; border:1px dashed var(--border-strong); border-radius:8px; color:var(--muted); text-align:center; font-size:12px; }
+@media (max-width:760px) { .note-wall-grid { grid-template-columns:1fr; } }
 .exercise-head {
   display: flex;
   align-items: flex-start;
@@ -922,29 +947,6 @@ pre.code {
   font-size: 12px;
   line-height: 1.7;
 }
-.hint-steps {
-  display: grid;
-  gap: 7px;
-  margin-top: 9px;
-}
-.hint-step {
-  border: 1px solid #f1e4c4;
-  border-radius: 8px;
-  background: rgba(255,255,255,.72);
-}
-.hint-step summary {
-  padding: 8px 10px;
-  color: #8a5a00;
-  font-size: 11.5px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.hint-step p {
-  margin: 0;
-  padding: 0 10px 9px;
-}
-.hint-step-2 summary { color: #7c4a03; }
-.hint-step-3 summary { color: #92400e; }
 .criteria-title { margin-bottom: 7px; color: #64748b; }
 .criteria-list {
   display: grid;
@@ -1529,6 +1531,14 @@ button:focus-visible {
 }
 .trace-table th { background: #eff6ff; color: #1e40af; }
 .trace-table tr:last-child td { border-bottom: 0; }
+.trace-table tr.active td { background:#fef3c7; color:#713f12; }
+.trace-code { overflow:auto; max-height:260px; margin:9px 0; padding:10px 12px; border-radius:8px; background:#0f172a; color:#e2e8f0; font:12px/1.8 var(--mono); }
+.trace-code-line { display:block; padding:0 5px; border-radius:4px; white-space:pre; }
+.trace-code-line.active { background:#854d0e; color:#fef3c7; }
+.trace-line-number { display:inline-block; width:26px; margin-right:9px; color:#64748b; text-align:right; user-select:none; }
+.trace-controls { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:10px 0; }
+.trace-controls button,.trace-controls select { min-height:34px; padding:6px 10px; border:1px solid #cbd5e1; border-radius:7px; background:#fff; color:#334155; font:inherit; font-size:12px; cursor:pointer; }
+.trace-controls button:disabled { opacity:.5; cursor:not-allowed; }
 .deep-note {
   margin-top: 13px;
   padding: 11px 12px;
@@ -1635,18 +1645,7 @@ pre.syntax-code {
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.04em;
-  cursor: pointer;
-  list-style: none;
 }
-.plan-title::-webkit-details-marker { display: none; }
-.plan-title::after {
-  content: "展开";
-  margin-left: auto;
-  color: #818cf8;
-  font-size: 10px;
-  font-weight: 700;
-}
-.plan-box[open] .plan-title::after { content: "收起"; }
 .plan-dot {
   width: 5px;
   height: 5px;
@@ -2036,7 +2035,7 @@ pre.syntax-code {
       <span></span><span></span><span></span>
     </button>
     <div class="mobile-brand">Python 实用学习区</div>
-    <span class="mobile-progress" id="mobileProgress">0/39</span>
+    <span class="mobile-progress" id="mobileProgress">0/48</span>
   </header>
   <aside class="sidebar" id="sidebar">
     <div class="brand">
@@ -2054,7 +2053,7 @@ pre.syntax-code {
         <div class="progress-ring" id="progressRing" style="--p:0"><span id="ringPercent">0%</span></div>
         <div class="progress-meta">
           <div class="progress-label">总进度</div>
-          <strong id="totalText">0 / 39</strong>
+          <strong id="totalText">0 / 48</strong>
           <div class="bar"><span id="totalBar"></span></div>
         </div>
       </div>
@@ -2585,47 +2584,6 @@ print(f"明年{score + 1}分")      # 明年93分`,
               { label: '把 score 嵌进字符串', test: re(/\{\s*score\s*\}/) }
             ],
             explain: 'f-string 里的 <code>{name}</code> 会换成变量 name 的值，<code>{score}</code> 换成 92，于是输出“小明考了92分”。'
-          }
-        },
-        {
-          id: 'p4-4',
-          title: 'format() 模板格式化',
-          oneLine: '<code>format()</code> 用占位符把数据填入字符串模板，还能控制小数位、对齐和编号格式。',
-          analogy: '像一张可重复使用的快递面单：先留好 {name}、{price} 这些空位，打印时再把具体内容填进去。',
-          example: `name = "小明"
-price = 12.5
-count = 2
-
-message = "顾客：{}，单价：{:.2f} 元，数量：{}".format(
-    name, price, count
-)
-print(message)
-
-print("订单号：{id}，状态：{status}".format(
-    id="A1024", status="已支付"
-))`,
-          mistakes: [
-            '<code>{}</code> 的位置要和 format() 传入参数的顺序对应；顺序错了，输出也会错。',
-            '<code>{:.2f}</code> 中的 <code>.2f</code> 表示保留两位小数，f 代表按小数格式显示。',
-            '命名占位符要写成 <code>{name}</code>，调用时传 <code>name="小明"</code>；不要把位置参数和命名参数混得没有规律。',
-            'format() 会返回一个新字符串，不会修改原模板；模板需要反复使用时，可以先保存起来。'
-          ],
-          exercise: {
-            id: 'ex4-4',
-            title: '制作订单确认消息',
-            prompt: '变量 <code>product = "无线鼠标"</code>、<code>price = 59.9</code>、<code>count = 2</code>。使用 <code>format()</code> 输出：<code>无线鼠标：2 件，共 119.80 元</code>。金额必须保留两位小数。',
-            hint: '模板可以写成 "{}：{} 件，共 {:.2f} 元".format(product, count, price * count)。',
-            starter: 'product = "无线鼠标"\nprice = 59.9\ncount = 2\n\n# 用 format() 生成订单确认消息，金额保留两位小数\n',
-            expected: '无线鼠标：2 件，共 119.80 元',
-            checks: [
-              { label: '准备 product、price、count 三个变量', test: function (code) { return /product\s*=\s*["']无线鼠标["']/.test(code) && /price\s*=\s*59\.9/.test(code) && /count\s*=\s*2(?![\d.])/.test(code); } },
-              { label: '调用 format() 进行字符串填充', test: re(/["'][^\n]*\{[^\n]*\}[^\n]*["']\.format\s*\(/) },
-              { label: '把商品名和数量放入模板', test: function (code) { return /format\s*\(\s*product\s*,\s*count/.test(code) || (/\{\s*product\s*\}/.test(code) && /\{\s*count\s*\}/.test(code)); } },
-              { label: '计算 price * count', test: re(/price\s*\*\s*count/) },
-              { label: '使用 {:.2f} 保留两位小数', test: re(/\{\s*:\s*\.2f\s*\}/) },
-              { label: '打印最终消息', test: re(/print\s*\(/) }
-            ],
-            explain: 'price * count 得到 119.8；模板中的 {:.2f} 把它显示为 119.80。format() 先按位置把三个值填入，再按照格式说明控制金额的显示样式。'
           }
         }
       ]
@@ -3462,9 +3420,328 @@ print(product.label())`,
           }
         }
       ]
+    },
+    {
+      title: '目录重点补齐：序列、元组、集合与模块',
+      points: [
+        {
+          id: 'p12-1',
+          title: '序列通用操作',
+          oneLine: '字符串、列表和元组都属于序列，可以共享索引、切片、拼接、重复和成员测试。',
+          analogy: '像一排座位：可以按编号找位置、截取一段、把两排接起来，也可以检查某个人是否在这一排。',
+          example: `items = ["Python", "Java", "C"]
+print(items[0])
+print(items[1:3])
+print(items + ["Go"])
+print("Python" in items)
+print(len(items))`,
+          mistakes: [
+            '切片右端不包含；items[1:3] 只取下标 1、2。',
+            'in 判断元素是否存在，不是下标是否存在。',
+            '序列拼接要求整体结构兼容，不能把整数直接和列表相加。'
+          ],
+          exercise: {
+            id: 'ex12-1',
+            title: '完成序列操作清单',
+            prompt: '使用 words = ["red", "green", "blue"]，依次打印第一个元素、后两个元素、拼接后的长度，以及判断 "green" in words 的结果。',
+            hint: '分别使用 words[0]、words[1:]、len(words + ["yellow"]) 和成员运算 in。',
+            starter: 'words = ["red", "green", "blue"]\n\n# 完成索引、切片、拼接、长度和成员测试\n',
+            expected: "red\n['green', 'blue']\n4\nTrue",
+            checks: [
+              { label: '使用索引 words[0]', test: re(/words\s*\[\s*0\s*\]/) },
+              { label: '使用切片 words[1:]', test: re(/words\s*\[\s*1\s*:\s*\]/) },
+              { label: '使用 len 计算拼接后的长度', test: re(/len\s*\([^\n]*words[^\n]*\)/) },
+              { label: '使用 in 判断 green', test: re(/["']green["']\s+in\s+words/) }
+            ],
+            explain: '序列的共同操作可以迁移到字符串、列表和元组。先按位置取值，再取片段，最后用 len 和 in 做整体判断。'
+          }
+        },
+        {
+          id: 'p12-2',
+          title: '元组与拆包',
+          oneLine: '元组适合保存不希望被随意修改的一组数据，也可以一次拆包给多个变量。',
+          analogy: '像一张已经盖章的坐标卡片：可以读取每一项，但不应该随意改掉其中一个位置。',
+          example: `point = (120, 80)
+x, y = point
+print(x)
+print(y)
+print(len(point))`,
+          mistakes: [
+            '单元素元组必须写成 (value,)，否则括号只是分组。',
+            '元组不支持 point[0] = new_value 这样的修改。',
+            '拆包时变量数量要和元组元素数量匹配。'
+          ],
+          exercise: {
+            id: 'ex12-2',
+            title: '读取坐标元组',
+            prompt: '创建 rgb = (255, 128, 0)，使用拆包得到 red、green、blue，打印三个变量和元组长度。',
+            hint: '写 red, green, blue = rgb，然后依次 print。',
+            starter: '# 创建 rgb 元组并拆包\n',
+            expected: '255\n128\n0\n3',
+            checks: [
+              { label: '创建 RGB 元组', test: re(/rgb\s*=\s*\(\s*255\s*,\s*128\s*,\s*0\s*\)/) },
+              { label: '使用 red、green、blue 拆包', test: re(/red\s*,\s*green\s*,\s*blue\s*=\s*rgb/) },
+              { label: '打印三个颜色变量', test: function (code) { return (code.match(/print\s*\(/g) || []).length >= 3; } },
+              { label: '打印元组长度', test: re(/print\s*\(\s*len\s*\(\s*rgb\s*\)\s*\)/) }
+            ],
+            explain: '拆包把一个序列中的多个位置一次分配给多个变量，适合坐标、RGB、函数返回的多个结果。'
+          }
+        },
+        {
+          id: 'p12-3',
+          title: '集合创建与运算',
+          oneLine: '集合只保留不重复元素，并支持并集、交集、差集等关系运算。',
+          analogy: '像两个社团的名单：并集看所有成员，交集看共同成员，差集看只属于其中一个社团的人。',
+          example: `python_users = {"小林", "小周", "小林"}
+data_users = {"小周", "小王"}
+print(python_users | data_users)
+print(python_users & data_users)
+print(python_users - data_users)`,
+          mistakes: [
+            '{} 表示空字典，创建空集合要使用 set()。',
+            '集合无序，打印顺序不应该作为判题依据。',
+            '集合中的元素必须是可哈希对象，列表不能直接作为集合元素。'
+          ],
+          exercise: {
+            id: 'ex12-3',
+            title: '求两个课程名单关系',
+            prompt: '创建 a = {"A", "B", "C"} 和 b = {"B", "C", "D"}，打印交集、并集元素个数和只在 a 中的成员个数。',
+            hint: '交集用 &，并集用 |，差集用 -；集合长度用 len。',
+            starter: '# 创建两个集合并完成交集、并集、差集\n',
+            expected: '2\n4\n1',
+            checks: [
+              { label: '创建两个集合 a 和 b', test: re(/a\s*=\s*\{[^}]*["']A["'][^}]*\}/) },
+              { label: '使用交集运算', test: re(/a\s*&\s*b|b\s*&\s*a/) },
+              { label: '使用并集运算', test: re(/a\s*\|\s*b|b\s*\|\s*a/) },
+              { label: '使用差集运算', test: re(/a\s*-\s*b/) },
+              { label: '使用 len 统计结果', test: re(/len\s*\(/) }
+            ],
+            explain: '集合运算直接表达共同、全部和只属于一方这些关系，不需要手写多层循环。'
+          }
+        },
+        {
+          id: 'p12-4',
+          title: '字典方法与推导式',
+          oneLine: '字典不仅能按键取值，还能用 keys、values、items 和推导式批量转换。',
+          analogy: '像通讯录：键是姓名，值是电话；可以查某个人，也可以一次整理所有联系人。',
+          example: `scores = {"小林": 88, "小周": 92, "小王": 76}
+passed = {name: score for name, score in scores.items() if score >= 80}
+print(passed)
+print(list(scores.keys()))`,
+          mistakes: [
+            'items() 返回键和值两项，for 左侧要准备两个变量。',
+            '字典推导式冒号左侧是新键，右侧是新值。',
+            '遍历字典时不要一边直接修改字典大小，一边继续迭代。'
+          ],
+          exercise: {
+            id: 'ex12-4',
+            title: '筛选及格成绩字典',
+            prompt: '给定 scores = {"A": 88, "B": 59, "C": 76}，用字典推导式生成只包含及格成绩的 passed，打印 passed["A"] 和 len(passed)。',
+            hint: '形式是 {name: score for name, score in scores.items() if score >= 60}。',
+            starter: 'scores = {"A": 88, "B": 59, "C": 76}\n\n# 用字典推导式生成 passed\n',
+            expected: '88\n2',
+            checks: [
+              { label: '使用 items 遍历键值', test: re(/scores\s*\.\s*items\s*\(\s*\)/) },
+              { label: '使用字典推导式', test: re(/\{[^\n]+for[^\n]+in[^\n]+if/) },
+              { label: '筛选 score >= 60', test: re(/score\s*>=\s*60/) },
+              { label: '打印 passed["A"] 和长度', test: function (code) { return /passed\s*\[\s*["']A["']\s*\]/.test(code) && /len\s*\(\s*passed\s*\)/.test(code); } }
+            ],
+            explain: '字典推导式把遍历、判断和生成新键值写在一起；原字典仍然保留，适合筛选和转换数据。'
+          }
+        },
+        {
+          id: 'p12-5',
+          title: '输入与布尔逻辑',
+          oneLine: 'input 返回字符串；先转换类型，再用 and、or、not 表达多个条件。',
+          analogy: '像报名审核：年龄达到要求并且有证件才能通过；缺一项就不能报名。',
+          example: `age = int("19")
+has_card = True
+can_enter = age >= 18 and has_card
+print(can_enter)`,
+          mistakes: [
+            'input() 得到字符串，不能直接和整数比较或相加。',
+            '比较相等使用 ==，单个 = 是赋值。',
+            '多个条件要用括号或清晰的布尔表达式，避免优先级误读。'
+          ],
+          exercise: {
+            id: 'ex12-5',
+            title: '判断活动报名资格',
+            prompt: '设置 age = 20、has_ticket = True，用 and 判断两项都满足时打印“可以入场”，否则打印“不能入场”。',
+            hint: '条件写成 age >= 18 and has_ticket。',
+            starter: 'age = 20\nhas_ticket = True\n\n# 写出布尔条件并打印结果\n',
+            expected: '可以入场',
+            checks: [
+              { label: '设置 age 和 has_ticket', test: function (code) { return /age\s*=\s*20/.test(code) && /has_ticket\s*=\s*True/.test(code); } },
+              { label: '使用 and 组合条件', test: re(/age\s*>=\s*18\s+and\s+has_ticket/) },
+              { label: '打印可以入场和不能入场分支', test: function (code) { return /print\s*\(\s*["']可以入场["']\s*\)/.test(code) && /不能入场/.test(code); } }
+            ],
+            explain: '先把年龄转换成整数，再用 and 要求两个条件同时为真；if/else 把布尔结果转换成用户看得懂的提示。'
+          }
+        },
+        {
+          id: 'p12-6',
+          title: '模块导入与别名',
+          oneLine: '模块把相关工具集中保存，import 后可以使用模块提供的函数；as 可以给模块起短别名。',
+          analogy: '像工具箱分格：需要数学工具时拿 math 格，不必把所有工具混在一起。',
+          example: `import math as m
+
+radius = 3
+area = m.pi * radius ** 2
+print(round(area, 2))`,
+          mistakes: [
+            '导入后使用的名称要和 import 写法一致，import math as m 后应写 m.pi。',
+            '模块函数不是全局变量，漏写模块前缀会出现 NameError。',
+            '不要用自己的变量名覆盖模块名。'
+          ],
+          exercise: {
+            id: 'ex12-6',
+            title: '用 math 计算圆面积',
+            prompt: '使用 import math，设置 radius = 4，利用 math.pi 计算并打印保留两位小数的圆面积。',
+            hint: 'area = math.pi * radius ** 2，再 print(round(area, 2))。',
+            starter: '# 导入 math 并计算半径 4 的圆面积\n',
+            expected: '50.27',
+            checks: [
+              { label: '导入 math 模块', test: re(/import\s+math/) },
+              { label: '设置半径为 4', test: re(/radius\s*=\s*4/) },
+              { label: '使用 math.pi 和平方', test: re(/math\s*\.\s*pi[\s\S]*radius\s*\*\*\s*2/) },
+              { label: '使用 round 保留两位', test: re(/round\s*\(/) }
+            ],
+            explain: 'math.pi 提供圆周率；半径平方乘圆周率得到面积，round 只控制显示精度。'
+          }
+        },
+        {
+          id: 'p12-7',
+          title: '模块化程序设计',
+          oneLine: '把输入、计算和输出拆成函数，再由主流程组合，代码更容易测试和复用。',
+          analogy: '像餐厅后厨分工：一个人备菜，一个人烹饪，最后由出餐流程组合。',
+          example: `def subtotal(price, count):
+    return price * count
+
+def total_with_tax(amount, rate=0.06):
+    return amount * (1 + rate)
+
+amount = subtotal(12, 2)
+print(round(total_with_tax(amount), 2))`,
+          mistakes: [
+            '函数只负责一个清晰动作，避免把所有步骤塞进一个大函数。',
+            '前一个函数的返回值要用变量接住，再传给下一个函数。',
+            '模块化不是机械切碎；每个函数要有明确输入和输出。'
+          ],
+          exercise: {
+            id: 'ex12-7',
+            title: '组合订单计算模块',
+            prompt: '定义 subtotal(price, count) 返回小计，再定义 discount(amount, rate) 返回折后价。计算 20 元商品买 3 件、打 9 折后的结果并打印。',
+            hint: '先 amount = subtotal(20, 3)，再 print(discount(amount, 0.1))。',
+            starter: '# 定义两个函数并组合调用\n',
+            expected: '54.0',
+            checks: [
+              { label: '定义 subtotal', test: re(/def\s+subtotal\s*\(\s*price\s*,\s*count\s*\)\s*:/) },
+              { label: '定义 discount', test: re(/def\s+discount\s*\(\s*amount\s*,\s*rate\s*\)\s*:/) },
+              { label: '使用 return 返回计算结果', test: function (code) { return (code.match(/return\s+/g) || []).length >= 2; } },
+              { label: '使用 20、3 和 0.1 调用', test: function (code) { return /subtotal\s*\(\s*20\s*,\s*3\s*\)/.test(code) && /discount\s*\([^\n]*0\.1/.test(code); } }
+            ],
+            explain: 'subtotal 只负责原价小计，discount 只负责折扣；主流程把两个函数串起来，任何一步都可以单独测试。'
+          }
+        },
+        {
+          id: 'p12-8',
+          title: 'lambda、map 与 filter',
+          oneLine: '简单的一次性函数可以用 lambda 表达，并配合 map 转换数据、filter 筛选数据。',
+          analogy: '像流水线：map 给每件商品贴新标签，filter 只让满足规则的商品通过。',
+          example: `nums = [1, 2, 3, 4]
+squares = list(map(lambda x: x * x, nums))
+evens = list(filter(lambda x: x % 2 == 0, nums))
+print(squares)
+print(evens)`,
+          mistakes: [
+            'map 和 filter 返回可迭代对象，需要 list() 才方便查看结果。',
+            'lambda 适合短小表达式，复杂逻辑应写普通 def。',
+            'filter 的条件返回 True 才会保留元素。'
+          ],
+          exercise: {
+            id: 'ex12-8',
+            title: '转换并筛选价格',
+            prompt: '给定 prices = [10, 20, 30]，用 map 和 lambda 计算每个价格的 9 折，再用 filter 保留折后价 >= 18 的值，分别打印两个列表。',
+            hint: '先 discounted = list(map(lambda price: price * 0.9, prices))，再 filter。',
+            starter: 'prices = [10, 20, 30]\n\n# 用 map 计算折后价，再用 filter 筛选\n',
+            expected: '[9.0, 18.0, 27.0]\n[18.0, 27.0]',
+            checks: [
+              { label: '使用 map 和 lambda', test: re(/map\s*\(\s*lambda/) },
+              { label: '使用 list 接住 map 结果', test: re(/list\s*\(\s*map/) },
+              { label: '使用 filter 和 lambda', test: re(/filter\s*\(\s*lambda/) },
+              { label: '筛选折后价 >= 18', test: re(/>=\s*18/) }
+            ],
+            explain: 'map 对每个元素执行同一个转换，filter 根据条件保留元素。把它们转成 list 后可以直接打印。'
+          }
+        },
+        {
+          id: 'p12-9',
+          title: '递归的终止条件',
+          oneLine: '递归函数会把问题缩小后再次调用自己，必须先写终止条件。',
+          analogy: '像拆快递盒：每次打开一层，直到遇到最里面的小盒子就停止。',
+          example: `def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print(factorial(5))`,
+          mistakes: [
+            '没有终止条件会触发 RecursionError。',
+            '递归参数必须向终止条件靠近，例如 n - 1。',
+            '递归返回值要参与上一层计算，不能只调用但不 return。'
+          ],
+          exercise: {
+            id: 'ex12-9',
+            title: '递归计算阶乘',
+            prompt: '定义递归函数 factorial(n)，计算并打印 factorial(4)。n <= 1 时返回 1。',
+            hint: '终止条件 return 1；递归情况 return n * factorial(n - 1)。',
+            starter: '# 定义递归 factorial 并打印 factorial(4)\n',
+            expected: '24',
+            checks: [
+              { label: '定义 factorial(n)', test: re(/def\s+factorial\s*\(\s*n\s*\)\s*:/) },
+              { label: '写出 n <= 1 的终止条件', test: re(/if\s+n\s*<=\s*1\s*:/) },
+              { label: '递归调用 factorial(n - 1)', test: re(/factorial\s*\(\s*n\s*-\s*1\s*\)/) },
+              { label: '打印 factorial(4)', test: re(/print\s*\(\s*factorial\s*\(\s*4\s*\)\s*\)/) }
+            ],
+            explain: 'factorial(4) 会逐层变成 4×factorial(3)、3×factorial(2)，到 1 时返回 1，再逐层把结果乘回来。'
+          }
+        },
+        {
+          id: 'p12-10',
+          title: 'CSV 数据读写',
+          oneLine: 'CSV 用行和逗号保存表格数据，csv 模块可以让读取和写入更可靠。',
+          analogy: '像电子表格导出的纯文本：每行是一条记录，每列用逗号分开。',
+          example: `import csv
+from io import StringIO
+
+text = "name,score\\n小林,88\\n小周,92"
+rows = list(csv.DictReader(StringIO(text)))
+print(rows[0]["name"])
+print(len(rows))`,
+          mistakes: [
+            'CSV 字段可能包含逗号，优先使用 csv 模块而不是直接 split(",")。',
+            '读取到的字段默认是字符串，需要时再转换为 int 或 float。',
+            '真实文件操作要指定 encoding="utf-8"，并用 with 自动关闭文件。'
+          ],
+          exercise: {
+            id: 'ex12-10',
+            title: '读取 CSV 成绩',
+            prompt: '使用 csv.DictReader 和 StringIO 读取两行成绩数据，打印第一名姓名和所有记录数量。',
+            hint: 'CSV 文本第一行写 name,score；rows = list(csv.DictReader(StringIO(text)))。',
+            starter: '# 导入 csv 和 StringIO，读取 CSV 文本\n',
+            expected: '小林\n2',
+            checks: [
+              { label: '导入 csv 和 StringIO', test: function (code) { return /import\s+csv/.test(code) && /from\s+io\s+import\s+StringIO/.test(code); } },
+              { label: '使用 csv.DictReader', test: re(/csv\s*\.\s*DictReader/) },
+              { label: '使用 StringIO 包装文本', test: re(/StringIO\s*\(/) },
+              { label: '打印第一名和记录数量', test: function (code) { return /rows\s*\[\s*0\s*\]/.test(code) && /len\s*\(\s*rows\s*\)/.test(code); } }
+            ],
+            explain: 'DictReader 会把每行转换成以表头为键的字典；StringIO 让字符串像文件一样被读取，适合浏览器练习。'
+          }
+        }
+      ]
     }
   ];
-
   const DETAILS = {
     'p1-1': {
       steps: [
@@ -3645,21 +3922,6 @@ print(product.label())`,
         '先准备 name 和 score 两个变量。',
         '写 print(f"{name}考了{score}分")。',
         '检查字符串前的 f 和引号是否成对。'
-      ]
-    },
-    'p4-4': {
-      steps: [
-        '字符串中的 <code>{}</code> 是位置占位符，format() 里的第一个值填第一个空位，第二个值填第二个空位。',
-        '<code>{:.2f}</code> 不是变量名，而是一条格式规则：把数字按小数形式显示，并保留两位。',
-        '本题先算 <code>price * count</code> 得到 119.8，再把它格式化为 119.80，最后和商品名称、数量组合成完整消息。',
-        'format() 也支持命名占位符，例如 <code>"{name}".format(name="小明")</code>，当模板字段较多时更不容易弄错。'
-      ],
-      syntax: '"{}：{} 件，共 {:.2f} 元".format(商品, 数量, 金额)',
-      plan: [
-        '先确认模板中有三个空位：商品、数量、金额。',
-        '按相同顺序传入 product、count 和 price * count。',
-        '在金额占位符中写 {:.2f}，保证 119.8 显示为 119.80。',
-        '用 print 输出 format() 返回的新字符串。'
       ]
     },
     'p5-1': {
@@ -3883,6 +4145,59 @@ print(product.label())`,
     }
   };
 
+  const EXAMPLE_BREAKDOWNS = {
+    'p12-1': {
+      purpose: '用同一份列表演示序列的五种常见动作：取一个元素、取一段、拼接、检查成员和统计长度。',
+      steps: ['先创建 3 个元素的列表；下标从 0 开始，所以 items[0] 是 Python。', 'items[1:3] 取下标 1 到 3 之前的元素，得到 Java 和 C；右端 3 不包含。', 'items + ["Go"] 会生成一份新列表，不会把 Go 写回 items。', 'in 检查值是否出现，len 统计元素数量；最后一个 len(items) 仍然是 3。'],
+      output: 'Python\n[\'Java\', \'C\']\n[\'Python\', \'Java\', \'C\', \'Go\']\nTrue\n3'
+    },
+    'p12-2': {
+      purpose: '把一对坐标存在元组里，再按固定顺序拆成 x、y 两个变量。',
+      steps: ['point = (120, 80) 创建含两个值的元组：第 1 项 120 是横坐标，第 2 项 80 是纵坐标。', 'x, y = point 是拆包：左边两个变量按顺序接收右边两个值，因此 x 为 120、y 为 80。', 'print(x) 和 print(y) 分别显示横纵坐标。', 'len(point) 统计元组里有几项，所以输出 2；它不会把 120 和 80 相加。'],
+      output: '120\n80\n2'
+    },
+    'p12-3': {
+      purpose: '把两份选课名单当成集合，分别找出所有报名者、共同报名者和只在第一份名单中的人。',
+      steps: ['创建集合时重复的“小林”会自动合并，只保留一个成员。', '| 求并集：两份名单中的所有不同成员。', '& 求交集：两份名单都出现的成员。', '- 求差集：在左侧名单中、但不在右侧名单中的成员；集合显示顺序可能变化。'],
+      output: "{'小林', '小周', '小王'}\n{'小周'}\n{'小林'}"
+    },
+    'p12-4': {
+      purpose: '遍历成绩字典，筛选出分数达到 80 的记录，生成新字典，同时查看原字典的姓名键。',
+      steps: ['scores 用“姓名: 分数”保存三条记录。', 'scores.items() 每次给出一对键和值，因此 for 左侧的 name、score 会分别接住姓名和分数。', '{name: score ...} 规定新字典的键和值；if score >= 80 只留下小林和小周。', 'passed 是筛选后的新字典；list(scores.keys()) 显示原字典的所有姓名，原数据未被修改。'],
+      output: '{\'小林\': 88, \'小周\': 92}\n[\'小林\', \'小周\', \'小王\']'
+    },
+    'p12-5': {
+      purpose: '模拟用户输入年龄，转换成整数后，判断年龄达标和持有证件这两个条件是否同时成立。',
+      steps: ['int("19") 把文本“19”变成整数 19；示例用固定文字模拟 input()，避免练习运行时停下来等待键盘输入。', 'has_card = True 表示持有证件。', 'age >= 18 得到 True；and 要求两侧都为 True，所以 can_enter 也是 True。', '如果年龄不够或没有证件，组合结果会变成 False。'],
+      output: 'True'
+    },
+    'p12-6': {
+      purpose: '从 math 模块取圆周率，按“圆周率 × 半径平方”计算面积，再把结果保留两位小数。',
+      steps: ['import math as m 导入 math，并把模块简称为 m；因此后面通过 m.pi 取圆周率。', 'radius = 3 保存半径；** 2 表示平方。', 'm.pi * radius ** 2 计算出约 28.2743。', 'round(area, 2) 将显示结果四舍五入到 2 位小数，打印 28.27。'],
+      output: '28.27'
+    },
+    'p12-7': {
+      purpose: '把结账拆成“小计”和“加税”两个函数，并用返回值把结果从第一步传到第二步。',
+      steps: ['定义 subtotal 和 total_with_tax 只是在登记两条计算规则，此时函数体还没有执行。', 'subtotal(12, 2) 才开始计算，return 把 12×2 的结果 24 交回调用处。', 'amount 接住 24，再传给 total_with_tax；rate 没有传入，所以采用默认税率 0.06。', '总价为 24×1.06=25.44，round(..., 2) 控制小数位数后打印。'],
+      output: '25.44'
+    },
+    'p12-8': {
+      purpose: '用 map 把每个数字变成平方，再用 filter 只保留偶数，比较“转换数据”和“筛选数据”。',
+      steps: ['nums 是原始数字列表，后续操作读取它。', 'lambda x: x * x 是一个短函数；map 把它逐个应用到 1、2、3、4，得到平方列表。', 'list(...) 将 map 的结果收集成可查看的列表 [1, 4, 9, 16]。', 'filter 会检查 x % 2 == 0，只保留条件为真的 2 和 4；外层 list 将结果收集起来。'],
+      output: '[1, 4, 9, 16]\n[2, 4]'
+    },
+    'p12-9': {
+      purpose: '计算 5 的阶乘：把问题逐步缩小到 1，再把每层的乘法结果返回。',
+      steps: ['factorial(5) 先检查 n 是否小于等于 1；不是，就计算 5 * factorial(4)。', '每次递归都把 n 减 1，依次到 factorial(1)。', 'factorial(1) 满足终止条件，返回 1；这一步让递归停止。', '返回值逐层算回：2×1=2、3×2=6、4×6=24、5×24=120，最后打印 120。'],
+      output: '120'
+    },
+    'p12-10': {
+      purpose: '把 CSV 文本解析成按列名访问的记录，读取第一行姓名，并统计数据行数。',
+      steps: ['csv 提供 CSV 解析功能；StringIO 把普通字符串包装成类似文件的对象。', '字符串中的 \\n 表示换行，因此文本包含表头 name,score 和两条成绩记录。', 'DictReader 将表头作为键名，把每一行转换成字典；例如第一行是 name 对应“小林”、score 对应字符串“88”。', 'list(...) 把记录收集起来，方便用 rows[0] 访问第一条；rows[0]["name"] 取出“小林”。', 'len(rows) 统计的是两条数据记录，不包括表头。'],
+      output: '小林\n2'
+    }
+  };
+
   const PRACTICE_CONTEXT = {
     'p1-1': { scene: '报名表、个人资料和订单都需要先把姓名、城市、数量等信息保存下来。变量就是程序里最小的数据容器。', goal: '能创建变量、分清字符串和整数，并正确打印变量里的内容。' },
     'p1-2': { scene: '价格标签、快递信息和消息提示经常要把数字放进一段文字中。拼接之前，需要先统一数据类型。', goal: '理解数字与字符串的区别，并用 str() 把数字转换后再拼接。' },
@@ -3899,7 +4214,6 @@ print(product.label())`,
     'p4-1': { scene: '隐藏手机号、提取文件后缀和截取日期，都需要从文本的指定位置取字符。', goal: '能用正负下标和切片准确取得字符串片段。' },
     'p4-2': { scene: '用户提交的姓名、邮箱和搜索词经常带有空格或大小写不统一，需要先清洗。', goal: '能组合 strip() 和 upper() 处理原始文本。' },
     'p4-3': { scene: '成绩通知、订单确认和欢迎语都需要把变量填进固定文本模板。', goal: '能正确书写 f-string，并把多个变量放入花括号。' },
-    'p4-4': { scene: '订单、报表和批量通知需要反复套用同一套文字模板，还要控制金额、小数和编号的显示格式。', goal: '掌握 format() 的位置参数、命名参数和数字格式化，并知道它与 f-string 的适用区别。' },
     'p5-1': { scene: '购物车、课程名单和一周温度都可以按顺序放在列表中统一管理。', goal: '能创建列表，用下标取元素，并用 len() 获取数量。' },
     'p5-2': { scene: '购物车会新增商品、修改数量或删除条目，列表也提供对应的增改删操作。', goal: '能用 append() 添加元素，并通过下标修改已有元素。' },
     'p5-3': { scene: '统计总分、总消费或总库存时，需要遍历一组数字并持续累加。', goal: '能设置累加初始值，在循环中更新它，并在循环结束后输出结果。' },
@@ -3922,7 +4236,17 @@ print(product.label())`,
     'p10-3': { scene: '表单输入、文件内容和网络请求都可能不符合预期，应用需要友好处理错误。', goal: '能捕获明确的 ValueError，并为用户提供可理解的反馈。' },
     'p11-1': { scene: '课程提醒、截止日期、日志和日报都离不开日期对象与格式化。', goal: '会创建 datetime 对象并按界面需要格式化日期。' },
     'p11-2': { scene: '照片、作业附件和扫描件经常需要按统一编号批量整理。', goal: '用 enumerate 和格式化字符串安全地预览批量文件名。' },
-    'p11-3': { scene: '商品、用户、订单都有固定字段和行为，类可以把相关数据与方法组织在一起。', goal: '理解类、初始化方法、属性、对象和实例方法之间的关系。' }
+    'p11-3': { scene: '商品、用户、订单都有固定字段和行为，类可以把相关数据与方法组织在一起。', goal: '理解类、初始化方法、属性、对象和实例方法之间的关系。' },
+    'p12-1': { scene: '搜索、分页和文本处理经常要对字符串、列表或元组执行相同的索引、切片和成员检查。', goal: '掌握序列共用的索引、切片、拼接、重复、长度和成员测试。' },
+    'p12-2': { scene: '坐标、RGB 颜色和函数返回的多项结果需要成组保存，并一次拆分给多个变量。', goal: '会创建元组、理解不可变性，并使用数量匹配的变量进行拆包。' },
+    'p12-3': { scene: '课程报名名单、标签去重和权限比对需要快速找出全部、共同或只属于一方的成员。', goal: '会创建集合，并用并集、交集、差集解决去重和集合关系问题。' },
+    'p12-4': { scene: '成绩表、商品库存和用户档案要按字段查找，并批量筛选或转换键值对。', goal: '掌握 keys、values、items、get 和字典推导式的常见用法。' },
+    'p12-5': { scene: '门禁、报名和支付流程通常要先规范输入，再同时检查多个条件。', goal: '理解 input 返回字符串，能转换输入并用 and、or、not 组合条件。' },
+    'p12-6': { scene: '日期、数学和随机数功能由标准库模块提供，导入后要通过正确的模块名调用。', goal: '掌握 import、from import 和 as 别名，并避免模块名冲突。' },
+    'p12-7': { scene: '订单、成绩报告和数据导入都可拆成读取、校验、计算、展示等可单独测试的步骤。', goal: '能按职责拆分函数，用参数传入数据、用返回值连接模块化流程。' },
+    'p12-8': { scene: '批量价格换算、成绩筛选和数据清洗可用函数式工具表达统一的转换与筛选规则。', goal: '理解 lambda、map 和 filter 的输入输出，并知道何时改用普通函数。' },
+    'p12-9': { scene: '目录遍历、树形结构和数学定义有时天然可以拆成更小的同类问题。', goal: '能写出递归基准条件，并确保每次调用都向终止条件靠近。' },
+    'p12-10': { scene: '成绩单、库存表和报表常以 CSV 文件交换，需要按表头读取和可靠写出记录。', goal: '掌握 csv.reader、DictReader、writer 和文件编码的基本使用方式。' }
   };
 
   const CHAPTER_META = {
@@ -3952,13 +4276,11 @@ print(product.label())`,
       ]
     },
     '字符串': {
-      goal: '学完这章，你会定位、清洗、拆分和格式化文本，并能根据场景选择 format() 或 f-string。',
+      goal: '学完这章，你会按下标取字符、用常用方法处理文本，并用 f-string 拼接输出。',
       summary: [
         '下标从 0 开始，切片含头不含尾。',
         'strip、upper、split 等方法返回新字符串，要接住结果。',
-        'f-string 用 {} 把变量嵌进文字，字符串前面别忘写 f。',
-        'format() 通过位置或名称填充占位符，还能控制小数位和对齐。',
-        '模板字段较多或需要复用时，命名 format() 更清楚；代码固定且追求直观时，f-string 通常更简洁。'
+        'f-string 用 {} 把变量嵌进文字，字符串前面别忘写 f。'
       ]
     },
     '列表': {
@@ -4005,6 +4327,15 @@ print(product.label())`,
     '模块与自动化': {
       goal: '使用标准库处理日期和批量命名，并用类组织更完整的业务对象。',
       summary: ['标准库提供日期等成熟工具，使用前先 import。', '批量文件操作应先生成并检查预览。', '类把同类数据和行为组织成可复用模板。']
+    },
+    '目录重点补齐：序列、元组、集合与模块': {
+      goal: '把教材中容易漏学、考试却常出现的序列、元组、集合、字典、输入逻辑、模块与递归连成完整的学习路径。',
+      summary: [
+        '字符串、列表和元组共享索引、切片、拼接、长度和成员测试等序列操作。',
+        '元组适合成组保存不希望随意修改的数据；集合适合去重和关系运算；字典适合按键组织字段。',
+        '模块导入工具，函数拆分职责；map、filter 和递归要结合问题规模与可读性选择。',
+        'CSV 是常见表格交换格式，真实文件操作要考虑编码、表头和自动关闭。'
+      ]
     }
   };
 
@@ -4097,6 +4428,7 @@ print(product.label())`,
         ['为什么 print 不缩进？', '不缩进表示等三条订单都处理完再打印一次。如果放在循环里，会打印三个中间结果。']
       ],
       traceHeaders: ['轮次', '当前 order', '条件是否成立', 'total 的变化'],
+      traceLineNumbers: [1, 7, 8, 9, 10],
       traceRows: [
         ['开始前', '还没取订单', '还没判断', '0'],
         ['第 1 轮', 'paid，120 元', '成立', '0 + 120 → 120'],
@@ -4108,14 +4440,23 @@ print(product.label())`,
     },
     'p3-5': {
       concepts: [['enumerate 解决什么问题？', '普通 for 只能直接拿到元素；enumerate 会额外生成序号，让你不用自己维护容易出错的计数器。'], ['start=1 有什么作用？', 'Python 默认从 0 编号，但用户看到的清单通常从 1 开始，因此指定 start=1。']],
+      traceHeaders: ['步骤', 'index', 'task', '本轮输出'],
+      traceLineNumbers: [0, 2, 3, 3, 2],
+      traceRows: [['开始', '尚未赋值', '尚未取值', '无'], ['第 1 轮', '1', '复习', '1. 复习'], ['第 2 轮', '2', '写作业', '2. 写作业'], ['第 3 轮', '3', '提交', '3. 提交'], ['循环结束', '没有下一项', '没有下一项', '程序停止']],
       note: '把数据本身和展示序号分开理解：task 是任务内容，index 只是展示位置。'
     },
     'p3-6': {
       concepts: [['两层循环怎么运行？', '外层每运行 1 次，内层会完整运行 3 次。先生成 A1、A2、A3，再进入 B 行。'], ['为什么每行重新建 seats？', 'seats 只负责当前这一行。如果不清空，第二行会带着第一行的数据。']],
+      traceHeaders: ['步骤', 'row', 'col', 'line 的内容'],
+      traceLineNumbers: [1, 3, 4, 4, 2],
+      traceRows: [['开始', '1', '尚未开始', '[]'], ['内层第 1 次', '1', '1', '["1-1"]'], ['内层第 2 次', '1', '2', '["1-1", "1-2"]'], ['内层第 3 次', '1', '3', '["1-1", "1-2", "1-3"]'], ['外层进入下一轮', '2', '重新从 1 开始', 'line 重新清空']],
       note: '嵌套循环适合二维结构，但层数过多会难读；真实项目中通常把内层逻辑拆成函数。'
     },
     'p3-7': {
       concepts: [['while 和 for 的核心区别', 'for 通常处理已有集合或明确次数；while 表示“条件仍成立就继续”，次数可能事先不知道。'], ['怎样避免死循环？', '循环体必须改变条件依赖的数据，并能证明它最终让条件变成 False。']],
+      traceHeaders: ['步骤', 'password', 'attempts', '执行结果'],
+      traceLineNumbers: [1, 3, 4, 5, 6, 7],
+      traceRows: [['初始化', '空字符串', '0', '准备检查条件'], ['进入循环', '空字符串', '0', '条件成立，等待输入'], ['第 1 次输入', '123', '0', '读取输入内容'], ['更新次数', '123', '1', 'attempts += 1'], ['第 2 次输入', 'python', '1', '读取正确密码'], ['循环结束', 'python', '2', '退出循环，判断登录结果']],
       note: '写 while 前先回答两个问题：什么时候继续？每轮改变什么，才能最终停止？'
     },
     'p4-1': {
@@ -4129,24 +4470,6 @@ print(product.label())`,
     'p4-3': {
       concepts: [['f-string 做了什么？', '字符串前的 f 告诉 Python：花括号中是表达式，需要先计算再放回文字。'], ['花括号里能写什么？', '可以写变量和简单表达式，但复杂业务计算最好先保存到变量，避免输出模板难读。']],
       note: 'f-string 负责展示，不应承担大量业务计算。'
-    },
-    'p4-4': {
-      concepts: [
-        ['{} 和参数怎样对应？', '不写名字时按顺序填充：第一个 {} 使用 format() 的第一个参数。也可以写 {0}、{1} 指定位置，或写 {product} 使用命名参数。'],
-        [':.2f 到底是什么意思？', '冒号表示后面开始写显示规则；.2 表示小数点后两位；f 表示按浮点数格式显示。它改变的是显示结果，不是原变量的数值。'],
-        ['什么时候用命名参数？', '模板很长或同一个字段出现多次时，"{name}：{price}".format(name=..., price=...) 比只看位置更容易理解和维护。'],
-        ['format() 和 f-string 怎么选？', 'f-string 适合模板和变量写在同一段代码里；format() 适合模板先保存、之后再填数据，或项目仍需兼容较旧的 Python 写法。'],
-        ['还有哪些实用格式？', '<code>{:,}</code> 添加千位分隔符，<code>{:.1%}</code> 显示百分比，<code>{:&gt;10}</code> 表示在宽度 10 内右对齐并用指定字符填充。'],
-        ['怎样输出花括号本身？', '占位符本身使用花括号，所以要显示一个真正的 { 或 }，需写成双花括号 <code>{{</code> 或 <code>}}</code>。']
-      ],
-      traceHeaders: ['模板片段', '对应的值', '格式规则', '填入后的结果'],
-      traceRows: [
-        ['{}', 'product = "无线鼠标"', '直接转成文字', '无线鼠标'],
-        ['{}', 'count = 2', '直接转成文字', '2'],
-        ['{:.2f}', 'price * count = 119.8', '保留两位小数', '119.80'],
-        ['完整模板', '三个结果依次填入', '保留原有标点和单位', '无线鼠标：2 件，共 119.80 元']
-      ],
-      note: '<strong>常见误解：</strong><code>.2f</code> 不会把 price 永久改成两位小数，它只控制这一次生成字符串时怎样显示。例如 <code>"{:,.2f}".format(12345.6)</code> 得到 12,345.60。货币计算还涉及精度问题，正式财务程序通常使用 <code>Decimal</code>，这里先学习输出格式。'
     },
     'p5-1': {
       concepts: [['列表解决什么问题？', '当多个数据属于同一组并且有顺序时，用一个列表统一保存，比创建许多独立变量更容易遍历。'], ['下标和长度的关系', '长度为 3 的列表，有效正下标是 0、1、2；下标 3 已经越界。']],
@@ -4244,50 +4567,147 @@ print(product.label())`,
 
   const STORAGE_KEY = 'python-learning-demo-v1';
   const ERROR_GUIDE = [
-    { pattern: /SyntaxError/, title: 'SyntaxError: invalid syntax', cause: '标点、括号或语句结构不符合 Python 语法。', fix: '检查报错行前后是否缺冒号、括号或引号，并确认使用英文标点。' },
-    { pattern: /IndentationError|TabError/, title: 'IndentationError / TabError', cause: '代码块缩进不一致，或冒号后没有缩进代码。', fix: '统一使用 4 个空格；检查 if、for、while、def、class 后面的代码块。' },
-    { pattern: /NameError/, title: 'NameError: name is not defined', cause: '变量或函数尚未定义，或名称拼写不一致。', fix: '先赋值或定义，再使用；逐字核对大小写和下划线。' },
-    { pattern: /TypeError.*concatenate|TypeError.*str.*int/i, title: 'TypeError: 字符串和数字不能直接拼接', cause: '把文字和整数用 + 直接连接。', fix: '使用 f-string，或先用 str() 把数字转换为文字。' },
-    { pattern: /TypeError/, title: 'TypeError: 类型或参数不匹配', cause: '运算两侧类型不兼容，或函数收到错误类型/数量的参数。', fix: '检查 input() 的返回类型、函数定义和调用参数。' },
-    { pattern: /ValueError/, title: 'ValueError: invalid value', cause: '值的格式不符合转换或操作的要求。', fix: '检查输入内容；转换用户输入时考虑捕获 ValueError。' },
-    { pattern: /IndexError/, title: 'IndexError: list index out of range', cause: '列表索引超出有效范围。', fix: '下标从 0 开始，最大是 len(items) - 1；循环优先直接遍历元素。' },
-    { pattern: /KeyError/, title: 'KeyError: key not found', cause: '字典里没有要访问的键。', fix: '不确定键是否存在时使用 data.get(key) 或先用 key in data 检查。' },
-    { pattern: /ZeroDivisionError/, title: 'ZeroDivisionError: division by zero', cause: '除数为 0，常见于空数据的平均值计算。', fix: '计算前确认分母不为 0，并为没有数据的情况设置处理方式。' },
-    { pattern: /FileNotFoundError/, title: 'FileNotFoundError: file not found', cause: '路径写错、文件不存在，或运行目录与预期不同。', fix: '检查文件名和相对路径；先确认文件存在再读取。' },
-    { pattern: /AttributeError/, title: 'AttributeError: attribute not found', cause: '对象没有该属性或方法，常见于名称拼写错误。', fix: '检查对象的实际类型、方法拼写，以及字符串方法是否接住返回值。' },
-    { pattern: /UnboundLocalError/, title: 'UnboundLocalError: local variable referenced before assignment', cause: '函数内赋值使名称成为局部变量，但读取发生在赋值之前。', fix: '调整赋值顺序；优先通过参数传入数据并用 return 返回结果。' },
-    { pattern: /RecursionError/, title: 'RecursionError: maximum recursion depth exceeded', cause: '递归没有走到终止条件，或问题规模没有缩小。', fix: '先写清最小输入的返回值，并确认每次递归都更接近终止条件。' },
-    { pattern: /RuntimeError.*dictionary changed/i, title: 'RuntimeError: dictionary changed size during iteration', cause: '遍历字典时同时新增或删除键。', fix: '先复制 keys/items 再修改，或把要删除的键收集起来统一处理。' }
+    { title: 'SyntaxError: invalid syntax', cause: '标点、括号或语句结构不符合 Python 语法。', fix: '检查报错行前后是否缺冒号、括号或引号，并确认使用英文标点。' },
+    { title: 'IndentationError / TabError', cause: '代码块缩进不一致，或冒号后没有缩进代码。', fix: '统一使用 4 个空格；检查 if、for、while、def、class 后面的代码块。' },
+    { title: 'NameError: name is not defined', cause: '变量或函数尚未定义，或名称拼写不一致。', fix: '先赋值或定义，再使用；逐字核对大小写和下划线。' },
+    { title: 'TypeError: 字符串和数字不能直接拼接', cause: '把文字和整数用 + 直接连接。', fix: '使用 f-string，或先用 str() 把数字转换为文字。' },
+    { title: 'TypeError: 类型或参数不匹配', cause: '运算两侧类型不兼容，或函数收到错误类型/数量的参数。', fix: '检查 input() 的返回类型、函数定义和调用参数。' },
+    { title: 'ValueError: invalid value', cause: '值的格式不符合转换或操作的要求。', fix: '检查输入内容；转换用户输入时考虑捕获 ValueError。' },
+    { title: 'IndexError: list index out of range', cause: '列表索引超出有效范围。', fix: '下标从 0 开始，最大是 len(items) - 1；循环优先直接遍历元素。' },
+    { title: 'KeyError: key not found', cause: '字典里没有要访问的键。', fix: '不确定键是否存在时使用 data.get(key) 或先用 key in data 检查。' },
+    { title: 'ZeroDivisionError: division by zero', cause: '除数为 0，常见于空数据的平均值计算。', fix: '计算前确认分母不为 0，并为没有数据的情况设置处理方式。' },
+    { title: 'FileNotFoundError: file not found', cause: '路径写错、文件不存在，或运行目录与预期不同。', fix: '检查文件名和相对路径；先确认文件存在再读取。' },
+    { title: 'AttributeError: attribute not found', cause: '对象没有该属性或方法，常见于名称拼写错误。', fix: '检查对象的实际类型、方法拼写，以及字符串方法是否接住返回值。' },
+    { title: 'UnboundLocalError: local variable referenced before assignment', cause: '函数内赋值使名称成为局部变量，但读取发生在赋值之前。', fix: '调整赋值顺序；优先通过参数传入数据并用 return 返回结果。' },
+    { title: 'RecursionError: maximum recursion depth exceeded', cause: '递归没有走到终止条件，或问题规模没有缩小。', fix: '先写清最小输入的返回值，并确认每次递归都更接近终止条件。' },
+    { title: 'RuntimeError: dictionary changed size during iteration', cause: '遍历字典时同时新增或删除键。', fix: '先复制 keys/items 再修改，或把要删除的键收集起来统一处理。' }
   ];
   const TEXTBOOK_MAP = [
-    { book: '第1章 Python 概述与开发环境', ids: ['p1-1'], note: '变量示例作为第一个可运行程序的延伸；安装与 IDE 操作需在本机完成。' },
-    { book: '第2章 内置对象、运算符、表达式、内置函数', ids: ['p1-1','p1-2','p1-3','p2-1','p2-2','p4-3','p4-4','p5-1','p5-3','p7-1','p7-2','p9-1'], note: '类型转换、输入输出、常用函数与表达式。' },
-    { book: '第3章 序列：字符串、列表、元组', ids: ['p4-1','p4-2','p5-1','p5-2','p5-3','p9-2'], note: '索引切片、字符串方法、列表操作和推导式。' },
-    { book: '第4章 程序控制结构', ids: ['p2-1','p2-2','p3-1','p3-2','p3-3','p3-4','p3-5','p3-6','p3-7'], note: '分支、循环、嵌套与典型算法。' },
-    { book: '第5章 函数', ids: ['p6-1','p6-2','p6-3','p6-4','p6-5','p6-6'], note: '定义调用、参数、返回、作用域与组合。' },
-    { book: '第6章 面向对象程序设计', ids: ['p11-3'], note: '类、实例属性与方法；封装、继承可继续补充专门课程。' },
-    { book: '第7章 字典与集合', ids: ['p7-1','p7-2','p8-2','p8-4'], note: '字典创建访问、遍历及分组汇总；集合运算目前尚未单列。' },
-    { book: '第8章 文件与异常', ids: ['p10-1','p10-2','p10-3'], note: '文件、JSON 与异常处理。' },
-    { book: '第9章 Python 计算生态（选学）', ids: ['p11-1','p11-2'], note: '日期和批量命名是标准库实践；turtle、matplotlib、pandas 尚未覆盖。' }
+    { book: '第1章 Python语言基础', ids: ['p1-1','p1-2','p1-3','p12-5'], status: '部分覆盖', note: '已讲变量、类型转换、布尔逻辑和 input 返回字符串的规则；安装/IDE、对象与属性、交互输入校验流程仍可继续补充。' },
+    { book: '第2章 数据类型与科学计算', ids: ['p1-2','p1-3','p5-3','p9-1','p12-6'], status: '部分覆盖', note: '有基础数值、类型转换、内置函数和 math 导入；复数、eval、random/numpy/scipy/sympy 未系统覆盖。' },
+    { book: '第3章 函数', ids: ['p6-1','p6-2','p6-3','p6-4','p6-5','p6-6','p12-6','p12-7','p12-8','p12-9'], status: '部分覆盖', note: '已覆盖定义、调用、参数、默认值、返回和作用域；新增 lambda、递归和模块化组合，关键字/可变参数、装饰器及 pip/虚拟环境仍未覆盖。' },
+    { book: '第4章 流程控制及应用', ids: ['p2-1','p2-2','p3-1','p3-2','p3-3','p3-4','p3-5','p3-6','p3-7','p10-3'], status: '部分覆盖', note: '已覆盖 if、for、while、嵌套循环、break/continue 和异常入门；match/case、无限循环设计等目录实例未单独讲解。' },
+    { book: '第5章 字符串与序列', ids: ['p4-1','p4-2','p4-3','p5-1','p5-2','p5-3','p9-2','p12-1','p12-2'], status: '部分覆盖', note: '新增序列通用操作和元组；字符串分类统计、序列重复/拼接的更多例题与格式化专题仍可继续增加。' },
+    { book: '第6章 字典与集合', ids: ['p7-1','p7-2','p8-2','p8-4','p12-3','p12-4'], status: '部分覆盖', note: '已覆盖字典创建、取值、遍历、推导式和集合运算；集合综合应用还可以继续增加。' },
+    { book: '第7章 数据处理', ids: ['p10-1','p10-2','p8-3','p9-1','p9-2','p12-10'], status: '部分覆盖', note: '已有文本文件、JSON、CSV 和基础列表处理；二进制文件、NumPy、Pandas 与 Excel 数据处理缺失。' },
+    { book: '第8章 数据可视化', ids: [], status: '未覆盖', note: '当前没有 Matplotlib 绘图课程；目录所列折线、饼图、柱状/直方、散点、热力、箱线、雷达、等高线、词云等都未覆盖。' }
   ];
+  const EXAM_GUIDE = {
+    '水仙花数': {
+      input: '程序遍历 100 到 999 之间的所有整数，不需要键盘输入。',
+      output: '153、370、371、407（每个数单独一行）。',
+      lineNotes: ['range(100, 1000) 逐个生成三位数；右端 1000 不包含。', '整除 100，取出百位数字。', '先整除 10 去掉个位，再对 10 取余，得到十位数字。', '对 10 取余，得到个位数字。', '水仙花数定义：各位数字的立方和等于原数。', '条件成立时打印这个数；不符合的数字跳过。'],
+      variant: '把条件改成各位数字的平方和等于原数，观察 100 到 999 中是否有结果。'
+    },
+    '判断素数': {
+      input: '示例输入固定为 n = 29；可改成 1、2、9、25 测试边界。',
+      output: '是素数',
+      lineNotes: ['设置待判断的整数。', '小于 2 的数不是素数，因此先初始化判断结果。', '只检查到平方根即可；如果存在因数，一定有一个不大于平方根。', '余数为 0 说明找到除了 1 和自身之外的因数。', '找到因数后把结果改为 False。', '无需继续找其他因数，立即结束循环。', '根据布尔值选择并打印对应文字。'],
+      variant: '将 n 改成 25 和 1，确认合数与小于 2 的数都会被判断为非素数。'
+    },
+    '最大公约数与最小公倍数': {
+      input: '示例使用 a = 24、b = 18。',
+      output: '6 72',
+      lineNotes: ['保存原始的两个数，后面用来计算最小公倍数。', '复制一份参与辗转相除的工作变量。', '只要 y 不为 0 就继续计算。', '把旧的 y 作为新的 x，并用余数作为新的 y。', '余数变成 0 时，x 就是最大公约数。', '利用两数乘积 = 最大公约数 × 最小公倍数。', '同时打印最大公约数和最小公倍数。'],
+      variant: '换成 48 和 18，手算最大公约数与最小公倍数，再运行验证。'
+    },
+    '斐波那契数列': {
+      input: '无键盘输入；从 0、1 开始生成数列。',
+      output: '输出前 20 项，从 0、1、1、2 开始，到 4181 结束。',
+      lineNotes: ['a 和 b 分别保存当前项与下一项。', '循环 20 次，因此恰好输出 20 个数字。', '打印当前项。', '同时更新两个变量：新 a 是旧 b，新 b 是旧 a + 旧 b。'],
+      variant: '把循环次数改成 10，并尝试把起始值改成 1、1。'
+    },
+    '九九乘法表': {
+      input: '无键盘输入；外层和内层循环分别控制行与列。',
+      output: '输出 1 到 9 行的乘法表；第一行是 1×1=1，最后一行包含 1×9 到 9×9。',
+      lineNotes: ['外层循环生成 1 到 9，决定当前是第几行。', '内层从 1 数到当前行号，只打印三角形区域。', '用 f-string 填入乘数和乘积；end="\\t" 让同一行的表达式用制表符隔开。', '内层循环结束后打印空行，换到下一行。'],
+      variant: '改成每行都打印 1 到 9，观察它与常见三角乘法表的区别。'
+    },
+    '百钱百鸡': {
+      input: '总共有 100 文钱、100 只鸡；公鸡 5 文、母鸡 3 文、小鸡 1 文买 3 只。',
+      output: '0 25 75；4 18 78；8 11 81；12 4 84。',
+      lineNotes: ['公鸡最多 20 只，因为每只 5 文，总钱数只有 100 文。', '枚举母鸡数量；最多买 33 只。', '总数固定为 100，剩余数量就是小鸡数。', '小鸡数必须非负且能被 3 整除；乘以 3 后用整数等式核对总价，避免浮点误差。', '每找到一组符合条件的数量，就输出公鸡、母鸡、小鸡数量。'],
+      variant: '自己推导“公鸡 3 文、母鸡 2 文、小鸡 1 文买 2 只”的循环范围和整数方程。'
+    },
+    '成绩统计': {
+      input: 'scores = [78, 92, 85, 61]。',
+      output: '平均分 79.0；最高分 92；最低分 61。',
+      lineNotes: ['用列表集中保存多名学生的成绩。', 'sum 求总分，len 求人数，相除得到平均分。', 'max 与 min 分别找出最高分和最低分。'],
+      variant: '增加一个成绩，重新计算；再思考空列表时为什么不能直接求平均数。'
+    },
+    '字符串反转与回文': {
+      input: 'text = "level"。',
+      output: 'level；True。',
+      lineNotes: ['保存要检查的字符串。', '切片步长为 -1，生成反向排列的新字符串。', '先打印反转结果，便于观察。', '比较原字符串和反转结果；相同就是回文。'],
+      variant: '把字符串改成 "Python"，再把它改成 "Never odd or even"，思考大小写和空格是否要先清理。'
+    },
+    '学生信息管理': {
+      input: '初始有 S01；随后新增 S02，每条记录包含姓名和分数。',
+      output: 'S01 小林 88；S02 小周 91。',
+      lineNotes: ['外层字典用学号作为唯一键；内层字典保存姓名和分数。', '用新学号新增第二条学生记录。', 'items() 每轮同时给出学号 sid 和记录字典 info。', '通过键取出姓名、分数，并连同学号一起打印。'],
+      variant: '用 get 查询一个不存在的学号，并输出“未找到”，避免直接索引触发 KeyError。'
+    },
+    '词频统计': {
+      input: '一段英文文本；程序会统一转小写并按空格切词。',
+      output: "[('python', 2), ('is', 2), ('fun', 1), ('and', 1), ('useful', 1)]",
+      lineNotes: ['准备一段待统计的文本。', '创建空字典，准备按单词保存出现次数。', 'lower 统一大小写，split 按空白拆出单词。', 'get(word, 0) 取旧次数；第一次出现时从 0 开始，再加 1。', '按次数从高到低排序并打印；相同次数保留原有出现顺序。'],
+      variant: '将文本改成包含大写字母和重复单词的句子，检查大小写统一后计数是否正确。'
+    },
+    '二分查找': {
+      input: '已排序列表 [3, 8, 12, 19, 27, 34]，查找 target = 19。',
+      output: '3（目标值 19 的下标，从 0 开始计数）。',
+      lineNotes: ['准备升序排列的数据；二分查找要求输入已经排序。', '保存要找的目标值。', 'left 和 right 表示当前仍可能包含目标值的区间。', '先用 -1 表示“还没有找到”。', '区间非空时继续查找。', '取区间中间位置，使用整除得到整数下标。', '如果中间值正好等于目标值，就进入成功分支。', '保存目标值所在的下标。', '找到后停止循环。', '中间值比目标小，目标只能在右半边。', '左边界移到 mid 右侧。', '否则目标在左半边。', '右边界移到 mid 左侧。', '循环结束后输出下标；未找到时仍为 -1。'],
+      variant: '将目标改成 20，确认输出 -1；再改成 3，检查边界位置是否正确。'
+    },
+    '冒泡排序': {
+      input: 'nums = [5, 2, 4, 1]。',
+      output: '[1, 2, 4, 5]',
+      lineNotes: ['准备一个无序数字列表。', '每一趟把当前未排序区域的最大值推到末尾；末尾区域逐渐变成已排序。', '逐对检查相邻元素。', '如果左边比右边大，就需要交换。', '用同时赋值交换两个位置，不需要临时变量。', '排序结束后打印结果。'],
+      variant: '换一组含重复数字的列表，确认排序后重复项仍然保留。'
+    },
+    '矩阵相加': {
+      input: '两个 2×2 矩阵 a 和 b；矩阵加法要求行列数相同。',
+      output: '[[6, 8], [10, 12]]',
+      lineNotes: ['定义第一个矩阵，每个内层列表是一行。', '定义第二个同尺寸矩阵。', '创建空列表保存结果矩阵。', '逐行处理第一个矩阵。', '每进入新的一行，都新建 row，避免不同结果行互相混在一起。', '逐列处理当前行。', '把两个矩阵相同位置的元素相加，放入当前结果行。', '当前行完成后加入结果矩阵。', '打印完整结果。'],
+      variant: '把两个矩阵都扩展到 3×2，并调整循环范围后再运行。'
+    },
+    '日期是当年第几天': {
+      input: 'year = 2024、month = 3、day = 1。',
+      output: '61',
+      lineNotes: ['列表按月份顺序保存平年每个月的天数；二月先按 28 天记录。', '设置要查询的年月日。', '判断闰年：能被 400 整除，或能被 4 整除且不能被 100 整除。', '闰年把二月改成 29 天。', '切片取当前月份之前的月份，求和后加上当月日期。'],
+      variant: '把日期改成 2023-03-01，结果应为 60；再试 2000 与 1900 年，区分世纪闰年规则。'
+    },
+    '购物车小计': {
+      input: '购物车有 2 杯 12 元奶茶和 1 个 8 元面包。',
+      output: '32',
+      lineNotes: ['列表保存多件商品；每件商品用字典记录名称、单价和数量。', '累计金额从 0 开始。', '逐件读取购物车中的商品字典。', '单价乘数量得到本件小计，再加到总金额。', '所有商品处理完后输出总额。'],
+      variant: '新增一个商品，并加入打折后的单价；金额题请尽量使用统一精度规则。'
+    },
+    '异常保护的数字输入': {
+      input: 'text = "abc"；尝试把这段文字转成整数。',
+      output: '请输入整数',
+      lineNotes: ['准备一个无法转成整数的字符串。', '开始可能失败的代码块。', '尝试执行字符串到整数的转换。', '只捕获整数转换失败时会产生的 ValueError。', '捕获异常后给出面向用户的提示。', '没有发生异常时才会执行 else。', '成功转换时打印数字乘以 2 的结果。'],
+      variant: '把 text 改成 "21"，观察程序走到 try/else；再试空字符串。'
+    }
+  };
   const EXAM_PACK = [
-    { title: '水仙花数', level: '基础', idea: '逐位拆出百位、十位、个位，计算立方和并与原数比较。', code: 'for n in range(100, 1000):\n    a = n // 100\n    b = n // 10 % 10\n    c = n % 10\n    if a**3 + b**3 + c**3 == n:\n        print(n)', pitfall: '整除和取余的顺序要正确；范围要覆盖 100 到 999。' },
-    { title: '判断素数', level: '基础', idea: '小于 2 的数不是素数；只需检查 2 到平方根是否有因数。', code: 'n = 29\nis_prime = n >= 2\nfor i in range(2, int(n ** 0.5) + 1):\n    if n % i == 0:\n        is_prime = False\n        break\nprint("是素数" if is_prime else "不是素数")', pitfall: '1 不是素数；range 终点不包含，所以要加 1。' },
-    { title: '最大公约数与最小公倍数', level: '基础', idea: '辗转相除直到余数为 0；最小公倍数等于两数乘积除以最大公约数。', code: 'a, b = 24, 18\nx, y = a, b\nwhile y:\n    x, y = y, x % y\ngcd = x\nlcm = a * b // gcd\nprint(gcd, lcm)', pitfall: '计算过程中保留原始 a、b；0 与负数需要按题目约定处理。' },
-    { title: '斐波那契数列', level: '基础', idea: '维护相邻两项，每轮输出当前项并把状态向前推进。', code: 'a, b = 0, 1\nfor _ in range(20):\n    print(a)\n    a, b = b, a + b', pitfall: '先确认数列从 0, 1 还是 1, 1 开始；不要把更新写成依赖已覆盖的旧值。' },
-    { title: '九九乘法表', level: '基础', idea: '外层循环控制行，内层循环打印当前行的乘法表达式。', code: 'for i in range(1, 10):\n    for j in range(1, i + 1):\n        print(f"{j}×{i}={i*j}", end="\\t")\n    print()', pitfall: '换行 print 要放在内层循环结束后。' },
-    { title: '百钱百鸡', level: '基础', idea: '把公鸡、母鸡数量作为循环变量，利用总价和总数约束筛选解。', code: 'for rooster in range(21):\n    for hen in range(34):\n        chick = 100 - rooster - hen\n        if chick >= 0 and 5*rooster + 3*hen + chick/3 == 100:\n            print(rooster, hen, chick)', pitfall: '小鸡只能按整只购买，建议把金额都换成分或整理为整数方程。' },
-    { title: '成绩统计', level: '基础', idea: '用列表保存成绩，再用 sum、len、max、min 汇总。', code: 'scores = [78, 92, 85, 61]\nprint(sum(scores) / len(scores))\nprint(max(scores), min(scores))', pitfall: '空列表不能求平均值；先检查是否至少有一条成绩。' },
-    { title: '字符串反转与回文', level: '基础', idea: '切片 [::-1] 可反转字符串，比较原文与反转结果即可判断回文。', code: 'text = "level"\nreversed_text = text[::-1]\nprint(reversed_text)\nprint(text == reversed_text)', pitfall: '如果题目忽略空格和大小写，要先清洗字符串再比较。' },
-    { title: '学生信息管理', level: '进阶', idea: '用字典以学号为键保存记录，再根据命令完成增删改查。', code: 'students = {"S01": {"name": "小林", "score": 88}}\nstudents["S02"] = {"name": "小周", "score": 91}\nfor sid, info in students.items():\n    print(sid, info["name"], info["score"])', pitfall: '先判断键是否存在；删除前确认记录，避免 KeyError。' },
-    { title: '词频统计', level: '进阶', idea: '清洗文本后按空白拆词，用字典累加每个词出现的次数。', code: 'text = "Python is fun and Python is useful"\ncounts = {}\nfor word in text.lower().split():\n    counts[word] = counts.get(word, 0) + 1\nprint(sorted(counts.items(), key=lambda item: item[1], reverse=True))', pitfall: '大小写、标点和中文分词规则会改变统计结果，先明确清洗口径。' },
-    { title: '二分查找', level: '进阶', idea: '在有序列表中每次检查中间位置，排除不可能的一半。', code: 'nums = [3, 8, 12, 19, 27, 34]\ntarget = 19\nleft, right = 0, len(nums) - 1\nanswer = -1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        answer = mid\n        break\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\nprint(answer)', pitfall: '输入必须有序；边界更新需加减 1，否则可能死循环。' },
-    { title: '冒泡排序', level: '进阶', idea: '反复比较相邻元素，把较大的值逐步交换到末尾。', code: 'nums = [5, 2, 4, 1]\nfor end in range(len(nums) - 1, 0, -1):\n    for i in range(end):\n        if nums[i] > nums[i + 1]:\n            nums[i], nums[i + 1] = nums[i + 1], nums[i]\nprint(nums)', pitfall: '内层边界要保证 i + 1 不越界；已经有序时可提前结束优化。' },
-    { title: '矩阵相加', level: '进阶', idea: '对应位置元素相加，两个矩阵的行列数必须一致。', code: 'a = [[1, 2], [3, 4]]\nb = [[5, 6], [7, 8]]\nresult = []\nfor i in range(len(a)):\n    row = []\n    for j in range(len(a[0])):\n        row.append(a[i][j] + b[i][j])\n    result.append(row)\nprint(result)', pitfall: '先校验两个矩阵维度相同；每一行都需要独立创建。' },
-    { title: '日期是当年第几天', level: '进阶', idea: '累加当前月份之前每个月的天数，再加上日期；闰年二月多一天。', code: 'days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\nyear, month, day = 2024, 3, 1\nif year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):\n    days[1] = 29\nprint(sum(days[:month - 1]) + day)', pitfall: '闰年需同时处理世纪年份例外；月下标从 0 开始。' },
-    { title: '购物车小计', level: '进阶', idea: '用列表保存商品字典，遍历时累计单价乘数量。', code: 'cart = [{"name": "奶茶", "price": 12, "count": 2}, {"name": "面包", "price": 8, "count": 1}]\ntotal = 0\nfor item in cart:\n    total += item["price"] * item["count"]\nprint(total)', pitfall: '金额计算应统一数值类型；正式支付场景不要依赖二进制浮点数。' },
-    { title: '异常保护的数字输入', level: '进阶', idea: '把类型转换放进 try，捕获预期的 ValueError 并重新提示。', code: 'text = "abc"\ntry:\n    number = int(text)\nexcept ValueError:\n    print("请输入整数")\nelse:\n    print(number * 2)', pitfall: '只捕获预期异常，避免裸 except 把真正的程序错误隐藏起来。' }
-  ];
+    ['水仙花数','基础','逐位拆出百位、十位、个位，计算立方和并比较原数。','for n in range(100, 1000):\n    a = n // 100\n    b = n // 10 % 10\n    c = n % 10\n    if a**3 + b**3 + c**3 == n:\n        print(n)','整除和取余顺序要正确；范围覆盖 100 到 999。'],
+    ['判断素数','基础','小于 2 的数不是素数；只需检查 2 到平方根是否有因数。','n = 29\nis_prime = n >= 2\nfor i in range(2, int(n ** 0.5) + 1):\n    if n % i == 0:\n        is_prime = False\n        break\nprint("是素数" if is_prime else "不是素数")','1 不是素数；range 终点不包含，所以要加 1。'],
+    ['最大公约数与最小公倍数','基础','用辗转相除求最大公约数；最小公倍数为乘积除以最大公约数。','a, b = 24, 18\nx, y = a, b\nwhile y:\n    x, y = y, x % y\ngcd = x\nlcm = a * b // gcd\nprint(gcd, lcm)','计算过程中保留原始 a、b；0 与负数按题目约定处理。'],
+    ['斐波那契数列','基础','维护相邻两项，每轮输出当前项并把状态向前推进。','a, b = 0, 1\nfor _ in range(20):\n    print(a)\n    a, b = b, a + b','先确认数列起点；更新时不要覆盖旧值。'],
+    ['九九乘法表','基础','外层循环控制行，内层循环打印当前行的乘法式。','for i in range(1, 10):\n    for j in range(1, i + 1):\n        print(f"{j}×{i}={i*j}", end="\\t")\n    print()','换行 print 要放在内层循环结束后。'],
+    ['百钱百鸡','基础','枚举公鸡、母鸡数量，利用总价和总数约束筛选解。','for rooster in range(21):\n    for hen in range(34):\n        chick = 100 - rooster - hen\n        if chick >= 0 and chick % 3 == 0 and 15*rooster + 9*hen + chick == 300:\n            print(rooster, hen, chick)','小鸡按整只计算；把方程乘以 3，避免浮点数相等判断。'],
+    ['成绩统计','基础','用列表保存成绩，再用 sum、len、max、min 汇总。','scores = [78, 92, 85, 61]\nprint(sum(scores) / len(scores))\nprint(max(scores), min(scores))','空列表不能求平均值；先检查是否有成绩。'],
+    ['字符串反转与回文','基础','用切片 [::-1] 反转字符串，比较原文与反转结果。','text = "level"\nreversed_text = text[::-1]\nprint(reversed_text)\nprint(text == reversed_text)','如果忽略空格或大小写，先清洗字符串。'],
+    ['学生信息管理','进阶','用字典以学号为键保存记录，再根据命令增删改查。','students = {"S01": {"name": "小林", "score": 88}}\nstudents["S02"] = {"name": "小周", "score": 91}\nfor sid, info in students.items():\n    print(sid, info["name"], info["score"])','先判断键是否存在，避免 KeyError。'],
+    ['词频统计','进阶','清洗文本后拆词，用字典累加每个词出现的次数。','text = "Python is fun and Python is useful"\ncounts = {}\nfor word in text.lower().split():\n    counts[word] = counts.get(word, 0) + 1\nprint(sorted(counts.items(), key=lambda item: item[1], reverse=True))','大小写、标点和分词规则会改变统计结果。'],
+    ['二分查找','进阶','在有序列表中每次检查中间位置，排除不可能的一半。','nums = [3, 8, 12, 19, 27, 34]\ntarget = 19\nleft, right = 0, len(nums) - 1\nanswer = -1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        answer = mid\n        break\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\nprint(answer)','输入必须有序；边界更新需加减 1，否则可能死循环。'],
+    ['冒泡排序','进阶','反复比较相邻元素，把较大的值逐步交换到末尾。','nums = [5, 2, 4, 1]\nfor end in range(len(nums) - 1, 0, -1):\n    for i in range(end):\n        if nums[i] > nums[i + 1]:\n            nums[i], nums[i + 1] = nums[i + 1], nums[i]\nprint(nums)','内层边界要保证 i + 1 不越界。'],
+    ['矩阵相加','进阶','对应位置元素相加，两个矩阵的行列数必须一致。','a = [[1, 2], [3, 4]]\nb = [[5, 6], [7, 8]]\nresult = []\nfor i in range(len(a)):\n    row = []\n    for j in range(len(a[0])):\n        row.append(a[i][j] + b[i][j])\n    result.append(row)\nprint(result)','先校验矩阵维度；每一行都要独立创建。'],
+    ['日期是当年第几天','进阶','累加当前月份之前的天数，再加日期；闰年二月多一天。','days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\nyear, month, day = 2024, 3, 1\nif year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):\n    days[1] = 29\nprint(sum(days[:month - 1]) + day)','闰年要处理世纪年份例外；月下标从 0 开始。'],
+    ['购物车小计','进阶','用列表保存商品字典，遍历时累计单价乘数量。','cart = [{"name": "奶茶", "price": 12, "count": 2}, {"name": "面包", "price": 8, "count": 1}]\ntotal = 0\nfor item in cart:\n    total += item["price"] * item["count"]\nprint(total)','金额计算要统一数值类型；真实支付不要依赖二进制浮点。'],
+    ['异常保护的数字输入','进阶','把类型转换放进 try，捕获预期 ValueError 并提示。','text = "abc"\ntry:\n    number = int(text)\nexcept ValueError:\n    print("请输入整数")\nelse:\n    print(number * 2)','只捕获预期异常，避免裸 except 隐藏程序错误。']
+  ].map(function (row) { var guide = EXAM_GUIDE[row[0]] || {}; return { title: row[0], level: row[1], idea: row[2], code: row[3], pitfall: row[4], input: guide.input || '按题目给定数据运行。', output: guide.output || '', lineNotes: guide.lineNotes || [], variant: guide.variant || '' }; });
   const FLAT_POINTS = [];
   const POINT_INDEX = new Map();
   COURSE.forEach(function (chapter) {
@@ -4315,12 +4735,13 @@ print(product.label())`,
       drafts: data && data.drafts && typeof data.drafts === 'object' && !Array.isArray(data.drafts) ? data.drafts : {},
       last: data && typeof data.last === 'string' ? data.last : null,
       wrong: data && data.wrong && typeof data.wrong === 'object' && !Array.isArray(data.wrong) ? data.wrong : {},
-      activity: data && data.activity && typeof data.activity === 'object' && !Array.isArray(data.activity) ? data.activity : {}
+      activity: data && data.activity && typeof data.activity === 'object' && !Array.isArray(data.activity) ? data.activity : {},
+      notes: data && Array.isArray(data.notes) ? data.notes.filter(function (note) { return note && typeof note.text === 'string' && note.text.trim(); }).slice(-100) : []
     };
   }
 
   function loadState() {
-    var empty = { completed: {}, drafts: {}, last: null, wrong: {}, activity: {} };
+    var empty = { completed: {}, drafts: {}, last: null, wrong: {}, activity: {}, notes: [] };
     try {
       var raw = storageOK ? localStorage.getItem(STORAGE_KEY) : memoryStore[STORAGE_KEY];
       if (!raw) return empty;
@@ -4363,7 +4784,7 @@ print(product.label())`,
   var mobileProgress = document.getElementById('mobileProgress');
 
   var currentIndex = 0;
-  var viewMode = 'course';
+  var viewMode = location.hash === '#suggestions' ? 'wall' : 'course';
   if (state.last && POINT_INDEX.has(state.last)) {
     currentIndex = POINT_INDEX.get(state.last);
   }
@@ -4578,6 +4999,355 @@ print(product.label())`,
     reader.readAsText(file);
   }
 
+  function localDateKey(date) {
+    date = date || new Date();
+    return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+  }
+  function noteStudyDay() { state.activity[localDateKey()] = true; persist(); }
+  function currentStreak() {
+    var count = 0, date = new Date();
+    while (state.activity[localDateKey(date)]) { count++; date.setDate(date.getDate() - 1); }
+    return count;
+  }
+  function recordWrong(exercise, code, kind) {
+    var old = state.wrong[exercise.id] || {}, attempts = (old.attempts || 0) + 1;
+    var intervals = [1, 3, 7, 14, 30], reviewDate = new Date();
+    reviewDate.setDate(reviewDate.getDate() + intervals[Math.min(attempts - 1, intervals.length - 1)]);
+    state.wrong[exercise.id] = { code:String(code || ''), kind:kind, attempts:attempts, firstAt:old.firstAt || localDateKey(), updatedAt:localDateKey(), reviewAt:localDateKey(reviewDate) };
+    persist();
+  }
+  function relevantErrors(point) {
+    var ids = point.id, names = ['SyntaxError','NameError','TypeError','ValueError'];
+    if (/p3-/.test(ids)) names = ['SyntaxError','NameError','TypeError','ZeroDivisionError','IndentationError'];
+    else if (/p4-/.test(ids)) names = ['SyntaxError','IndexError','TypeError','AttributeError'];
+    else if (/p5-/.test(ids)) names = ['SyntaxError','IndexError','TypeError','ValueError'];
+    else if (/p6-/.test(ids)) names = ['SyntaxError','NameError','TypeError','UnboundLocalError','RecursionError'];
+    else if (/p7-/.test(ids) || /p8-[234]/.test(ids)) names = ['SyntaxError','KeyError','TypeError','AttributeError','RuntimeError'];
+    else if (/p10-/.test(ids)) names = ['SyntaxError','ValueError','FileNotFoundError','TypeError'];
+    else if (/p11-/.test(ids)) names = ['SyntaxError','TypeError','AttributeError','NameError'];
+    return ERROR_GUIDE.filter(function (entry) { return names.some(function (name) { return entry.title.indexOf(name) === 0; }); }).slice(0,5);
+  }
+  function feedbackMarkup() {
+    return '<section class="card tool-section"><div class="card-label">发现问题或有内容建议？</div><p><button type="button" class="tool-link" data-wall-feedback>到便签墙提建议</button></p></section>';
+  }
+  mainInner.addEventListener('click', function (event) {
+    if (!event.target.closest('[data-wall-feedback]')) return;
+    openNoteWall(viewMode === 'course' ? FLAT_POINTS[currentIndex].point.title : mainInner.querySelector('h1')?.textContent);
+  });
+  function renderTextbookMap() {
+    var done = ALL_EXERCISES.filter(function (exercise) { return !!state.completed[exercise.id]; }).length;
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>按教材目录对照</h1><p>按你发来的目录图片中的第 1–8 章整理。网站已有 48 个知识点；课程分类和教材章节不同，下表将课程对应到目录并标明仍需补充的部分。</p></header><section class="card tool-section"><div class="card-label">目前最明显的空缺</div><p>第 8 章数据可视化尚无课程；NumPy、Pandas、Excel、SciPy、SymPy、match/case、复数和部分字符串专题仍未系统覆盖。序列通用操作、元组、集合、字典推导式、递归、模块化与 CSV 已补入课程。</p></section><section class="card tool-section"><div class="card-label">整体进度</div><p>网站已完成 ' + done + ' / ' + ALL_EXERCISES.length + ' 个知识点；连续学习 ' + currentStreak() + ' 天。这里的数量是网站课程进度，不代表教材章节覆盖比例。</p></section><div class="tool-table-wrap"><table class="tool-table"><thead><tr><th>教材章节</th><th>网站知识点</th><th>完成</th><th>覆盖状态</th><th>已覆盖与未覆盖说明</th></tr></thead><tbody>' + TEXTBOOK_MAP.map(function (row) {
+      var points = row.ids.map(function (id) { var index = POINT_INDEX.get(id); return index == null ? null : FLAT_POINTS[index]; }).filter(Boolean);
+      var count = points.filter(function (item) { return !!state.completed[item.point.exercise.id]; }).length;
+      var links = points.map(function (item) { return '<button class="tool-link" type="button" data-index="' + POINT_INDEX.get(item.point.id) + '">' + item.point.title + '</button>'; }).join('、') || '尚未覆盖';
+      var statusClass = row.status === '未覆盖' ? ' none' : (row.status === '已覆盖' ? ' full' : '');
+      return '<tr><td>' + row.book + '</td><td>' + links + '</td><td>' + count + '/' + points.length + '</td><td><span class="coverage-status' + statusClass + '">' + row.status + '</span></td><td>' + row.note + '</td></tr>';
+    }).join('') + '</tbody></table></div>' + feedbackMarkup();
+    mainInner.querySelectorAll('[data-index]').forEach(function (button) { button.addEventListener('click', function () { viewMode='course'; goTo(Number(button.getAttribute('data-index'))); renderSidebar(); }); });
+  }
+  function renderExamPack() {
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>期末急救包</h1><p>' + EXAM_PACK.length + ' 道高频题，逐题提供题意、完整代码、代码拆解、输出、易错点和变式练习。</p></header><section class="card tool-section"><div class="card-label">怎么使用</div><p>先读题意和输入输出，再自己尝试；卡住时展开完整代码和逐行解析。复制代码到课程练习区运行，可亲自改数据验证。</p></section>' + EXAM_PACK.map(function (item,index) {
+      var lineNotes = item.lineNotes.length ? item.lineNotes : item.code.split('\n').map(function (line) { return '第 ' + (item.code.split('\n').indexOf(line) + 1) + ' 行：' + (line.trim() ? '观察这一行如何完成“' + item.idea + '”中的一个步骤。' : '空行用于分隔代码逻辑，便于阅读。'); });
+      return '<details class="exam-item"><summary>' + (index+1) + '. ' + item.title + ' · ' + item.level + '</summary><div class="exam-body">' +
+        '<h3>题目要做什么</h3><p>' + item.idea + '</p>' +
+        '<h3>输入或已知数据</h3><p>' + item.input + '</p>' +
+        '<h3>预期结果</h3><pre class="exam-output">' + escapeHtml(item.output || '请运行代码并观察结果。') + '</pre>' +
+        '<details><summary>展开完整参考代码</summary><pre class="exam-code">' + escapeHtml(item.code) + '</pre></details>' +
+        '<h3>完整代码逐行解析</h3><ol class="exam-line-list">' + lineNotes.map(function (note) { return '<li>' + note + '</li>'; }).join('') + '</ol>' +
+        '<h3>容易出错的地方</h3><p>' + item.pitfall + '</p>' +
+        (item.variant ? '<h3>再练一道变式</h3><p class="exam-variant">' + item.variant + '</p>' : '') +
+        '</div></details>';
+    }).join('') + feedbackMarkup();
+  }
+
+  const wallEndpoint = '';
+  const wallKinds = { suggestion: '修改建议', question: '学习疑问', reflection: '学习心得', message: '想说的话' };
+  var wallRefreshTimer;
+
+  function openNoteWall(topic) {
+    updateDraftSilently();
+    viewMode = 'wall';
+    renderSidebar();
+    renderNoteWall(topic);
+    mainEl.scrollTop = 0;
+    closeDrawer(false);
+  }
+
+  function renderNoteWall(topic) {
+    clearInterval(wallRefreshTimer);
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>便签墙</h1><p>共享留言服务上线后，可以在这里发布和查看公开便签。</p></header>' +
+      '<div class="note-wall-grid"><section class="card note-wall-form"><form id="noteForm">' +
+      '<label for="noteName">昵称（可选）</label><input id="noteName" maxlength="20" autocomplete="nickname" placeholder="匿名同学">' +
+      '<label for="noteKind">留言类型</label><select id="noteKind">' +
+      Object.keys(wallKinds).map(function (key) { return '<option value="' + key + '">' + wallKinds[key] + '</option>'; }).join('') +
+      '</select><label for="noteText">留言</label><textarea id="noteText" maxlength="500" required placeholder="哪一节可以讲得更清楚？也可以写下你的疑问或心得。"></textarea>' +
+      '<p class="note-wall-hint">留言会公开展示，请勿填写个人联系方式。</p>' +
+      '<div class="variation-toolbar"><button class="btn btn-primary" type="submit">发布留言</button></div><p role="status" id="noteStatus"></p></form></section>' +
+      '<section class="card note-wall-form"><div class="card-label">最新留言</div>' +
+      '<label for="noteFilter">查看类型</label><select id="noteFilter"><option value="">全部留言</option><option value="suggestion">只看修改建议</option></select>' +
+      '<p id="publicNoteStatus" role="status" class="note-wall-hint"></p><div class="note-wall-list" id="publicNoteList"></div>' +
+      '<div class="variation-toolbar"><button class="btn" id="noteRefresh" type="button">刷新</button><button class="btn" id="noteMore" type="button" hidden>加载更早留言</button></div></section></div>';
+    const form = document.getElementById('noteForm');
+    const status = document.getElementById('noteStatus');
+    const noteText = document.getElementById('noteText');
+    const noteKind = document.getElementById('noteKind');
+    const filter = document.getElementById('noteFilter');
+    const list = document.getElementById('publicNoteList');
+    const listStatus = document.getElementById('publicNoteStatus');
+    const refresh = document.getElementById('noteRefresh');
+    const more = document.getElementById('noteMore');
+    const publish = form.querySelector('button[type="submit"]');
+    let next = null;
+    let loadedOlder = false;
+    let sequence = 0;
+    let pendingPost;
+    filter.value = location.hash === '#suggestions' ? 'suggestion' : '';
+    if (topic) noteText.value = '关于「' + topic + '」：';
+
+    if (state.notes.length) {
+      const old = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = '查看此浏览器以前保存的便签';
+      old.appendChild(summary);
+      state.notes.slice().reverse().forEach(function (note) {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = note.text;
+        old.appendChild(paragraph);
+      });
+      form.parentNode.appendChild(old);
+    }
+
+    if (!wallEndpoint) {
+      publish.disabled = refresh.disabled = filter.disabled = true;
+      status.textContent = '这个网站的共享留言服务还未上线。';
+      return;
+    }
+
+    async function loadNotes(append) {
+      const current = ++sequence;
+      const query = new URLSearchParams();
+      if (filter.value) query.set('kind', filter.value);
+      if (append && next !== null) query.set('before', next);
+      more.disabled = refresh.disabled = true;
+      try {
+        const response = await fetch(wallEndpoint + '?' + query, { signal: AbortSignal.timeout(10000) });
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        if (current !== sequence || !list.isConnected) return;
+        const cards = data.items.map(function (note) {
+          const date = new Date(note.created_at).toLocaleString('zh-CN');
+          return '<article class="note-card"><div class="note-card-head"><span>' +
+            escapeHtml(note.nickname || '匿名同学') + ' · ' + escapeHtml(wallKinds[note.kind] || '留言') +
+            '</span><time>' + escapeHtml(date) + '</time></div><p>' + escapeHtml(note.message) + '</p></article>';
+        }).join('');
+        if (append) list.insertAdjacentHTML('beforeend', cards);
+        else list.innerHTML = cards || '<div class="note-wall-empty">暂时还没有这类留言。</div>';
+        loadedOlder = append;
+        next = data.next;
+        more.hidden = next === null;
+        listStatus.textContent = '';
+      } catch {
+        if (current === sequence) listStatus.textContent = '留言暂时无法读取，请点刷新重试。';
+      } finally {
+        if (current === sequence) more.disabled = refresh.disabled = false;
+      }
+    }
+
+    filter.addEventListener('change', function () {
+      if (filter.value === 'suggestion') history.replaceState(null, '', '#suggestions');
+      else if (location.hash === '#suggestions') history.replaceState(null, '', location.pathname + location.search);
+      list.innerHTML = '';
+      next = null;
+      more.hidden = true;
+      loadedOlder = false;
+      loadNotes(false);
+    });
+    refresh.addEventListener('click', function () { loadNotes(false); });
+    more.addEventListener('click', function () { loadNotes(true); });
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      if (publish.disabled) return;
+      const message = noteText.value.trim();
+      if (!message || message === '关于「' + topic + '」：') {
+        status.textContent = '请填写留言内容。';
+        noteText.focus();
+        return;
+      }
+      const payload = { nickname: document.getElementById('noteName').value.trim(), kind: noteKind.value, message: message };
+      const draft = JSON.stringify(payload);
+      try {
+        publish.disabled = true;
+        status.textContent = '正在发布…';
+        if (!pendingPost || pendingPost.draft !== draft) pendingPost = { draft: draft, id: crypto.randomUUID() };
+        const response = await fetch(wallEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...payload, requestId: pendingPost.id }),
+          signal: AbortSignal.timeout(10000)
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error);
+        pendingPost = null;
+        if (noteText.value.trim() === message) noteText.value = '';
+        status.textContent = '留言已公开发布。';
+        if (filter.value && filter.value !== payload.kind) filter.value = '';
+        await loadNotes(false);
+      } catch (error) {
+        status.textContent = (error.message && /[\u4e00-\u9fa5]/.test(error.message))
+          ? error.message : '发布暂未确认。内容已保留，可以重试。';
+      } finally {
+        publish.disabled = false;
+      }
+    });
+    loadNotes(false);
+    wallRefreshTimer = setInterval(function () {
+      if (!list.isConnected) { clearInterval(wallRefreshTimer); return; }
+      if (!document.hidden && !refresh.disabled && !loadedOlder) loadNotes(false);
+    }, 20000);
+  }
+
+  function renderWrongBook() {
+    var ids = Object.keys(state.wrong).sort(function (a,b) { return (state.wrong[b].updatedAt || '').localeCompare(state.wrong[a].updatedAt || ''); }), today = localDateKey();
+    var due = ids.filter(function (id) { return !state.wrong[id].reviewAt || state.wrong[id].reviewAt <= today; }).length;
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>错题复习</h1><p>今日待复习 ' + due + ' 道 · 连续学习 ' + currentStreak() + ' 天</p></header>' + (ids.length ? ids.map(function (id) {
+      var wrong = state.wrong[id], baseId = id.replace(/-(debug|transfer)$/, ''), index = FLAT_POINTS.findIndex(function (item) { return item.point.exercise.id === baseId; });
+      if (index < 0) return '';
+      var item = FLAT_POINTS[index];
+      var variant = id === baseId ? null : variantById(item.point, id);
+      var practice = variant || item.point.exercise;
+      return '<section class="card wrong-item"><div class="card-label">' + item.point.title + (variant ? ' · ' + variant.title : '') + ' · ' + (wrong.kind || '练习未通过') + '</div><p>' + practice.title + ' · 错误 ' + (wrong.attempts || 1) + ' 次 · 最近练习 ' + wrong.updatedAt + (wrong.reviewAt && wrong.reviewAt > today ? ' · 下次复习 ' + wrong.reviewAt : ' · 今日待复习') + '</p><p><strong>解题提示：</strong>' + practice.hint + '</p><pre>' + escapeHtml(wrong.code || '') + '</pre><div class="wrong-actions"><button class="btn" type="button" data-retry="' + index + '"' + (variant ? ' data-retry-variant="' + escapeHtml(id) + '"' : '') + '>重新练习</button><button class="btn" type="button" data-master="' + escapeHtml(id) + '">标记已掌握</button></div></section>';
+    }).join('') : '<section class="card"><div class="card-label">还没有错题</div><p>提交练习后若运行报错或检查未通过，题目会自动出现在这里。</p></section>') + feedbackMarkup();
+    mainInner.querySelectorAll('[data-retry]').forEach(function (button) { button.addEventListener('click', function () { viewMode='course'; goTo(Number(button.getAttribute('data-retry'))); var variantId = button.getAttribute('data-retry-variant'); if (variantId) { var check = mainInner.querySelector('[data-variant-check="' + variantId + '"]'); var details = check && check.closest('details'); if (details) { details.open = true; details.scrollIntoView({ behavior: 'smooth', block: 'center' }); } } renderSidebar(); }); });
+    mainInner.querySelectorAll('[data-master]').forEach(function (button) { button.addEventListener('click', function () { delete state.wrong[button.getAttribute('data-master')]; persist(); renderSidebar(); renderWrongBook(); }); });
+  }
+
+  function variantExercises(point) {
+    var base = point.exercise;
+    var context = PRACTICE_CONTEXT[point.id] || { scene: point.analogy, goal: '把本节知识迁移到新的数据或场景。' };
+    return [
+      {
+        id: base.id + '-debug',
+        title: '基础强化：独立完成并检查',
+        prompt: '学习目标：' + context.goal + ' 请独立完成本节基础题，先运行观察实际结果，再按检查项补齐代码。',
+        hint: '先保证代码能运行，再逐条对照完成标准；不要一次改很多处。',
+        starter: base.starter,
+        expected: base.expected,
+        checks: base.checks,
+        explain: '改错题的关键不是猜答案，而是把报错、实际输出和完成标准逐项对应起来。'
+      },
+      {
+        id: base.id + '-transfer',
+        title: '应用练习：结合场景完成任务',
+        prompt: '场景：' + context.scene + '。请用本节核心写法完成基础题要求，逐项理解每个变量和步骤在该场景中的作用，然后运行并提交检查。',
+        hint: '先读基础题要求和预期输出，再把每一步对应到场景中的数据；修改后重新运行，确认输出和语法检查都通过。',
+        starter: base.starter,
+        expected: base.expected,
+        checks: base.checks,
+        explain: '迁移题要求你保留语法结构，同时理解每个变量在新场景中的含义。'
+      }
+    ];
+  }
+
+  function renderVariantExercises(point) {
+    return variantExercises(point).map(function (exercise, index) {
+      var editorId = 'variant-editor-' + exercise.id;
+      var resultId = 'variant-result-' + exercise.id;
+      var runtimeId = 'variant-runtime-' + exercise.id;
+      return '<details class="variation-item"' + (index === 0 ? '' : '') + '><summary>' + exercise.title + '</summary><div class="variation-exercise">' +
+        '<h4>任务要求</h4><p class="variation-prompt">' + exercise.prompt + '</p>' +
+        '<p class="variation-prompt"><strong>提示：</strong>' + exercise.hint + '</p>' +
+        '<textarea class="variation-editor" id="' + editorId + '" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>' +
+        '<div class="variation-toolbar"><button class="btn btn-run" type="button" data-variant-run="' + exercise.id + '">▶ 运行代码</button><button class="btn btn-primary" type="button" data-variant-check="' + exercise.id + '">提交并检查</button><button class="btn" type="button" data-variant-reset="' + exercise.id + '">重置</button><span class="shortcut-hint">预期：' + escapeHtml(exercise.expected) + '</span></div>' +
+        '<pre class="variation-result" id="' + runtimeId + '" hidden></pre><div class="variation-result" id="' + resultId + '" hidden></div>' +
+        '</div></details>';
+    }).join('');
+  }
+
+  function variantById(point, id) {
+    return variantExercises(point).find(function (exercise) { return exercise.id === id; });
+  }
+
+  async function runVariant(point, id, shouldCheck) {
+    var exercise = variantById(point, id);
+    if (!exercise) return;
+    var editor = document.getElementById('variant-editor-' + id);
+    var result = document.getElementById('variant-result-' + id);
+    var runtime = document.getElementById('variant-runtime-' + id);
+    if (!editor || !result || !runtime) return;
+    var code = editor.value;
+    if (!code.trim()) {
+      result.hidden = false;
+      result.className = 'variation-result bad';
+      result.textContent = '编辑区是空的，请先写代码。';
+      return;
+    }
+    var runButton = mainInner.querySelector('[data-variant-run="' + id + '"]');
+    var checkButton = mainInner.querySelector('[data-variant-check="' + id + '"]');
+    if (runButton) runButton.disabled = true;
+    if (checkButton) checkButton.disabled = true;
+    var output = await executePython(code);
+    if (runButton) runButton.disabled = false;
+    if (checkButton) checkButton.disabled = false;
+    runtime.hidden = false;
+    runtime.textContent = output.ok ? (output.stdout || '（程序运行成功，但没有输出）') : (output.error || '运行失败');
+    runtime.className = 'variation-result ' + (output.ok ? 'ok' : 'bad');
+    if (!shouldCheck) return;
+    if (!output.ok) {
+      result.hidden = false;
+      result.className = 'variation-result bad';
+      result.textContent = '提交失败：代码没有成功运行。请根据上方报错修改后重试。';
+      if (!output.infrastructure) recordWrong(exercise, code, /SyntaxError|IndentationError|TabError/.test(output.error || '') ? '变式编译/语法错误' : '变式运行错误');
+      noteStudyDay();
+      renderSidebar();
+      return;
+    }
+    var clean = normalizeCode(code);
+    var outputMatches = normalizeOutput(output.stdout) === normalizeOutput(exercise.expected);
+    var checks = [{ label: '运行输出与预期一致', ok: outputMatches }].concat(exercise.checks.map(function (check) {
+      var ok = false;
+      try { ok = !!check.test(clean); } catch (err) { ok = false; }
+      return { label: check.label, ok: ok };
+    }));
+    var passed = checks.every(function (check) { return check.ok; });
+    result.hidden = false;
+    result.className = 'variation-result ' + (passed ? 'ok' : 'bad');
+    result.textContent = (passed ? '提交通过！这道变式题已完成。\n' : '还需要修改：\n') + checks.map(function (check) { return (check.ok ? '✓ ' : '✗ ') + check.label; }).join('\n');
+    if (passed) {
+      delete state.wrong[exercise.id];
+      noteStudyDay();
+    } else {
+      recordWrong(exercise, code, outputMatches ? '变式要求未满足' : '变式输出不匹配');
+      noteStudyDay();
+    }
+    renderSidebar();
+  }
+
+  function bindVariantExercises(point) {
+    variantExercises(point).forEach(function (exercise) {
+      var editor = document.getElementById('variant-editor-' + exercise.id);
+      if (!editor) return;
+      editor.value = Object.prototype.hasOwnProperty.call(state.drafts, exercise.id) ? state.drafts[exercise.id] : exercise.starter;
+      editor.addEventListener('input', function () { state.drafts[exercise.id] = editor.value; persist(); });
+      editor.addEventListener('keydown', function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') { event.preventDefault(); runVariant(point, exercise.id, false); return; }
+        if (event.key === 'Tab') {
+          event.preventDefault();
+          var start = editor.selectionStart, end = editor.selectionEnd, value = editor.value;
+          editor.value = value.slice(0, start) + '    ' + value.slice(end);
+          editor.selectionStart = editor.selectionEnd = start + 4;
+          state.drafts[exercise.id] = editor.value;
+          persist();
+        }
+      });
+      var run = mainInner.querySelector('[data-variant-run="' + exercise.id + '"]');
+      var check = mainInner.querySelector('[data-variant-check="' + exercise.id + '"]');
+      var reset = mainInner.querySelector('[data-variant-reset="' + exercise.id + '"]');
+      if (run) run.addEventListener('click', function () { runVariant(FLAT_POINTS[currentIndex].point, exercise.id, false); });
+      if (check) check.addEventListener('click', function () { runVariant(FLAT_POINTS[currentIndex].point, exercise.id, true); });
+      if (reset) reset.addEventListener('click', function () { editor.value = exercise.starter; state.drafts[exercise.id] = exercise.starter; persist(); });
+    });
+  }
+
   function updateDraftSilently() {
     var editor = document.getElementById('editor');
     if (!editor) return;
@@ -4597,7 +5367,7 @@ print(product.label())`,
   function setCompleted(id, value, options) {
     options = options || {};
     if (value) {
-      state.completed[id] = true;
+      state.completed[id] = new Date().toISOString();
       noteStudyDay();
       delete state.wrong[id];
     }
@@ -4647,7 +5417,9 @@ print(product.label())`,
       '<button type="button" data-tool="exam" class="' + (viewMode === 'exam' ? 'active' : '') + '">期末急救包</button>' +
       '<button type="button" data-tool="map" class="' + (viewMode === 'map' ? 'active' : '') + '">教材对照</button>' +
       '<button type="button" data-tool="wrong" class="' + (viewMode === 'wrong' ? 'active' : '') + '">错题本 ' + Object.keys(state.wrong).length + '</button>' +
+      '<button type="button" data-tool="wall" class="' + (viewMode === 'wall' ? 'active' : '') + '">便签墙 · 留下想法</button>' +
       '</div>';
+    html += '';
     COURSE.forEach(function (chapter, chapterIndex) {
       var chapterDone = chapter.points.filter(function (point) {
         return !!state.completed[point.exercise.id];
@@ -4663,7 +5435,9 @@ print(product.label())`,
         var flatIndex = POINT_INDEX.get(point.id);
         var done = !!state.completed[point.exercise.id];
         var active = flatIndex === currentIndex;
-        html += '<button class="point-btn' + (active ? ' active' : '') + '" type="button" data-index="' + flatIndex + '">';
+        var completedAt = state.completed[point.exercise.id];
+        var completedTitle = typeof completedAt === 'string' ? '已完成于 ' + completedAt.replace('T', ' ').slice(0, 16) : (completedAt ? '已完成' : '尚未完成');
+        html += '<button class="point-btn' + (active ? ' active' : '') + '" type="button" title="' + completedTitle + '" data-index="' + flatIndex + '">';
         html += '<span class="dot' + (done ? ' done' : '') + '"></span>';
         html += '<span class="point-label">' + (chapterIndex + 1) + '.' + (pointIndex + 1) + ' ' + point.title + '</span>';
         html += '</button>';
@@ -4674,6 +5448,7 @@ print(product.label())`,
 
     sidebarBody.querySelectorAll('[data-tool]').forEach(function (button) {
       button.addEventListener('click', function () {
+        if (button.getAttribute('data-tool') === 'wall') { openNoteWall(); return; }
         viewMode = button.getAttribute('data-tool');
         renderSidebar();
         renderMain();
@@ -4689,113 +5464,11 @@ print(product.label())`,
     });
   }
 
-  function localDateKey(date) {
-    date = date || new Date();
-    return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
-  }
-
-  function noteStudyDay() {
-    state.activity[localDateKey()] = true;
-    persist();
-  }
-
-  function renderTextbookMap() {
-    var doneTotal = ALL_EXERCISES.filter(function (exercise) { return !!state.completed[exercise.id]; }).length;
-    mainInner.innerHTML = '<header class="tool-page-head"><h1>教材章节对照</h1><p>按教材章节查看网站已有内容和完成情况。网站课程目前按学习主题组织，映射关系用于快速定位。</p></header>' +
-      '<section class="card tool-section"><div class="card-label">整体进度</div><p>已完成 ' + doneTotal + ' / ' + ALL_EXERCISES.length + ' 个知识点；连续学习 ' + currentStreak() + ' 天。</p></section>' +
-      '<div class="tool-table-wrap"><table class="tool-table"><thead><tr><th>教材章节</th><th>网站知识点</th><th>完成</th><th>覆盖说明</th></tr></thead><tbody>' +
-      TEXTBOOK_MAP.map(function (row) {
-        var points = row.ids.map(function (id) {
-          var index = POINT_INDEX.get(id);
-          return index == null ? null : FLAT_POINTS[index];
-        }).filter(Boolean);
-        var done = points.filter(function (item) { return !!state.completed[item.point.exercise.id]; }).length;
-        var links = points.map(function (item) {
-          var index = POINT_INDEX.get(item.point.id);
-          return '<button class="tool-link" type="button" data-index="' + index + '">' + item.point.title + '</button>';
-        }).join('、') || '尚未覆盖';
-        return '<tr><td>' + row.book + '</td><td>' + links + '</td><td>' + done + '/' + points.length + '</td><td>' + row.note + '</td></tr>';
-      }).join('') + '</tbody></table></div>';
-    mainInner.querySelectorAll('[data-index]').forEach(function (button) {
-      button.addEventListener('click', function () { viewMode = 'course'; goTo(Number(button.getAttribute('data-index'))); renderSidebar(); });
-    });
-  }
-
-  function renderExamPack() {
-    mainInner.innerHTML = '<header class="tool-page-head"><h1>期末急救包</h1><p>15 道高频题，按基础语法到综合应用排列。先读思路，再展开代码核对。</p></header>' +
-      '<section class="card tool-section"><div class="card-label">复习顺序</div><p>基础题巩固循环、字符串和列表；进阶题组合函数、字典、文件与异常。每道题都列出常见失分点。</p></section>' +
-      EXAM_PACK.map(function (item, index) {
-        return '<details class="exam-item"><summary>' + (index + 1) + '. ' + item.title + ' · ' + item.level + '</summary><div class="exam-body"><h3>思路</h3><p>' + item.idea + '</p><h3>参考代码</h3><pre>' + escapeHtml(item.code) + '</pre><h3>易错点</h3><p>' + item.pitfall + '</p></div></details>';
-      }).join('');
-  }
-
-  function renderWrongBook() {
-    var ids = Object.keys(state.wrong).sort(function (a, b) { return (state.wrong[b].updatedAt || '').localeCompare(state.wrong[a].updatedAt || ''); });
-    var today = localDateKey();
-    var due = ids.filter(function (id) { return !state.wrong[id].reviewAt || state.wrong[id].reviewAt <= today; }).length;
-    var streak = currentStreak();
-    mainInner.innerHTML = '<header class="tool-page-head"><h1>错题复习</h1><p>今日待复习 ' + due + ' 道 · 连续学习 ' + streak + ' 天</p></header>' +
-      (ids.length ? ids.map(function (id) {
-        var wrong = state.wrong[id];
-        var index = FLAT_POINTS.findIndex(function (item) { return item.point.exercise.id === id; });
-        if (index < 0) return '';
-        var item = FLAT_POINTS[index];
-        return '<section class="card wrong-item"><div class="card-label">' + item.point.title + ' · ' + (wrong.kind || '输出或要求不匹配') + '</div>' +
-          '<p>' + item.point.exercise.title + ' · 错误 ' + (wrong.attempts || 1) + ' 次 · 最近练习 ' + (wrong.updatedAt || '今天') + (wrong.reviewAt && wrong.reviewAt > today ? ' · 下次复习 ' + wrong.reviewAt : ' · 今日待复习') + '</p>' +
-          '<pre>' + escapeHtml(wrong.code || '') + '</pre><div class="wrong-actions"><button class="btn" type="button" data-retry="' + index + '">重新练习</button><button class="btn" type="button" data-master="' + escapeHtml(id) + '">标记已掌握</button></div></section>';
-      }).join('') : '<section class="card"><div class="card-label">还没有错题</div><p>提交练习后若运行报错或检查未通过，题目会自动出现在这里。</p></section>');
-    mainInner.querySelectorAll('[data-retry]').forEach(function (button) {
-      button.addEventListener('click', function () { viewMode = 'course'; goTo(Number(button.getAttribute('data-retry'))); renderSidebar(); });
-    });
-    mainInner.querySelectorAll('[data-master]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        delete state.wrong[button.getAttribute('data-master')];
-        persist(); renderSidebar(); renderWrongBook();
-      });
-    });
-  }
-
-  function currentStreak() {
-    var count = 0;
-    var date = new Date();
-    while (state.activity[localDateKey(date)]) {
-      count++;
-      date.setDate(date.getDate() - 1);
-    }
-    return count;
-  }
-
-  function recordWrong(exercise, code, kind) {
-    var old = state.wrong[exercise.id] || {};
-    var attempts = (old.attempts || 0) + 1;
-    var intervals = [1, 3, 7, 14, 30];
-    var days = intervals[Math.min(attempts - 1, intervals.length - 1)];
-    var reviewDate = new Date();
-    reviewDate.setDate(reviewDate.getDate() + days);
-    state.wrong[exercise.id] = {
-      code: String(code || ''), kind: kind, attempts: attempts,
-      firstAt: old.firstAt || localDateKey(), updatedAt: localDateKey(), reviewAt: localDateKey(reviewDate)
-    };
-    persist();
-  }
-
-  function relevantErrors(point) {
-    var ids = point.id;
-    var names = ['SyntaxError', 'NameError', 'TypeError', 'ValueError'];
-    if (/p3-/.test(ids)) names = ['SyntaxError', 'NameError', 'TypeError', 'ZeroDivisionError', 'IndentationError'];
-    else if (/p4-/.test(ids)) names = ['SyntaxError', 'IndexError', 'TypeError', 'AttributeError'];
-    else if (/p5-/.test(ids)) names = ['SyntaxError', 'IndexError', 'TypeError', 'ValueError'];
-    else if (/p6-/.test(ids)) names = ['SyntaxError', 'NameError', 'TypeError', 'UnboundLocalError', 'RecursionError'];
-    else if (/p7-/.test(ids) || /p8-[234]/.test(ids)) names = ['SyntaxError', 'KeyError', 'TypeError', 'AttributeError', 'RuntimeError'];
-    else if (/p10-/.test(ids)) names = ['SyntaxError', 'ValueError', 'FileNotFoundError', 'TypeError'];
-    else if (/p11-/.test(ids)) names = ['SyntaxError', 'TypeError', 'AttributeError', 'NameError'];
-    return ERROR_GUIDE.filter(function (entry) { return names.indexOf(entry.title.split(':')[0].split(' / ')[0]) >= 0 || names.some(function (name) { return entry.title.indexOf(name) === 0; }); }).slice(0, 5);
-  }
-
   function renderMain() {
     if (viewMode === 'exam') return renderExamPack();
     if (viewMode === 'map') return renderTextbookMap();
     if (viewMode === 'wrong') return renderWrongBook();
+    if (viewMode === 'wall') return renderNoteWall();
     var item = FLAT_POINTS[currentIndex];
     var chapter = item.chapter;
     var point = item.point;
@@ -4808,10 +5481,13 @@ print(product.label())`,
     var isDone = !!state.completed[exercise.id];
     var saved = Object.prototype.hasOwnProperty.call(state.drafts, exercise.id) ? state.drafts[exercise.id] : exercise.starter;
     var detail = DETAILS[point.id] || { steps: [], syntax: '', plan: [] };
+    var exampleBreakdown = EXAMPLE_BREAKDOWNS[point.id] || null;
     var practiceContext = PRACTICE_CONTEXT[point.id] || { scene: point.analogy, goal: '理解本节写法并完成练习。' };
     var chapterMeta = CHAPTER_META[chapter.title] || { goal: '', summary: [] };
     var chapterShowcase = CHAPTER_SHOWCASES[chapter.title] || null;
     var deepDive = DEEP_DIVES[point.id] || null;
+    var todayKey = localDateKey();
+    var dueReviews = Object.keys(state.wrong).filter(function (id) { return !state.wrong[id].reviewAt || state.wrong[id].reviewAt <= todayKey; }).length;
     var isFirstInChapter = pointIndex === 0;
     var isLastInChapter = pointIndex === chapter.points.length - 1;
     var isVeryFirst = chapterIndex === 0 && pointIndex === 0;
@@ -4828,7 +5504,7 @@ print(product.label())`,
     }).join('');
 
     mainInner.innerHTML =
-      '<div class="resume-note">' + (hasSavedLearning
+      '<div class="resume-note"><strong>学习状态：</strong>已完成 ' + Object.keys(state.completed).length + ' 个知识点 · 连续学习 ' + currentStreak() + ' 天 · 今日待复习 ' + dueReviews + ' 道。 ' + (hasSavedLearning
         ? '已恢复上次学习位置。代码草稿和完成进度会继续自动保存在当前浏览器。'
         : '开始学习后，代码草稿和完成进度会自动保存在当前浏览器，下次打开这个链接可以继续。') + '</div>' +
       '<header class="page-head">' +
@@ -4874,6 +5550,7 @@ print(product.label())`,
         '<div class="card-label">生活化类比</div>' +
         '<p>' + point.analogy + '</p>' +
       '</section>' +
+      '<section class="example-preview"><strong>先想一想：这段代码要解决什么？</strong><p>' + (exampleBreakdown ? exampleBreakdown.purpose : point.oneLine) + '</p></section>' +
       '<section class="card code-card">' +
         '<div class="card-head">' +
           '<div class="card-label">Python 示例</div>' +
@@ -4888,19 +5565,20 @@ print(product.label())`,
           '<pre class="code"><code>' + highlightPython(point.example) + '</code></pre>' +
         '</div>' +
       '</section>' +
-      (detail.steps.length ?
+      (detail.steps.length || exampleBreakdown ?
         '<section class="card steps-card">' +
-          '<div class="card-label">一步步看懂</div>' +
-          '<ol class="step-list">' + detail.steps.map(function (step, index) {
+          '<div class="card-label">示例逐步拆解 · 跟着数据变化理解逻辑</div>' +
+          '<ol class="step-list">' + (exampleBreakdown ? exampleBreakdown.steps : detail.steps).map(function (step, index) {
             return '<li><span class="step-number">' + (index + 1) + '</span><p>' + step + '</p></li>';
           }).join('') + '</ol>' +
-          '<div class="syntax-box">' +
+          (exampleBreakdown && exampleBreakdown.output ? '<div class="example-output"><strong>运行结果</strong>\n' + escapeHtml(exampleBreakdown.output) + '</div>' : '') +
+          (detail.syntax ? '<div class="syntax-box">' +
             '<div class="syntax-head">' +
               '<span class="syntax-label">记住这个写法</span>' +
               '<span class="syntax-tag">模板</span>' +
             '</div>' +
             '<pre class="syntax-code">' + escapeHtml(detail.syntax) + '</pre>' +
-          '</div>' +
+          '</div>' : '') +
         '</section>' : '') +
       (deepDive ? '<section class="card deep-dive-card">' +
         '<div class="card-label">把它真正想明白</div>' +
@@ -4908,10 +5586,12 @@ print(product.label())`,
           return '<div class="concept-item"><strong>' + item[0] + '</strong><p>' + item[1] + '</p></div>';
         }).join('') + '</div>' +
         (deepDive.traceRows ? '<div class="trace-title">程序运行时，数据是这样变化的</div>' +
+          '<pre class="trace-code">' + point.example.split('\n').map(function (line, lineIndex) { return '<span class="trace-code-line" data-trace-code-line="' + (lineIndex + 1) + '"><span class="trace-line-number">' + (lineIndex + 1) + '</span>' + (line ? highlightPython(line) : '&nbsp;') + '</span>'; }).join('') + '</pre>' +
+          '<div class="trace-controls"><button type="button" data-trace-prev>上一步</button><button type="button" data-trace-next>下一步</button><button type="button" data-trace-play>自动播放</button><label>速度 <select data-trace-speed><option value="1600">慢</option><option value="900" selected>中</option><option value="400">快</option></select></label></div>' +
           '<div class="trace-table-wrap"><table class="trace-table"><thead><tr>' +
           deepDive.traceHeaders.map(function (header) { return '<th>' + header + '</th>'; }).join('') +
           '</tr></thead><tbody>' + deepDive.traceRows.map(function (row) {
-            return '<tr>' + row.map(function (cell) { return '<td>' + cell + '</td>'; }).join('') + '</tr>';
+            return '<tr data-trace-row>' + row.map(function (cell) { return '<td>' + cell + '</td>'; }).join('') + '</tr>';
           }).join('') + '</tbody></table></div>' : '') +
         '<div class="deep-note">' + deepDive.note + '</div>' +
       '</section>' : '') +
@@ -4919,12 +5599,9 @@ print(product.label())`,
         '<div class="card-label">常见错误 / 易混点</div>' +
         '<ul>' + point.mistakes.map(function (mistake) { return '<li>' + mistake + '</li>'; }).join('') + '</ul>' +
       '</section>' +
-      '<section class="card error-guide">' +
-        '<div class="card-label">本节常见报错</div>' +
-        '<div class="error-guide-list">' + relevantErrors(point).map(function (entry) {
-          return '<div class="error-guide-item"><code>' + entry.title + '</code><p><strong>原因：</strong>' + entry.cause + '<br><strong>处理：</strong>' + entry.fix + '</p></div>';
-        }).join('') + '</div>' +
-      '</section>' +
+      '<section class="card error-guide"><div class="card-label">本节常见报错</div><div class="error-guide-list">' + relevantErrors(point).map(function (entry) {
+        return '<div class="error-guide-item"><code>' + entry.title + '</code><p><strong>原因：</strong>' + entry.cause + '<br><strong>处理：</strong>' + entry.fix + '</p></div>';
+      }).join('') + '</div></section>' +
       '<section class="card exercise-card">' +
         '<div class="exercise-head">' +
           '<div>' +
@@ -4942,23 +5619,13 @@ print(product.label())`,
           '<p class="ex-prompt">' + exercise.prompt + '</p>' +
         '</div>' +
         (detail.plan.length ?
-          '<details class="plan-box">' +
-            '<summary class="plan-title"><span class="plan-dot"></span>解题路线（先自己尝试）</summary>' +
+          '<div class="plan-box">' +
+            '<div class="plan-title"><span class="plan-dot"></span>解题步骤</div>' +
             '<ol class="plan-list">' + detail.plan.map(function (step) { return '<li>' + step + '</li>'; }).join('') + '</ol>' +
-          '</details>' : '') +
+          '</div>' : '') +
         '<details class="hint-box">' +
-          '<summary>卡住了？分三步获取提示</summary>' +
-          '<div class="hint-steps">' +
-            '<details class="hint-step hint-step-1"><summary>提示 1：先想清楚任务</summary><p>' +
-              '先不要急着写完整代码：找出题目中的输入、需要重复或判断的动作，以及最后要输出的结果。先写出变量名或函数名。' +
-            '</p></details>' +
-            '<details class="hint-step hint-step-2"><summary>提示 2：搭出代码骨架</summary><p>' +
-              escapeHtml(detail.plan.length ? detail.plan[0] : '先写出本题要求的基本语法结构，再把题目给出的数据放进去。') +
-            '</p></details>' +
-            '<details class="hint-step hint-step-3"><summary>提示 3：检查关键写法</summary><p>' +
-              exercise.hint +
-            '</p></details>' +
-          '</div>' +
+          '<summary>卡住了？展开提示</summary>' +
+          '<p>' + exercise.hint + '</p>' +
         '</details>' +
         '<div class="criteria-box">' +
           '<div class="criteria-title">完成标准</div>' +
@@ -4996,6 +5663,7 @@ print(product.label())`,
         '</div>' +
         '<div class="result" id="result" hidden></div>' +
       '</section>' +
+      '<section class="card variation-card"><div class="card-label">变式练习 · 每题都可以运行和提交检查</div><div class="variation-list">' + renderVariantExercises(point) + '</div></section>' +
       (isLastInChapter ?
         '<section class="card summary-card">' +
           '<div class="card-label">本章小结</div>' +
@@ -5008,7 +5676,48 @@ print(product.label())`,
         '<button class="btn" id="prevBtn" type="button"' + (currentIndex === 0 ? ' disabled' : '') + '>← 上一节</button>' +
         '<span class="pos">' + (currentIndex + 1) + ' / ' + FLAT_POINTS.length + '</span>' +
         '<button class="btn" id="nextBtn" type="button"' + (currentIndex === FLAT_POINTS.length - 1 ? ' disabled' : '') + '>下一节 →</button>' +
-      '</nav>';
+      '</nav>' + feedbackMarkup();
+
+    var traceRows = mainInner.querySelectorAll('[data-trace-row]');
+    if (traceRows.length) {
+      var tracePosition = 0;
+      var traceTimer = null;
+      var tracePrev = mainInner.querySelector('[data-trace-prev]');
+      var traceNext = mainInner.querySelector('[data-trace-next]');
+      var tracePlay = mainInner.querySelector('[data-trace-play]');
+      var traceSpeed = mainInner.querySelector('[data-trace-speed]');
+      function paintTrace() {
+        traceRows.forEach(function (row, index) { row.classList.toggle('active', index === tracePosition); });
+        var codeLines = mainInner.querySelectorAll('[data-trace-code-line]');
+        var activeLine = deepDive.traceLineNumbers ? deepDive.traceLineNumbers[tracePosition] : 0;
+        codeLines.forEach(function (line) { line.classList.toggle('active', Number(line.getAttribute('data-trace-code-line')) === activeLine && activeLine > 0); });
+        tracePrev.disabled = tracePosition === 0;
+        traceNext.disabled = tracePosition === traceRows.length - 1;
+      }
+      function stopTrace() {
+        if (traceTimer) clearInterval(traceTimer);
+        traceTimer = null;
+        tracePlay.textContent = '自动播放';
+      }
+      tracePrev.addEventListener('click', function () { stopTrace(); tracePosition = Math.max(0, tracePosition - 1); paintTrace(); });
+      traceNext.addEventListener('click', function () { stopTrace(); tracePosition = Math.min(traceRows.length - 1, tracePosition + 1); paintTrace(); });
+      tracePlay.addEventListener('click', function () {
+        if (traceTimer) { stopTrace(); return; }
+        if (tracePosition >= traceRows.length - 1) tracePosition = 0;
+        paintTrace();
+        tracePlay.textContent = '暂停';
+        traceTimer = setInterval(function () {
+          if (tracePosition >= traceRows.length - 1) { stopTrace(); return; }
+          tracePosition++;
+          paintTrace();
+          if (tracePosition >= traceRows.length - 1) stopTrace();
+        }, Number(traceSpeed.value));
+      });
+      traceSpeed.addEventListener('change', function () {
+        if (traceTimer) { stopTrace(); tracePlay.click(); }
+      });
+      paintTrace();
+    }
 
     var editor = document.getElementById('editor');
     editor.value = saved;
@@ -5035,6 +5744,7 @@ print(product.label())`,
     });
     document.getElementById('prevBtn').addEventListener('click', function () { goTo(currentIndex - 1); });
     document.getElementById('nextBtn').addEventListener('click', function () { goTo(currentIndex + 1); });
+    bindVariantExercises(point);
   }
 
   var pythonWorker = null;
@@ -5044,6 +5754,7 @@ print(product.label())`,
 
   function createPythonWorker() {
     if (pythonWorker) pythonWorker.terminate();
+    var pythonBase = new URL('./pyodide/', location.href).href;
     var source = [
       'var enginePromise = null;',
       'self.onmessage = async function (event) {',
@@ -5051,8 +5762,9 @@ print(product.label())`,
       '  try {',
       '    if (!enginePromise) {',
       '      self.postMessage({ id: data.id, phase: "loading" });',
-      '      importScripts("https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js");',
-      '      enginePromise = loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.7/full/" });',
+      '      var indexURL = ' + JSON.stringify(pythonBase) + ';',
+      '      importScripts(indexURL + "pyodide.js");',
+      '      enginePromise = loadPyodide({ indexURL: indexURL });',
       '    }',
       '    var pyodide = await enginePromise;',
       '    self.postMessage({ id: data.id, phase: "running" });',
@@ -5231,7 +5943,11 @@ print(product.label())`,
     setRunBusy(false);
     showRuntime(runtime);
     if (!runtime.ok) {
-      recordWrong(exercise, editor.value, '运行错误');
+      if (!runtime.infrastructure) {
+        var errorKind = /SyntaxError|IndentationError|TabError/.test(runtime.error || '') ? '编译/语法错误' : '运行错误';
+        recordWrong(exercise, editor.value, errorKind);
+      }
+      noteStudyDay();
       renderSidebar();
       box.className = 'result result-bad';
       box.innerHTML = '<div class="result-title">代码还没有成功运行</div>' +
@@ -5274,7 +5990,7 @@ print(product.label())`,
         '<ul class="check-list">' + checks.map(function (check) {
           return '<li class="' + (check.ok ? 'ok' : 'bad') + '">' + (check.ok ? '✓' : '✗') + ' ' + escapeHtml(check.label) + '</li>';
         }).join('') + '</ul>' +
-        '<p class="result-explain">先从“提示 1”开始。如果仍然卡住，再依次展开“提示 2”和“提示 3”，不要一次把所有答案都看完。</p>' +
+        '<p class="result-explain">提示：' + exercise.hint + '</p>' +
         (outputMatches ? '' : '<p class="result-explain"><strong>实际输出：</strong><br><code>' + escapeHtml(normalizeOutput(runtime.stdout) || '（无输出）') + '</code><br><strong>预期输出：</strong><br><code>' + escapeHtml(normalizeOutput(exercise.expected)) + '</code></p>') +
         '<p class="result-explain">系统已经真实运行代码，并继续检查是否使用了本题要求的知识点。对照失败项逐个修改即可。</p>';
     }
@@ -5356,11 +6072,13 @@ print(product.label())`,
   function goTo(index) {
     if (index < 0 || index >= FLAT_POINTS.length) return;
     if (index === currentIndex) {
+      viewMode = 'course';
       renderMain();
       renderSidebar();
       mainEl.scrollTop = 0;
       return;
     }
+    viewMode = 'course';
     updateDraftSilently();
     currentIndex = index;
     state.last = FLAT_POINTS[index].point.id;
