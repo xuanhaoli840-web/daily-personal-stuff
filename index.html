@@ -183,6 +183,26 @@ button {
   scrollbar-width: thin;
   scrollbar-color: #cbd5e1 transparent;
 }
+.tool-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+}
+.tool-nav button {
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #f8fafc;
+  color: var(--text-2);
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.tool-nav button:hover, .tool-nav button.active { border-color: #93c5fd; background: #eff6ff; color: #1d4ed8; }
 .sidebar-body::-webkit-scrollbar { width: 8px; }
 .sidebar-body::-webkit-scrollbar-thumb {
   background: #cbd5e1;
@@ -750,6 +770,30 @@ pre.code {
   border-radius: 50%;
   background: #e9c47a;
 }
+.error-guide { border-color: #fecaca; background: #fffafa; }
+.error-guide-list { display: grid; gap: 9px; margin-top: 12px; }
+.error-guide-item { padding: 11px 12px; border: 1px solid #fee2e2; border-radius: 7px; background: #fff; }
+.error-guide-item code { color: #b42318; }
+.error-guide-item p { margin: 6px 0 0; color: var(--text-2); font-size: 12px; line-height: 1.65; }
+.tool-page-head { margin-bottom: 22px; }
+.tool-page-head h1 { margin: 0 0 8px; font-size: 27px; }
+.tool-page-head p { margin: 0; color: var(--muted); line-height: 1.7; }
+.tool-section { margin-bottom: 16px; }
+.tool-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.tool-table { width: 100%; border-collapse: collapse; min-width: 650px; font-size: 12px; }
+.tool-table th, .tool-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; line-height: 1.6; }
+.tool-table th { background: #f1f5f9; color: var(--text-2); }
+.tool-table tr:last-child td { border-bottom: 0; }
+.tool-link { border: 0; padding: 0; background: none; color: #2563eb; font: inherit; cursor: pointer; text-align: left; }
+.exam-item { border: 1px solid var(--border); border-radius: 8px; background: #fff; margin-bottom: 10px; }
+.exam-item summary { padding: 14px 16px; cursor: pointer; font-weight: 750; color: var(--text); }
+.exam-body { padding: 0 16px 16px; color: var(--text-2); font-size: 13px; line-height: 1.75; }
+.exam-body h3 { margin: 12px 0 5px; color: var(--text); font-size: 12px; }
+.exam-body pre { overflow: auto; padding: 12px; border-radius: 7px; background: var(--code-bg); color: var(--code-text); font: 12px/1.65 var(--mono); }
+.wrong-item { margin-bottom: 12px; }
+.wrong-item pre { overflow: auto; max-height: 240px; padding: 12px; border-radius: 7px; background: var(--code-bg); color: var(--code-text); white-space: pre-wrap; }
+.wrong-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+@media (max-width: 960px) { .tool-nav { padding: 10px 12px; } .tool-page-head h1 { font-size: 23px; } }
 
 .exercise-card {
   overflow: hidden;
@@ -4199,6 +4243,51 @@ print(product.label())`,
   };
 
   const STORAGE_KEY = 'python-learning-demo-v1';
+  const ERROR_GUIDE = [
+    { pattern: /SyntaxError/, title: 'SyntaxError: invalid syntax', cause: '标点、括号或语句结构不符合 Python 语法。', fix: '检查报错行前后是否缺冒号、括号或引号，并确认使用英文标点。' },
+    { pattern: /IndentationError|TabError/, title: 'IndentationError / TabError', cause: '代码块缩进不一致，或冒号后没有缩进代码。', fix: '统一使用 4 个空格；检查 if、for、while、def、class 后面的代码块。' },
+    { pattern: /NameError/, title: 'NameError: name is not defined', cause: '变量或函数尚未定义，或名称拼写不一致。', fix: '先赋值或定义，再使用；逐字核对大小写和下划线。' },
+    { pattern: /TypeError.*concatenate|TypeError.*str.*int/i, title: 'TypeError: 字符串和数字不能直接拼接', cause: '把文字和整数用 + 直接连接。', fix: '使用 f-string，或先用 str() 把数字转换为文字。' },
+    { pattern: /TypeError/, title: 'TypeError: 类型或参数不匹配', cause: '运算两侧类型不兼容，或函数收到错误类型/数量的参数。', fix: '检查 input() 的返回类型、函数定义和调用参数。' },
+    { pattern: /ValueError/, title: 'ValueError: invalid value', cause: '值的格式不符合转换或操作的要求。', fix: '检查输入内容；转换用户输入时考虑捕获 ValueError。' },
+    { pattern: /IndexError/, title: 'IndexError: list index out of range', cause: '列表索引超出有效范围。', fix: '下标从 0 开始，最大是 len(items) - 1；循环优先直接遍历元素。' },
+    { pattern: /KeyError/, title: 'KeyError: key not found', cause: '字典里没有要访问的键。', fix: '不确定键是否存在时使用 data.get(key) 或先用 key in data 检查。' },
+    { pattern: /ZeroDivisionError/, title: 'ZeroDivisionError: division by zero', cause: '除数为 0，常见于空数据的平均值计算。', fix: '计算前确认分母不为 0，并为没有数据的情况设置处理方式。' },
+    { pattern: /FileNotFoundError/, title: 'FileNotFoundError: file not found', cause: '路径写错、文件不存在，或运行目录与预期不同。', fix: '检查文件名和相对路径；先确认文件存在再读取。' },
+    { pattern: /AttributeError/, title: 'AttributeError: attribute not found', cause: '对象没有该属性或方法，常见于名称拼写错误。', fix: '检查对象的实际类型、方法拼写，以及字符串方法是否接住返回值。' },
+    { pattern: /UnboundLocalError/, title: 'UnboundLocalError: local variable referenced before assignment', cause: '函数内赋值使名称成为局部变量，但读取发生在赋值之前。', fix: '调整赋值顺序；优先通过参数传入数据并用 return 返回结果。' },
+    { pattern: /RecursionError/, title: 'RecursionError: maximum recursion depth exceeded', cause: '递归没有走到终止条件，或问题规模没有缩小。', fix: '先写清最小输入的返回值，并确认每次递归都更接近终止条件。' },
+    { pattern: /RuntimeError.*dictionary changed/i, title: 'RuntimeError: dictionary changed size during iteration', cause: '遍历字典时同时新增或删除键。', fix: '先复制 keys/items 再修改，或把要删除的键收集起来统一处理。' }
+  ];
+  const TEXTBOOK_MAP = [
+    { book: '第1章 Python 概述与开发环境', ids: ['p1-1'], note: '变量示例作为第一个可运行程序的延伸；安装与 IDE 操作需在本机完成。' },
+    { book: '第2章 内置对象、运算符、表达式、内置函数', ids: ['p1-1','p1-2','p1-3','p2-1','p2-2','p4-3','p4-4','p5-1','p5-3','p7-1','p7-2','p9-1'], note: '类型转换、输入输出、常用函数与表达式。' },
+    { book: '第3章 序列：字符串、列表、元组', ids: ['p4-1','p4-2','p5-1','p5-2','p5-3','p9-2'], note: '索引切片、字符串方法、列表操作和推导式。' },
+    { book: '第4章 程序控制结构', ids: ['p2-1','p2-2','p3-1','p3-2','p3-3','p3-4','p3-5','p3-6','p3-7'], note: '分支、循环、嵌套与典型算法。' },
+    { book: '第5章 函数', ids: ['p6-1','p6-2','p6-3','p6-4','p6-5','p6-6'], note: '定义调用、参数、返回、作用域与组合。' },
+    { book: '第6章 面向对象程序设计', ids: ['p11-3'], note: '类、实例属性与方法；封装、继承可继续补充专门课程。' },
+    { book: '第7章 字典与集合', ids: ['p7-1','p7-2','p8-2','p8-4'], note: '字典创建访问、遍历及分组汇总；集合运算目前尚未单列。' },
+    { book: '第8章 文件与异常', ids: ['p10-1','p10-2','p10-3'], note: '文件、JSON 与异常处理。' },
+    { book: '第9章 Python 计算生态（选学）', ids: ['p11-1','p11-2'], note: '日期和批量命名是标准库实践；turtle、matplotlib、pandas 尚未覆盖。' }
+  ];
+  const EXAM_PACK = [
+    { title: '水仙花数', level: '基础', idea: '逐位拆出百位、十位、个位，计算立方和并与原数比较。', code: 'for n in range(100, 1000):\n    a = n // 100\n    b = n // 10 % 10\n    c = n % 10\n    if a**3 + b**3 + c**3 == n:\n        print(n)', pitfall: '整除和取余的顺序要正确；范围要覆盖 100 到 999。' },
+    { title: '判断素数', level: '基础', idea: '小于 2 的数不是素数；只需检查 2 到平方根是否有因数。', code: 'n = 29\nis_prime = n >= 2\nfor i in range(2, int(n ** 0.5) + 1):\n    if n % i == 0:\n        is_prime = False\n        break\nprint("是素数" if is_prime else "不是素数")', pitfall: '1 不是素数；range 终点不包含，所以要加 1。' },
+    { title: '最大公约数与最小公倍数', level: '基础', idea: '辗转相除直到余数为 0；最小公倍数等于两数乘积除以最大公约数。', code: 'a, b = 24, 18\nx, y = a, b\nwhile y:\n    x, y = y, x % y\ngcd = x\nlcm = a * b // gcd\nprint(gcd, lcm)', pitfall: '计算过程中保留原始 a、b；0 与负数需要按题目约定处理。' },
+    { title: '斐波那契数列', level: '基础', idea: '维护相邻两项，每轮输出当前项并把状态向前推进。', code: 'a, b = 0, 1\nfor _ in range(20):\n    print(a)\n    a, b = b, a + b', pitfall: '先确认数列从 0, 1 还是 1, 1 开始；不要把更新写成依赖已覆盖的旧值。' },
+    { title: '九九乘法表', level: '基础', idea: '外层循环控制行，内层循环打印当前行的乘法表达式。', code: 'for i in range(1, 10):\n    for j in range(1, i + 1):\n        print(f"{j}×{i}={i*j}", end="\\t")\n    print()', pitfall: '换行 print 要放在内层循环结束后。' },
+    { title: '百钱百鸡', level: '基础', idea: '把公鸡、母鸡数量作为循环变量，利用总价和总数约束筛选解。', code: 'for rooster in range(21):\n    for hen in range(34):\n        chick = 100 - rooster - hen\n        if chick >= 0 and 5*rooster + 3*hen + chick/3 == 100:\n            print(rooster, hen, chick)', pitfall: '小鸡只能按整只购买，建议把金额都换成分或整理为整数方程。' },
+    { title: '成绩统计', level: '基础', idea: '用列表保存成绩，再用 sum、len、max、min 汇总。', code: 'scores = [78, 92, 85, 61]\nprint(sum(scores) / len(scores))\nprint(max(scores), min(scores))', pitfall: '空列表不能求平均值；先检查是否至少有一条成绩。' },
+    { title: '字符串反转与回文', level: '基础', idea: '切片 [::-1] 可反转字符串，比较原文与反转结果即可判断回文。', code: 'text = "level"\nreversed_text = text[::-1]\nprint(reversed_text)\nprint(text == reversed_text)', pitfall: '如果题目忽略空格和大小写，要先清洗字符串再比较。' },
+    { title: '学生信息管理', level: '进阶', idea: '用字典以学号为键保存记录，再根据命令完成增删改查。', code: 'students = {"S01": {"name": "小林", "score": 88}}\nstudents["S02"] = {"name": "小周", "score": 91}\nfor sid, info in students.items():\n    print(sid, info["name"], info["score"])', pitfall: '先判断键是否存在；删除前确认记录，避免 KeyError。' },
+    { title: '词频统计', level: '进阶', idea: '清洗文本后按空白拆词，用字典累加每个词出现的次数。', code: 'text = "Python is fun and Python is useful"\ncounts = {}\nfor word in text.lower().split():\n    counts[word] = counts.get(word, 0) + 1\nprint(sorted(counts.items(), key=lambda item: item[1], reverse=True))', pitfall: '大小写、标点和中文分词规则会改变统计结果，先明确清洗口径。' },
+    { title: '二分查找', level: '进阶', idea: '在有序列表中每次检查中间位置，排除不可能的一半。', code: 'nums = [3, 8, 12, 19, 27, 34]\ntarget = 19\nleft, right = 0, len(nums) - 1\nanswer = -1\nwhile left <= right:\n    mid = (left + right) // 2\n    if nums[mid] == target:\n        answer = mid\n        break\n    if nums[mid] < target:\n        left = mid + 1\n    else:\n        right = mid - 1\nprint(answer)', pitfall: '输入必须有序；边界更新需加减 1，否则可能死循环。' },
+    { title: '冒泡排序', level: '进阶', idea: '反复比较相邻元素，把较大的值逐步交换到末尾。', code: 'nums = [5, 2, 4, 1]\nfor end in range(len(nums) - 1, 0, -1):\n    for i in range(end):\n        if nums[i] > nums[i + 1]:\n            nums[i], nums[i + 1] = nums[i + 1], nums[i]\nprint(nums)', pitfall: '内层边界要保证 i + 1 不越界；已经有序时可提前结束优化。' },
+    { title: '矩阵相加', level: '进阶', idea: '对应位置元素相加，两个矩阵的行列数必须一致。', code: 'a = [[1, 2], [3, 4]]\nb = [[5, 6], [7, 8]]\nresult = []\nfor i in range(len(a)):\n    row = []\n    for j in range(len(a[0])):\n        row.append(a[i][j] + b[i][j])\n    result.append(row)\nprint(result)', pitfall: '先校验两个矩阵维度相同；每一行都需要独立创建。' },
+    { title: '日期是当年第几天', level: '进阶', idea: '累加当前月份之前每个月的天数，再加上日期；闰年二月多一天。', code: 'days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]\nyear, month, day = 2024, 3, 1\nif year % 400 == 0 or (year % 4 == 0 and year % 100 != 0):\n    days[1] = 29\nprint(sum(days[:month - 1]) + day)', pitfall: '闰年需同时处理世纪年份例外；月下标从 0 开始。' },
+    { title: '购物车小计', level: '进阶', idea: '用列表保存商品字典，遍历时累计单价乘数量。', code: 'cart = [{"name": "奶茶", "price": 12, "count": 2}, {"name": "面包", "price": 8, "count": 1}]\ntotal = 0\nfor item in cart:\n    total += item["price"] * item["count"]\nprint(total)', pitfall: '金额计算应统一数值类型；正式支付场景不要依赖二进制浮点数。' },
+    { title: '异常保护的数字输入', level: '进阶', idea: '把类型转换放进 try，捕获预期的 ValueError 并重新提示。', code: 'text = "abc"\ntry:\n    number = int(text)\nexcept ValueError:\n    print("请输入整数")\nelse:\n    print(number * 2)', pitfall: '只捕获预期异常，避免裸 except 把真正的程序错误隐藏起来。' }
+  ];
   const FLAT_POINTS = [];
   const POINT_INDEX = new Map();
   COURSE.forEach(function (chapter) {
@@ -4224,12 +4313,14 @@ print(product.label())`,
     return {
       completed: data && data.completed && typeof data.completed === 'object' && !Array.isArray(data.completed) ? data.completed : {},
       drafts: data && data.drafts && typeof data.drafts === 'object' && !Array.isArray(data.drafts) ? data.drafts : {},
-      last: data && typeof data.last === 'string' ? data.last : null
+      last: data && typeof data.last === 'string' ? data.last : null,
+      wrong: data && data.wrong && typeof data.wrong === 'object' && !Array.isArray(data.wrong) ? data.wrong : {},
+      activity: data && data.activity && typeof data.activity === 'object' && !Array.isArray(data.activity) ? data.activity : {}
     };
   }
 
   function loadState() {
-    var empty = { completed: {}, drafts: {}, last: null };
+    var empty = { completed: {}, drafts: {}, last: null, wrong: {}, activity: {} };
     try {
       var raw = storageOK ? localStorage.getItem(STORAGE_KEY) : memoryStore[STORAGE_KEY];
       if (!raw) return empty;
@@ -4272,6 +4363,7 @@ print(product.label())`,
   var mobileProgress = document.getElementById('mobileProgress');
 
   var currentIndex = 0;
+  var viewMode = 'course';
   if (state.last && POINT_INDEX.has(state.last)) {
     currentIndex = POINT_INDEX.get(state.last);
   }
@@ -4504,7 +4596,11 @@ print(product.label())`,
 
   function setCompleted(id, value, options) {
     options = options || {};
-    if (value) state.completed[id] = true;
+    if (value) {
+      state.completed[id] = true;
+      noteStudyDay();
+      delete state.wrong[id];
+    }
     else delete state.completed[id];
     persist();
     renderSidebar();
@@ -4546,7 +4642,12 @@ print(product.label())`,
     storageNote.hidden = storageOK;
 
     var activeChapter = FLAT_POINTS[currentIndex].chapter;
-    var html = '';
+    var html = '<div class="tool-nav">' +
+      '<button type="button" data-tool="course" class="' + (viewMode === 'course' ? 'active' : '') + '">课程目录</button>' +
+      '<button type="button" data-tool="exam" class="' + (viewMode === 'exam' ? 'active' : '') + '">期末急救包</button>' +
+      '<button type="button" data-tool="map" class="' + (viewMode === 'map' ? 'active' : '') + '">教材对照</button>' +
+      '<button type="button" data-tool="wrong" class="' + (viewMode === 'wrong' ? 'active' : '') + '">错题本 ' + Object.keys(state.wrong).length + '</button>' +
+      '</div>';
     COURSE.forEach(function (chapter, chapterIndex) {
       var chapterDone = chapter.points.filter(function (point) {
         return !!state.completed[point.exercise.id];
@@ -4571,6 +4672,15 @@ print(product.label())`,
     });
     sidebarBody.innerHTML = html;
 
+    sidebarBody.querySelectorAll('[data-tool]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        viewMode = button.getAttribute('data-tool');
+        renderSidebar();
+        renderMain();
+        if (isMobileLayout()) closeDrawer(false);
+      });
+    });
+
     sidebarBody.querySelectorAll('.point-btn').forEach(function (button) {
       button.addEventListener('click', function () {
         goTo(Number(button.getAttribute('data-index')));
@@ -4579,7 +4689,113 @@ print(product.label())`,
     });
   }
 
+  function localDateKey(date) {
+    date = date || new Date();
+    return date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+  }
+
+  function noteStudyDay() {
+    state.activity[localDateKey()] = true;
+    persist();
+  }
+
+  function renderTextbookMap() {
+    var doneTotal = ALL_EXERCISES.filter(function (exercise) { return !!state.completed[exercise.id]; }).length;
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>教材章节对照</h1><p>按教材章节查看网站已有内容和完成情况。网站课程目前按学习主题组织，映射关系用于快速定位。</p></header>' +
+      '<section class="card tool-section"><div class="card-label">整体进度</div><p>已完成 ' + doneTotal + ' / ' + ALL_EXERCISES.length + ' 个知识点；连续学习 ' + currentStreak() + ' 天。</p></section>' +
+      '<div class="tool-table-wrap"><table class="tool-table"><thead><tr><th>教材章节</th><th>网站知识点</th><th>完成</th><th>覆盖说明</th></tr></thead><tbody>' +
+      TEXTBOOK_MAP.map(function (row) {
+        var points = row.ids.map(function (id) {
+          var index = POINT_INDEX.get(id);
+          return index == null ? null : FLAT_POINTS[index];
+        }).filter(Boolean);
+        var done = points.filter(function (item) { return !!state.completed[item.point.exercise.id]; }).length;
+        var links = points.map(function (item) {
+          var index = POINT_INDEX.get(item.point.id);
+          return '<button class="tool-link" type="button" data-index="' + index + '">' + item.point.title + '</button>';
+        }).join('、') || '尚未覆盖';
+        return '<tr><td>' + row.book + '</td><td>' + links + '</td><td>' + done + '/' + points.length + '</td><td>' + row.note + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    mainInner.querySelectorAll('[data-index]').forEach(function (button) {
+      button.addEventListener('click', function () { viewMode = 'course'; goTo(Number(button.getAttribute('data-index'))); renderSidebar(); });
+    });
+  }
+
+  function renderExamPack() {
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>期末急救包</h1><p>15 道高频题，按基础语法到综合应用排列。先读思路，再展开代码核对。</p></header>' +
+      '<section class="card tool-section"><div class="card-label">复习顺序</div><p>基础题巩固循环、字符串和列表；进阶题组合函数、字典、文件与异常。每道题都列出常见失分点。</p></section>' +
+      EXAM_PACK.map(function (item, index) {
+        return '<details class="exam-item"><summary>' + (index + 1) + '. ' + item.title + ' · ' + item.level + '</summary><div class="exam-body"><h3>思路</h3><p>' + item.idea + '</p><h3>参考代码</h3><pre>' + escapeHtml(item.code) + '</pre><h3>易错点</h3><p>' + item.pitfall + '</p></div></details>';
+      }).join('');
+  }
+
+  function renderWrongBook() {
+    var ids = Object.keys(state.wrong).sort(function (a, b) { return (state.wrong[b].updatedAt || '').localeCompare(state.wrong[a].updatedAt || ''); });
+    var today = localDateKey();
+    var due = ids.filter(function (id) { return !state.wrong[id].reviewAt || state.wrong[id].reviewAt <= today; }).length;
+    var streak = currentStreak();
+    mainInner.innerHTML = '<header class="tool-page-head"><h1>错题复习</h1><p>今日待复习 ' + due + ' 道 · 连续学习 ' + streak + ' 天</p></header>' +
+      (ids.length ? ids.map(function (id) {
+        var wrong = state.wrong[id];
+        var index = FLAT_POINTS.findIndex(function (item) { return item.point.exercise.id === id; });
+        if (index < 0) return '';
+        var item = FLAT_POINTS[index];
+        return '<section class="card wrong-item"><div class="card-label">' + item.point.title + ' · ' + (wrong.kind || '输出或要求不匹配') + '</div>' +
+          '<p>' + item.point.exercise.title + ' · 错误 ' + (wrong.attempts || 1) + ' 次 · 最近练习 ' + (wrong.updatedAt || '今天') + (wrong.reviewAt && wrong.reviewAt > today ? ' · 下次复习 ' + wrong.reviewAt : ' · 今日待复习') + '</p>' +
+          '<pre>' + escapeHtml(wrong.code || '') + '</pre><div class="wrong-actions"><button class="btn" type="button" data-retry="' + index + '">重新练习</button><button class="btn" type="button" data-master="' + escapeHtml(id) + '">标记已掌握</button></div></section>';
+      }).join('') : '<section class="card"><div class="card-label">还没有错题</div><p>提交练习后若运行报错或检查未通过，题目会自动出现在这里。</p></section>');
+    mainInner.querySelectorAll('[data-retry]').forEach(function (button) {
+      button.addEventListener('click', function () { viewMode = 'course'; goTo(Number(button.getAttribute('data-retry'))); renderSidebar(); });
+    });
+    mainInner.querySelectorAll('[data-master]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        delete state.wrong[button.getAttribute('data-master')];
+        persist(); renderSidebar(); renderWrongBook();
+      });
+    });
+  }
+
+  function currentStreak() {
+    var count = 0;
+    var date = new Date();
+    while (state.activity[localDateKey(date)]) {
+      count++;
+      date.setDate(date.getDate() - 1);
+    }
+    return count;
+  }
+
+  function recordWrong(exercise, code, kind) {
+    var old = state.wrong[exercise.id] || {};
+    var attempts = (old.attempts || 0) + 1;
+    var intervals = [1, 3, 7, 14, 30];
+    var days = intervals[Math.min(attempts - 1, intervals.length - 1)];
+    var reviewDate = new Date();
+    reviewDate.setDate(reviewDate.getDate() + days);
+    state.wrong[exercise.id] = {
+      code: String(code || ''), kind: kind, attempts: attempts,
+      firstAt: old.firstAt || localDateKey(), updatedAt: localDateKey(), reviewAt: localDateKey(reviewDate)
+    };
+    persist();
+  }
+
+  function relevantErrors(point) {
+    var ids = point.id;
+    var names = ['SyntaxError', 'NameError', 'TypeError', 'ValueError'];
+    if (/p3-/.test(ids)) names = ['SyntaxError', 'NameError', 'TypeError', 'ZeroDivisionError', 'IndentationError'];
+    else if (/p4-/.test(ids)) names = ['SyntaxError', 'IndexError', 'TypeError', 'AttributeError'];
+    else if (/p5-/.test(ids)) names = ['SyntaxError', 'IndexError', 'TypeError', 'ValueError'];
+    else if (/p6-/.test(ids)) names = ['SyntaxError', 'NameError', 'TypeError', 'UnboundLocalError', 'RecursionError'];
+    else if (/p7-/.test(ids) || /p8-[234]/.test(ids)) names = ['SyntaxError', 'KeyError', 'TypeError', 'AttributeError', 'RuntimeError'];
+    else if (/p10-/.test(ids)) names = ['SyntaxError', 'ValueError', 'FileNotFoundError', 'TypeError'];
+    else if (/p11-/.test(ids)) names = ['SyntaxError', 'TypeError', 'AttributeError', 'NameError'];
+    return ERROR_GUIDE.filter(function (entry) { return names.indexOf(entry.title.split(':')[0].split(' / ')[0]) >= 0 || names.some(function (name) { return entry.title.indexOf(name) === 0; }); }).slice(0, 5);
+  }
+
   function renderMain() {
+    if (viewMode === 'exam') return renderExamPack();
+    if (viewMode === 'map') return renderTextbookMap();
+    if (viewMode === 'wrong') return renderWrongBook();
     var item = FLAT_POINTS[currentIndex];
     var chapter = item.chapter;
     var point = item.point;
@@ -4702,6 +4918,12 @@ print(product.label())`,
       '<section class="card warn-card">' +
         '<div class="card-label">常见错误 / 易混点</div>' +
         '<ul>' + point.mistakes.map(function (mistake) { return '<li>' + mistake + '</li>'; }).join('') + '</ul>' +
+      '</section>' +
+      '<section class="card error-guide">' +
+        '<div class="card-label">本节常见报错</div>' +
+        '<div class="error-guide-list">' + relevantErrors(point).map(function (entry) {
+          return '<div class="error-guide-item"><code>' + entry.title + '</code><p><strong>原因：</strong>' + entry.cause + '<br><strong>处理：</strong>' + entry.fix + '</p></div>';
+        }).join('') + '</div>' +
       '</section>' +
       '<section class="card exercise-card">' +
         '<div class="exercise-head">' +
@@ -5009,6 +5231,8 @@ print(product.label())`,
     setRunBusy(false);
     showRuntime(runtime);
     if (!runtime.ok) {
+      recordWrong(exercise, editor.value, '运行错误');
+      renderSidebar();
       box.className = 'result result-bad';
       box.innerHTML = '<div class="result-title">代码还没有成功运行</div>' +
         '<p class="result-explain">先根据上方真实报错修改代码。程序能运行后，系统才会继续核对答案。</p>';
@@ -5041,6 +5265,9 @@ print(product.label())`,
       }
       setCompleted(exercise.id, true, { silent: true });
     } else {
+      recordWrong(exercise, editor.value, outputMatches ? '练习要求未满足' : '输出不匹配');
+      noteStudyDay();
+      renderSidebar();
       box.className = 'result result-bad';
       box.innerHTML =
         '<div class="result-title">还差 ' + failedCount + ' 项，再改改</div>' +
@@ -5129,6 +5356,8 @@ print(product.label())`,
   function goTo(index) {
     if (index < 0 || index >= FLAT_POINTS.length) return;
     if (index === currentIndex) {
+      renderMain();
+      renderSidebar();
       mainEl.scrollTop = 0;
       return;
     }
